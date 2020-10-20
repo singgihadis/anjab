@@ -66,14 +66,30 @@
                         <tr>
                             <td><b>Urusan Pemerintahan</b></td>
                             <td> : </td>
-                            <td></td>
+                            <td id="urusan_pemerintahan_cap"></td>
                         </tr>
                         <tr>
                             <td><b>Ikhtisiar Jabatan</b></td>
                             <td> : </td>
-                            <td></td>
+                            <td id="ikhtisiar_cap"></td>
                         </tr>
                     </table>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="tab_standar_kompetensi" data-toggle="tab" href="#tab_content_standar_kompetensi">Standar Kompetensi</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab_persayaratan_jabatan" data-toggle="tab" href="#tab_content_persayaratan_jabatan">Persyaratan Jabatan</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content border">
+                        <div class="tab-pane fade show active p-3" id="tab_content_standar_kompetensi">
+
+                        </div>
+                        <div class="tab-pane fade" id="tab_content_persayaratan_jabatan">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <br><br>

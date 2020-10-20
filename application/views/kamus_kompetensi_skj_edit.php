@@ -53,7 +53,7 @@
                             <label>Uraian</label>
                             <textarea id="uraian" name="uraian" required="required" rows="3" class="form-control"></textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="div_urusan_pemerintahan" style="display: none;">
                             <label>Urusan Pemerintahan</label>
                             <select id="urusan_pemerintahan" name="urusan_pemerintahan" class="form-control" required="required">
                                 <option value="">Pilih Urusan Pemerintahan</option>

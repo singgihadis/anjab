@@ -24,6 +24,27 @@ body .navbar .navbar-collapse li .dropdown .dropdown-menu {
   right: 0 !important;
   left: auto;
 }
+/* line 32, ../sass/global.scss */
+body .nav.custom.nav-tabs .nav-item {
+  margin: 0px 10px 0px 0px;
+}
+/* line 34, ../sass/global.scss */
+body .nav.custom.nav-tabs .nav-item .nav-link {
+  color: #000000;
+  padding: 0.5rem 0rem;
+}
+/* line 37, ../sass/global.scss */
+body .nav.custom.nav-tabs .nav-item .nav-link .fa {
+  color: #007bff;
+}
+/* line 40, ../sass/global.scss */
+body .nav.custom.nav-tabs .nav-item .nav-link.active {
+  border-color: #fff #fff #007bff;
+}
+/* line 43, ../sass/global.scss */
+body .nav.custom.nav-tabs .nav-item .nav-link:hover {
+  border-color: #fff #fff #007bff;
+}
 /* line 51, ../sass/global.scss */
 body .custom-breadcrumb ul {
   list-style-type: none;

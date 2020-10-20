@@ -8,12 +8,14 @@ $(document).ready(function(){
         submitHandler:function(){
             $("#form_update").loading();
             var standar_kompetensi = $("#standar_kompetensi").val();
+            var standar_kompetensi_tipe = $("#standar_kompetensi").find("option:selected").attr("tipe");
             var kode = $("#kode").val();
             var nama = $("#nama").val();
             var uraian = $("#uraian").val();
             var urusan_pemerintahan = $("#urusan_pemerintahan").val();
             var data = new FormData();
             data.append("master_standar_kompetensi_id", standar_kompetensi);
+            data.append("master_standar_kompetensi_tipe", standar_kompetensi_tipe);
             data.append("kode", kode);
             data.append("nama", nama);
             data.append("uraian", uraian);
@@ -66,11 +68,18 @@ function dropdown_standar_kompetensi(){
             }else{
                 var html = "<option value=''>Pilih Standar Kompetensi</option>";
                 $.each(res.data,function(k,v){
-                    html += "<option value='" + v['id'] + "'>" + v['nama'] + "</option>";
+                    html += "<option value='" + v['id'] + "' tipe='" + v['tipe'] + "'>" + v['nama'] + "</option>";
                 });
                 $("#standar_kompetensi").html(html);
                 $("#standar_kompetensi").select2({
                     theme: "bootstrap"
+                });
+                $("#standar_kompetensi").change(function(){
+                    if($(this).find("option:selected").attr("tipe") == "2"){
+                        $("#div_urusan_pemerintahan").show();
+                    }else{
+                        $("#div_urusan_pemerintahan").hide();
+                    }
                 });
             }
         },error:function(){

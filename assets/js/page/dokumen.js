@@ -38,7 +38,7 @@ function load_data(){
                     html += "<tr>";
                     html += "<td>" + no + "</td>";
                     html += "<td>" + v['nama'] + "</td>";
-                    html += "<td>" + (v['tampil'] == "1"?"Ya":"Tidak") + "</td>";
+                    html += "<td>" + (v['is_tampil'] == "1"?"Ya":"Tidak") + "</td>";
                     html += "<td>" + dokumen + "</td>";
                     html += "<td>";
                     html += "<a href='/dokumen/edit/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";

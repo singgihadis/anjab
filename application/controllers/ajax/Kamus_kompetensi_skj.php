@@ -33,10 +33,14 @@ class Kamus_kompetensi_skj extends CI_Controller {
     {
         $token = $this->session->userdata("token");
         $master_standar_kompetensi_id = $this->input->post("master_standar_kompetensi_id");
+        $master_standar_kompetensi_tipe = $this->input->post("master_standar_kompetensi_tipe");
         $kode = $this->input->post("kode");
         $nama = $this->input->post("nama");
         $uraian = $this->input->post("uraian");
         $master_urusan_pemerintahan_id = $this->input->post("master_urusan_pemerintahan_id");
+        if($master_standar_kompetensi_tipe != "2"){
+            $master_urusan_pemerintahan_id = "";
+        }
         $param = array("token"=>$token,"master_standar_kompetensi_id"=>$master_standar_kompetensi_id,"kode"=>$kode,"nama"=>$nama,"uraian"=>$uraian,"master_urusan_pemerintahan_id"=>$master_urusan_pemerintahan_id);
         $data = $this->Api->Call("kamus_kompetensi_skj/tambah",$param);
         echo $data;
@@ -46,10 +50,14 @@ class Kamus_kompetensi_skj extends CI_Controller {
         $token = $this->session->userdata("token");
         $id = $this->input->post("id");
         $master_standar_kompetensi_id = $this->input->post("master_standar_kompetensi_id");
+        $master_standar_kompetensi_tipe = $this->input->post("master_standar_kompetensi_tipe");
         $kode = $this->input->post("kode");
         $nama = $this->input->post("nama");
         $uraian = $this->input->post("uraian");
         $master_urusan_pemerintahan_id = $this->input->post("master_urusan_pemerintahan_id");
+        if($master_standar_kompetensi_tipe != "2"){
+            $master_urusan_pemerintahan_id = "";
+        }
         $param = array("id"=>$id,"master_standar_kompetensi_id"=>$master_standar_kompetensi_id,"token"=>$token,"kode"=>$kode,"nama"=>$nama,"uraian"=>$uraian,"master_urusan_pemerintahan_id"=>$master_urusan_pemerintahan_id);
         $data = $this->Api->Call("kamus_kompetensi_skj/edit",$param);
         echo $data;

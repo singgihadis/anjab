@@ -27,26 +27,26 @@ body{
       }
     }
   }
-//  .nav{
-//    &.nav-tabs{
-//      .nav-item{
-//        margin: 0px 10px;
-//        .nav-link{
-//          color: #000000;
-//          padding: 0.5rem 0rem;
-//          .fa{
-//            color: #007bff;
-//          }
-//          &.active{
-//            border-color: #fff #fff #007bff;
-//          }
-//          &:hover{
-//            border-color: #fff #fff #007bff;
-//          }
-//        }
-//      }
-//    }
-//  }
+  .nav.custom{
+    &.nav-tabs{
+      .nav-item{
+        margin: 0px 10px 0px 0px;
+        .nav-link{
+          color: #000000;
+          padding: 0.5rem 0rem;
+          .fa{
+            color: #007bff;
+          }
+          &.active{
+            border-color: #fff #fff #007bff;
+          }
+          &:hover{
+            border-color: #fff #fff #007bff;
+          }
+        }
+      }
+    }
+  }
   .custom-breadcrumb{
     ul{
       list-style-type: none;
