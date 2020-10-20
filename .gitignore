@@ -15,3 +15,13 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+*.iml
+.idea/.name
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/watcherTasks.xml
+.idea/workspace.xml
+.sass-cache/8af235c4b54e657d801c59ce30b4d8dbb873ddd8/global.scssc

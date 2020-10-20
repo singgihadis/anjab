@@ -1,0 +1,15 @@
+<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/assets/js/fontawesome.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/assets/js/toastr.js"></script>
+<script type="text/javascript" src="/assets/js/loading.js"></script>
+<script type="text/javascript" src="/assets/js/moment.min.js"></script>
+<script type="text/javascript" src="/assets/js/select2.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap-drawer.min.js"></script>
+<script type="text/javascript" src="/assets/js/crypto/core.js"></script>
+<script type="text/javascript" src="/assets/js/crypto/md5.js"></script>
+<script type="text/javascript" src="/assets/js/crypto/sha1.js"></script>
+<script type="text/javascript" src="/assets/js/summernote-bs4.js"></script>
+<script type="text/javascript" src="/assets/js/public.js"></script>

@@ -1,0 +1,152 @@
+body{
+  font-size: 14px;
+  .logo{
+    width: 140px;
+  }
+  .nowrap{
+    white-space: nowrap;
+  }
+  td,th{
+    &.fit{
+      width: 1px;
+      white-space: nowrap;
+    }
+  }
+  .navbar{
+    .navbar-collapse{
+      li{
+        img{
+          width: 24px;
+        }
+        .dropdown{
+          .dropdown-menu{
+            right: 0 !important;
+            left: auto;
+          }
+        }
+      }
+    }
+  }
+//  .nav{
+//    &.nav-tabs{
+//      .nav-item{
+//        margin: 0px 10px;
+//        .nav-link{
+//          color: #000000;
+//          padding: 0.5rem 0rem;
+//          .fa{
+//            color: #007bff;
+//          }
+//          &.active{
+//            border-color: #fff #fff #007bff;
+//          }
+//          &:hover{
+//            border-color: #fff #fff #007bff;
+//          }
+//        }
+//      }
+//    }
+//  }
+  .custom-breadcrumb{
+    ul{
+      list-style-type: none;
+      padding-left: 0;
+      li{
+        display: inline-block;
+        &:first-child{
+          font-weight: bold;
+        }
+        &:not(:last-child){
+          &:after{
+            content: ' \203A';
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+          font-weight: bold;
+        }
+        a{
+          color: #007bff;
+          font-weight: bold;
+          &:hover,&:focus{
+            text-decoration: none;
+            color: #0071ea;
+          }
+        }
+      }
+    }
+  }
+  .custom-pagination{
+    ul{
+      li{
+        a{
+          font-size: 12px;
+          &.btn-secondary{
+            background-color: #808080;
+            border-color: #808080;
+            color: #000000;
+          }
+          &:not(.btn-secondary){
+            font-weight: bold;
+          }
+          &.active{
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
+  table{
+    font-size: 12px;
+  }
+  .text-nowrap{
+    vertical-align: middle;
+  }
+  label{
+    &.error{
+      margin-top: 4px;
+      font-size: 12px;
+      color: red;
+    }
+  }
+  #sidebar-wrapper{
+    .list-group{
+      .list-group-item{
+        padding: 0px;
+        border-bottom: 0px;
+        a{
+          padding: 0.75rem 1.25rem;
+          color:#212529;
+          display: block;
+          &:hover,&:focus{
+            text-decoration: none;
+            background-color: #f6f7fd;
+          }
+          &.active{
+            background-color: #f6f7fd;
+          }
+        }
+        .menu-title{
+          padding: 0.70rem 1.25rem;
+          color: #767676;
+          display: block;
+        }
+        .list-group-sub-menu{
+          li{
+            a{
+              font-size: 13px;
+              span{
+                &.fa{
+                  font-size: 10px;
+                  vertical-align: middle;
+                  margin-left: 10px;
+                  margin-right: 6px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@import "login";
