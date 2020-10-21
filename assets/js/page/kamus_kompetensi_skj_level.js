@@ -20,7 +20,7 @@ function load_detail(){
                 }
             }else{
                 var data = res.data[0];
-                $("#info").html(" : " + data['kode'] + " - " + data['uraian']);
+                $("#info").html(" : " + data['kode'] + " - " + data['nama']);
                 load_data();
             }
         },error:function(){
