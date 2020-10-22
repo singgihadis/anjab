@@ -1,3 +1,4 @@
+var data_kamus_kompetensi_skj = [];
 $(document).ready(function(){
     get_opd_name(function(){
         standar_kompetensi();
@@ -165,6 +166,7 @@ function skj(elm_id,master_standar_kompetensi_id,tipe){
                     $("#"  + elm_id).html(res.msg);
                 }
             }else{
+                data_kamus_kompetensi_skj = res.data;
                 var html_standar_kompetensi_list = "";
                 if(tipe == "2"){
 
@@ -175,10 +177,10 @@ function skj(elm_id,master_standar_kompetensi_id,tipe){
                     html_standar_kompetensi_list += "</thead>";
                     html_standar_kompetensi_list += "<tbody>";
                     $.each(res.data,function(k,v){
-                        html_standar_kompetensi_list += "<tr id='" + elm_id + "_" + k + "'>";
+                        html_standar_kompetensi_list += "<tr id='" + elm_id + "_" + k + "' data-id='" + v['id'] + "'>";
                         html_standar_kompetensi_list += "<td>" + (k + 1) + "</td>";
                         html_standar_kompetensi_list += "<td>" + v['nama'] + "</td>";
-                        html_standar_kompetensi_list += "<td></td>";
+                        html_standar_kompetensi_list += "<td style='width:60px;'></td>";
                         html_standar_kompetensi_list += "<td></td>";
                         html_standar_kompetensi_list += "<td></td>";
                         html_standar_kompetensi_list += "</tr>";
@@ -210,11 +212,15 @@ function kamus_kompetensi_skj_level(elm_id,master_kamus_kompetensi_skj_id,master
                 if(res.must_login){
                     window.location = "/login";
                 }else{
-
+                    var html_dropdown = "";
+                    html_dropdown += "<select class='form-control form-control-sm'>";
+                    html_dropdown += "<option value=''>Pilih</option>";
+                    html_dropdown += "</select>";
+                    $("#" + elm_id).find("td:nth-child(3)").html(html_dropdown);
                 }
             }else{
                 var html_dropdown = "";
-                html_dropdown += "<select class='form-control form-control-sm'>";
+                html_dropdown += "<select class='form-control form-control-sm dropdown_level' onchange='skj_update(this)'>";
                 html_dropdown += "<option value=''>Pilih</option>";
                 var deskripsi = "";
                 var indikator_kompetensi = "";
@@ -228,13 +234,64 @@ function kamus_kompetensi_skj_level(elm_id,master_kamus_kompetensi_skj_id,master
                     }
                 });
                 html_dropdown += "</select>";
-                console.log(html_dropdown);
                 $("#" + elm_id).find("td:nth-child(3)").html(html_dropdown);
                 $("#" + elm_id).find("td:nth-child(4)").html(deskripsi);
                 $("#" + elm_id).find("td:nth-child(5)").html(indikator_kompetensi);
             }
         },error:function(){
 
+        }
+    });
+}
+function skj_update(itu){
+    $(itu).parent().parent().loading();
+    var master_kamus_kompetensi_skj_level_id = $(itu).val();
+    var master_kamus_kompetensi_skj_id = $(itu).parent().parent().attr("data-id");
+    var tahun = $("#tahun").val();
+    var jabatan_id = $("#jabatan_id").val();
+    var data = new FormData();
+    data.append("tahun", tahun);
+    data.append("jabatan_id", jabatan_id);
+    data.append("master_kamus_kompetensi_skj_id", master_kamus_kompetensi_skj_id);
+    data.append("master_kamus_kompetensi_skj_level_id", master_kamus_kompetensi_skj_level_id);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/update',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $(itu).parent().parent().loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                    var index = $(itu).parent().parent().index();
+                    var elm = $(itu).parent().parent().attr("id");
+                    var master_kamus_kompetensi_skj_id = $(itu).parent().parent().attr("data-id");
+                    var master_kamus_kompetensi_skj_level_id_default = data_kamus_kompetensi_skj[index]['master_kamus_kompetensi_skj_level_id'];
+                    kamus_kompetensi_skj_level(elm,master_kamus_kompetensi_skj_id,master_kamus_kompetensi_skj_level_id_default);
+                }
+            }else{
+                toastr["success"](res.msg);
+                var index = $(itu).parent().parent().index();
+                var elm = $(itu).parent().parent().attr("id");
+                var master_kamus_kompetensi_skj_id = $(itu).parent().parent().attr("data-id");
+                data_kamus_kompetensi_skj[index]['master_kamus_kompetensi_skj_level_id'] = master_kamus_kompetensi_skj_level_id;
+                kamus_kompetensi_skj_level(elm,master_kamus_kompetensi_skj_id,master_kamus_kompetensi_skj_level_id);
+            }
+        },error:function(){
+            $(itu).parent().parent().loading("stop");
+            toastr["error"]("Gagal update data, coba lagi nanti");
+            var index = $(itu).parent().parent().index();
+            var elm = $(itu).parent().parent().attr("id");
+            var master_kamus_kompetensi_skj_id = $(itu).parent().parent().attr("data-id");
+            var master_kamus_kompetensi_skj_level_id_default = data_kamus_kompetensi_skj[index]['master_kamus_kompetensi_skj_level_id'];
+            kamus_kompetensi_skj_level(elm,master_kamus_kompetensi_skj_id,master_kamus_kompetensi_skj_level_id_default);
         }
     });
 }

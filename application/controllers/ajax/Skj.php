@@ -28,5 +28,22 @@ class Skj extends CI_Controller {
         $data = $this->Api->Call("skj",$param);
         echo $data;
     }
+    public function update()
+    {
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
+        $master_kamus_kompetensi_skj_id = $this->input->post("master_kamus_kompetensi_skj_id");
+        $master_kamus_kompetensi_skj_level_id = $this->input->post("master_kamus_kompetensi_skj_level_id");
+        $param = array(
+            "token"=>$token,
+            "tahun"=>$tahun,
+            "jabatan_id"=>$jabatan_id,
+            "master_kamus_kompetensi_skj_id"=>$master_kamus_kompetensi_skj_id,
+            "master_kamus_kompetensi_skj_level_id"=>$master_kamus_kompetensi_skj_level_id
+        );
+        $data = $this->Api->Call("skj/update",$param);
+        echo $data;
+    }
 }
 ?>
