@@ -116,6 +116,11 @@ function dropdown_standar_kompetensi(master_standar_kompetensi_id){
                         $("#div_urusan_pemerintahan").hide();
                     }
                 });
+                if($("#standar_kompetensi").find("option:selected").attr("tipe") == "2"){
+                    $("#div_urusan_pemerintahan").show();
+                }else{
+                    $("#div_urusan_pemerintahan").hide();
+                }
             }
         },error:function(){
             $("#standar_kompetensi").html("<option value=''>Gagal memuat data, coba lagi nanti</option>");
