@@ -92,29 +92,8 @@
                                 <div class="mb-2">
                                     <b>Jumlah pegawai yang mengisi</b>
                                 </div>
-                                <div class="form-group">
-                                    <label>BLUD</label>
-                                    <input type="text" class="form-control" id="blud" name="blud" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>PPPK</label>
-                                    <input type="text" class="form-control" id="pppk" name="pppk" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>Kontrak</label>
-                                    <input type="text" class="form-control" id="kontrak" name="kontrak" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>PNS</label>
-                                    <input type="text" class="form-control" id="pns" name="pns" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>PHD</label>
-                                    <input type="text" class="form-control" id="phd" name="phd" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>Outsourcing</label>
-                                    <input type="text" class="form-control" id="outsourcing" name="outsourcing" value="0">
+                                <div id="div_jml_pegawai">
+
                                 </div>
                                 <div class="form-group">
                                     <label>Jumlah Pegawai</label>

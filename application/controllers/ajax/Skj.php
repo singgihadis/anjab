@@ -95,5 +95,77 @@ class Skj extends CI_Controller {
         $data = $this->Api->Call("skj/syarat_jabatan_pelatihan",$param);
         echo $data;
     }
+    public function syarat_jabatan_pelatihan_update()
+    {
+        $token = $this->session->userdata("token");
+        $anjab_kualifikasi_pelatihan_id = $this->input->post("anjab_kualifikasi_pelatihan_id");
+        $tingkat_penting = $this->input->post("tingkat_penting");
+        $param = array(
+            "token"=>$token,
+            "anjab_kualifikasi_pelatihan_id"=>$anjab_kualifikasi_pelatihan_id,
+            "tingkat_penting"=>$tingkat_penting
+        );
+        $data = $this->Api->Call("skj/syarat_jabatan_pelatihan_update",$param);
+        echo $data;
+    }
+    public function syarat_jabatan_pengalaman_kerja()
+    {
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $param = array(
+            "token"=>$token,
+            "jabatan_id"=>$jabatan_id
+        );
+        $data = $this->Api->Call("skj/syarat_jabatan_pengalaman_kerja",$param);
+        echo $data;
+    }
+    public function syarat_jabatan_pengalaman_kerja_update()
+    {
+        $token = $this->session->userdata("token");
+        $anjab_kualifikasi_pengalaman_kerja_id = $this->input->post("anjab_kualifikasi_pengalaman_kerja_id");
+        $tingkat_penting = $this->input->post("tingkat_penting");
+        $param = array(
+            "token"=>$token,
+            "anjab_kualifikasi_pengalaman_kerja_id"=>$anjab_kualifikasi_pengalaman_kerja_id,
+            "tingkat_penting"=>$tingkat_penting
+        );
+        $data = $this->Api->Call("skj/syarat_jabatan_pengalaman_kerja_update",$param);
+        echo $data;
+    }
+    public function syarat_jabatan_golongan()
+    {
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $param = array(
+            "token"=>$token,
+            "jabatan_id"=>$jabatan_id
+        );
+        $data = $this->Api->Call("skj/syarat_jabatan_golongan",$param);
+        echo $data;
+    }
+    public function syarat_jabatan_indikator_kinerja_jabatan()
+    {
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $param = array(
+            "token"=>$token,
+            "jabatan_id"=>$jabatan_id
+        );
+        $data = $this->Api->Call("skj/syarat_jabatan_indikator_kinerja_jabatan",$param);
+        echo $data;
+    }
+    public function syarat_jabatan_indikator_kinerja_jabatan_update()
+    {
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $uraian = $this->input->post("uraian");
+        $param = array(
+            "token"=>$token,
+            "jabatan_id"=>$jabatan_id,
+            "uraian"=>$uraian
+        );
+        $data = $this->Api->Call("skj/syarat_jabatan_indikator_kinerja_jabatan_update",$param);
+        echo $data;
+    }
 }
 ?>

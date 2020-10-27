@@ -4,17 +4,15 @@ $(document).ready(function(){
         submitHandler:function(){
             $("#form_update").loading();
             var id = $("#id").val();
-            var kode = $("#kode").val();
             var nama = $("#nama").val();
-            var pangkat = $("#pangkat").val();
+            var kelas = $("#kelas").val();
             var data = new FormData();
             data.append("id", id);
-            data.append("kode", kode);
             data.append("nama", nama);
-            data.append("pangkat", pangkat);
+            data.append("kelas", kelas);
             $.ajax({
                 type:'post',
-                url:'/ajax/golongan/edit',
+                url:'/ajax/eselon/edit',
                 data:data,
                 enctype: 'multipart/form-data',
                 cache: false,
@@ -31,7 +29,7 @@ $(document).ready(function(){
                         }
                     }else{
                         toastr["success"](res.msg);
-                        window.location = "/golongan"
+                        window.location = "/eselon"
                     }
                 },error:function(){
                     $("#form_update").loading("stop");
@@ -46,7 +44,7 @@ function load_data(){
     var id = $("#id").val();
     $.ajax({
         type:'post',
-        url:'/ajax/golongan/detail',
+        url:'/ajax/eselon/detail',
         data:{id:id},
         success:function(resp){
             $("#form_update").loading("stop");
@@ -59,9 +57,8 @@ function load_data(){
                 }
             }else{
                 var data = res.data[0];
-                $("#kode").val(data['kode']);
                 $("#nama").val(data['nama']);
-                $("#pangkat").val(data['pangkat']);
+                $("#kelas").val(data['kelas']);
             }
         },error:function(){
             $("#form_update").loading("stop");

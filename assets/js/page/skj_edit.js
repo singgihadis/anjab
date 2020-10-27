@@ -2,13 +2,14 @@ var data_kamus_kompetensi_skj = [];
 var cur_urusan_pemerintahan_ids = [];
 var cur_elm_id = "";
 var cur_master_standar_kompetensi_id = "";
+var ajax_kamus_kompetensi_skj_level_is_run = false;
 $(document).ready(function(){
     get_opd_name(function(){
         standar_kompetensi();
     });
     $('#tab_persyaratan_jabatan').on('click', function (e) {
-        e.preventDefault()
-        $(this).tab('show')
+        e.preventDefault();
+        $(this).tab('show');
     });
     $('.tab_skj').on('shown.bs.tab', function (e) {
         if($(e.target).attr("id") == "tab_standar_kompetensi"){
@@ -56,6 +57,9 @@ $(document).ready(function(){
                 }
             });
         }
+    });
+    $('#indikator_kinerja_jabatan').summernote({
+        height: 200
     });
 });
 function hapus_skj_urusan_pemerintahan(itu,id){
@@ -383,48 +387,57 @@ function skj_non_urusan_pemerintahan(elm_id,master_standar_kompetensi_id){
     });
 }
 function kamus_kompetensi_skj_level(elm_id,master_kamus_kompetensi_skj_id,master_kamus_kompetensi_skj_level_id){
-    $("#" + elm_id).loading();
-    $.ajax({
-        type:'post',
-        url:'/ajax/kamus_kompetensi_skj/level',
-        data:{page:"x",master_kamus_kompetensi_skj_id:master_kamus_kompetensi_skj_id},
-        success:function(resp){
-            $("#" + elm_id).loading("stop");
-            var res = JSON.parse(resp);
-            if(res.is_error){
-                if(res.must_login){
-                    window.location = "/login";
-                }else{
-                    var html_dropdown = "";
-                    html_dropdown += "<select class='form-control form-control-sm'>";
-                    html_dropdown += "<option value=''>Pilih</option>";
-                    html_dropdown += "</select>";
-                    $("#" + elm_id).find("td:nth-child(3)").html(html_dropdown);
-                }
-            }else{
-                var html_dropdown = "";
-                html_dropdown += "<select class='form-control form-control-sm dropdown_level' onchange='skj_update(this)'>";
-                html_dropdown += "<option value=''>Pilih</option>";
-                var deskripsi = "";
-                var indikator_kompetensi = "";
-                $.each(res.data,function(k,v){
-                    if(master_kamus_kompetensi_skj_level_id == v['id']){
-                        html_dropdown += "<option value='" + v['id'] + "' selected>" + v['level'] + "</option>";
-                        deskripsi = v['deskripsi'];
-                        indikator_kompetensi = v['indikator_kompetensi'];
+    var interval_ajax = setInterval(function(){
+        if(ajax_kamus_kompetensi_skj_level_is_run == false){
+            clearInterval(interval_ajax);
+            ajax_kamus_kompetensi_skj_level_is_run = true;
+            $("#" + elm_id).loading();
+            $.ajax({
+                type:'post',
+                url:'/ajax/kamus_kompetensi_skj/level',
+                data:{page:"x",master_kamus_kompetensi_skj_id:master_kamus_kompetensi_skj_id},
+                success:function(resp){
+                    $("#" + elm_id).loading("stop");
+                    var res = JSON.parse(resp);
+                    if(res.is_error){
+                        if(res.must_login){
+                            window.location = "/login";
+                        }else{
+                            var html_dropdown = "";
+                            html_dropdown += "<select class='form-control form-control-sm'>";
+                            html_dropdown += "<option value=''>Pilih</option>";
+                            html_dropdown += "</select>";
+                            $("#" + elm_id).find("td:nth-child(3)").html(html_dropdown);
+                            ajax_kamus_kompetensi_skj_level_is_run = false;
+                        }
                     }else{
-                        html_dropdown += "<option value='" + v['id'] + "'>" + v['level'] + "</option>";
+                        var html_dropdown = "";
+                        html_dropdown += "<select class='form-control form-control-sm dropdown_level' onchange='skj_update(this)'>";
+                        html_dropdown += "<option value=''>Pilih</option>";
+                        var deskripsi = "";
+                        var indikator_kompetensi = "";
+                        $.each(res.data,function(k,v){
+                            if(master_kamus_kompetensi_skj_level_id == v['id']){
+                                html_dropdown += "<option value='" + v['id'] + "' selected>" + v['level'] + "</option>";
+                                deskripsi = v['deskripsi'];
+                                indikator_kompetensi = v['indikator_kompetensi'];
+                            }else{
+                                html_dropdown += "<option value='" + v['id'] + "'>" + v['level'] + "</option>";
+                            }
+                        });
+                        html_dropdown += "</select>";
+                        $("#" + elm_id).find("td:nth-child(3)").html(html_dropdown);
+                        $("#" + elm_id).find("td:nth-child(4)").html(deskripsi);
+                        $("#" + elm_id).find("td:nth-child(5)").html(indikator_kompetensi);
+                        ajax_kamus_kompetensi_skj_level_is_run = false;
                     }
-                });
-                html_dropdown += "</select>";
-                $("#" + elm_id).find("td:nth-child(3)").html(html_dropdown);
-                $("#" + elm_id).find("td:nth-child(4)").html(deskripsi);
-                $("#" + elm_id).find("td:nth-child(5)").html(indikator_kompetensi);
-            }
-        },error:function(){
+                },error:function(){
+                    ajax_kamus_kompetensi_skj_level_is_run = false;
 
+                }
+            });
         }
-    });
+    },300);
 }
 function modal_kamus_kompetensi_skj_urusan_pemerintahan(){
     $("#modal_kamus_kompetensi_skj_urusan_pemerintahan").modal("show");
@@ -518,7 +531,8 @@ function skj_update(itu){
     });
 }
 function kualifikasi_jabatan_pendidikan(){
-    $("#tab_content_persyaratan_jabatan").loading();
+    $("#pendidikan_formal").loading();
+    $("#fakultas_jurusan").loading();
     var jabatan_id = $("#jabatan_id").val();
     var data = new FormData();
     data.append("jabatan_id", jabatan_id);
@@ -531,7 +545,8 @@ function kualifikasi_jabatan_pendidikan(){
         contentType: false,
         processData: false,
         success:function(resp){
-            $("#tab_content_persyaratan_jabatan").loading("stop");
+            $("#pendidikan_formal").loading("stop");
+            $("#fakultas_jurusan").loading("stop");
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
@@ -547,13 +562,14 @@ function kualifikasi_jabatan_pendidikan(){
                 syarat_jabatan_pelatihan();
             }
         },error:function(){
-            $("#tab_content_persyaratan_jabatan").loading("stop");
+            $("#pendidikan_formal").loading("stop");
+            $("#fakultas_jurusan").loading("stop");
             toastr["error"]("Gagal memuat data, coba lagi nanti");
         }
     });
 }
 function syarat_jabatan_pelatihan(){
-    $("#tab_content_persyaratan_jabatan").loading();
+    $("#pendidikan_pelatihan").loading();
     var jabatan_id = $("#jabatan_id").val();
     var data = new FormData();
     data.append("jabatan_id", jabatan_id);
@@ -566,7 +582,7 @@ function syarat_jabatan_pelatihan(){
         contentType: false,
         processData: false,
         success:function(resp){
-            $("#tab_content_persyaratan_jabatan").loading("stop");
+            $("#pendidikan_pelatihan").loading("stop");
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
@@ -591,16 +607,16 @@ function syarat_jabatan_pelatihan(){
                 html_pendidikan_pelatihan += "</thead>";
                 html_pendidikan_pelatihan += "<tbody>";
                 $.each(res.data,function(k,v){
-                    html_pendidikan_pelatihan += "<tr data-id>";
+                    html_pendidikan_pelatihan += "<tr data-id='" + v['id'] + "' data-anjab-kualifikasi-pelatihan-id='" + v['anjab_kualifikasi_pelatihan_id'] + "'>";
                     html_pendidikan_pelatihan += "<td>" + (k + 1) + "</td>";
                     html_pendidikan_pelatihan += "<td>" + v['nama_jenis_pelatihan'] + "</td>";
                     html_pendidikan_pelatihan += "<td>" + v['nama'] + "</td>";
                     html_pendidikan_pelatihan += "<td>";
                     html_pendidikan_pelatihan += "<select class='form-control form-control-sm tingkat_penting' onchange='skj_pelatihan_update(this)'>";
                     html_pendidikan_pelatihan += "<option value='0'>-</option>";
-                    html_pendidikan_pelatihan += "<option value='1'>Mutlak</option>";
-                    html_pendidikan_pelatihan += "<option value='2'>Penting</option>";
-                    html_pendidikan_pelatihan += "<option value='3'>Perlu</option>";
+                    html_pendidikan_pelatihan += "<option value='1' " + (v['tingkat_penting'] == "1"?"selected":"") + ">Mutlak</option>";
+                    html_pendidikan_pelatihan += "<option value='2' " + (v['tingkat_penting'] == "2"?"selected":"") + ">Penting</option>";
+                    html_pendidikan_pelatihan += "<option value='3' " + (v['tingkat_penting'] == "3"?"selected":"") + ">Perlu</option>";
                     html_pendidikan_pelatihan += "</select>";
                     html_pendidikan_pelatihan += "</td>";
                     html_pendidikan_pelatihan += "</tr>";
@@ -608,13 +624,245 @@ function syarat_jabatan_pelatihan(){
                 html_pendidikan_pelatihan += "</tbody>";
                 html_pendidikan_pelatihan += "</table>";
                 $("#pendidikan_pelatihan").html(html_pendidikan_pelatihan);
+                syarat_jabatan_pengalaman_kerja();
             }
         },error:function(){
-            $("#tab_content_persyaratan_jabatan").loading("stop");
+            $("#pendidikan_pelatihan").loading("stop");
             toastr["error"]("Gagal memuat data, coba lagi nanti");
         }
     });
 }
 function skj_pelatihan_update(itu){
     $(itu).parent().parent().loading();
+    var tingkat_penting = $(itu).val();
+    var anjab_kualifikasi_pelatihan_id = $(itu).parent().parent().attr("data-anjab-kualifikasi-pelatihan-id");
+    var data = new FormData();
+    data.append("anjab_kualifikasi_pelatihan_id", anjab_kualifikasi_pelatihan_id);
+    data.append("tingkat_penting", tingkat_penting);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/syarat_jabatan_pelatihan_update',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $(itu).parent().parent().loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                    syarat_jabatan_pelatihan();
+                }
+            }else{
+                toastr["success"](res.msg);
+                syarat_jabatan_pelatihan();
+            }
+        },error:function(){
+            $(itu).parent().parent().loading("stop");
+            toastr["error"]("Gagal update data, coba lagi nanti");
+            syarat_jabatan_pelatihan();
+        }
+    });
+}
+function syarat_jabatan_pengalaman_kerja(){
+    $("#pengalaman_kerja").loading();
+    var jabatan_id = $("#jabatan_id").val();
+    var data = new FormData();
+    data.append("jabatan_id", jabatan_id);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/syarat_jabatan_pengalaman_kerja',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $("#pengalaman_kerja").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    var html_pengalaman_kerja = "";
+                    html_pengalaman_kerja += "<table class='table table-striped table-bordered'>";
+                    html_pengalaman_kerja += "<thead>";
+                    html_pengalaman_kerja += "<tr><th>No</th><th>Nama Pengalaman Kerja</th><th>Tingkat Penting</th></tr>";
+                    html_pengalaman_kerja += "</thead>";
+                    html_pengalaman_kerja += "<tbody>";
+                    html_pengalaman_kerja += "<tr><td colspan='3'>" + res.msg + "</td></tr>";
+                    html_pengalaman_kerja += "</tbody>";
+                    html_pengalaman_kerja += "</table>";
+                    $("#pengalaman_kerja").html(html_pengalaman_kerja);
+                }
+            }else{
+                var html_pengalaman_kerja = "";
+                html_pengalaman_kerja += "<table class='table table-striped table-bordered'>";
+                html_pengalaman_kerja += "<thead>";
+                html_pengalaman_kerja += "<tr><th>No</th><th>Nama Pengalaman Kerja</th><th>Tingkat Penting</th></tr>";
+                html_pengalaman_kerja += "</thead>";
+                html_pengalaman_kerja += "<tbody>";
+                $.each(res.data,function(k,v){
+                    html_pengalaman_kerja += "<tr data-id='" + v['id'] + "' data-anjab-kualifikasi-pengalaman-kerja-id='" + v['anjab_kualifikasi_pengalaman_kerja_id'] + "'>";
+                    html_pengalaman_kerja += "<td>" + (k + 1) + "</td>";
+                    html_pengalaman_kerja += "<td>" + v['nama'] + "</td>";
+                    html_pengalaman_kerja += "<td>";
+                    html_pengalaman_kerja += "<select class='form-control form-control-sm tingkat_penting' onchange='skj_pengalaman_kerja_update(this)'>";
+                    html_pengalaman_kerja += "<option value='0'>-</option>";
+                    html_pengalaman_kerja += "<option value='1' " + (v['tingkat_penting'] == "1"?"selected":"") + ">Mutlak</option>";
+                    html_pengalaman_kerja += "<option value='2' " + (v['tingkat_penting'] == "2"?"selected":"") + ">Penting</option>";
+                    html_pengalaman_kerja += "<option value='3' " + (v['tingkat_penting'] == "3"?"selected":"") + ">Perlu</option>";
+                    html_pengalaman_kerja += "</select>";
+                    html_pengalaman_kerja += "</td>";
+                    html_pengalaman_kerja += "</tr>";
+                });
+                html_pengalaman_kerja += "</tbody>";
+                html_pengalaman_kerja += "</table>";
+                $("#pengalaman_kerja").html(html_pengalaman_kerja);
+                syarat_jabatan_golongan();
+            }
+        },error:function(){
+            $("#pengalaman_kerja").loading("stop");
+            toastr["error"]("Gagal memuat data, coba lagi nanti");
+        }
+    });
+}
+function skj_pengalaman_kerja_update(itu){
+    $(itu).parent().parent().loading();
+    var tingkat_penting = $(itu).val();
+    var anjab_kualifikasi_pengalaman_kerja_id = $(itu).parent().parent().attr("data-anjab-kualifikasi-pengalaman-kerja-id");
+    var data = new FormData();
+    data.append("anjab_kualifikasi_pengalaman_kerja_id", anjab_kualifikasi_pengalaman_kerja_id);
+    data.append("tingkat_penting", tingkat_penting);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/syarat_jabatan_pengalaman_kerja_update',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $(itu).parent().parent().loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                    syarat_jabatan_pengalaman_kerja();
+                }
+            }else{
+                toastr["success"](res.msg);
+                syarat_jabatan_pengalaman_kerja();
+            }
+        },error:function(){
+            $(itu).parent().parent().loading("stop");
+            toastr["error"]("Gagal update data, coba lagi nanti");
+            syarat_jabatan_pengalaman_kerja();
+        }
+    });
+}
+function syarat_jabatan_golongan(){
+    $("#golongan_pangkat").loading();
+    var jabatan_id = $("#jabatan_id").val();
+    var data = new FormData();
+    data.append("jabatan_id", jabatan_id);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/syarat_jabatan_golongan',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $("#golongan_pangkat").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    $("#golongan_pangkat").html("-");
+                }
+            }else{
+                $("#golongan_pangkat").html(res.data[0]['nama'] + " - " + res.data[0]['pangkat']);
+                syarat_jabatan_indikator_kinerja_jabatan();
+            }
+        },error:function(){
+            $("#golongan_pangkat").loading("stop");
+            toastr["error"]("Gagal memuat data, coba lagi nanti");
+        }
+    });
+}
+function syarat_jabatan_indikator_kinerja_jabatan(){
+    $("#td_indikator_kinerja_jabatan").loading();
+    var jabatan_id = $("#jabatan_id").val();
+    var data = new FormData();
+    data.append("jabatan_id", jabatan_id);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/syarat_jabatan_indikator_kinerja_jabatan',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $("#td_indikator_kinerja_jabatan").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    $('#indikator_kinerja_jabatan').summernote("code","");
+                }
+            }else{
+                $('#indikator_kinerja_jabatan').summernote("code",res.data[0]['uraian']);
+            }
+        },error:function(){
+            $("#td_indikator_kinerja_jabatan").loading("stop");
+            toastr["error"]("Gagal memuat data, coba lagi nanti");
+        }
+    });
+}
+function syarat_jabatan_indikator_kinerja_jabatan_update(itu){
+    $(itu).parent().parent().loading();
+    var jabatan_id = $("#jabatan_id").val();
+    var uraian = $("#indikator_kinerja_jabatan").summernote("code");
+    var data = new FormData();
+    data.append("jabatan_id", jabatan_id);
+    data.append("uraian", uraian);
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/syarat_jabatan_indikator_kinerja_jabatan_update',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $(itu).parent().parent().loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                    syarat_jabatan_indikator_kinerja_jabatan();
+                }
+            }else{
+                toastr["success"](res.msg);
+                syarat_jabatan_indikator_kinerja_jabatan();
+            }
+        },error:function(){
+            $(itu).parent().parent().loading("stop");
+            toastr["error"]("Gagal update data, coba lagi nanti");
+            syarat_jabatan_indikator_kinerja_jabatan();
+        }
+    });
 }

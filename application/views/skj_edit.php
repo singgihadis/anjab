@@ -1,5 +1,10 @@
 <html>
 <?php include("head.php"); ?>
+<style type="text/css">
+    .note-group-select-from-files {
+        display: none;
+    }
+</style>
 <body>
 <div class="d-flex" id="wrapper">
     <?php
@@ -108,6 +113,30 @@
                                             <td>Pendidikan/Pelatihan</td>
                                             <td> : </td>
                                             <td id="pendidikan_pelatihan"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>c.</b></td>
+                                            <td>Pengalaman Kerja</td>
+                                            <td> : </td>
+                                            <td id="pengalaman_kerja"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>d.</b></td>
+                                            <td>Golongan / Pangkat</td>
+                                            <td> : </td>
+                                            <td id="golongan_pangkat"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>e.</b></td>
+                                            <td>Indikator Kinerja Jabatan</td>
+                                            <td> : </td>
+                                            <td id="td_indikator_kinerja_jabatan">
+                                                <div id="indikator_kinerja_jabatan" class="summernote"></div>
+                                                <br>
+                                                <div class="text-right">
+                                                    <a href="javascript:void(0);" onclick="syarat_jabatan_indikator_kinerja_jabatan_update(this)" class="btn btn-sm btn-primary"><span class="fa fa-save"></span> Simpan</a>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

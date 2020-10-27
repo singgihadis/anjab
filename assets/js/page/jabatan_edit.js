@@ -5,30 +5,6 @@ $(document).ready(function(){
         html_tahun += "<option value='"  + i + "'>" + i + "</option>";
     }
     $("#tahun").html(html_tahun);
-    $("#blud").keyup(function(){
-        $("#blud").val(FormatAngka($(this).val()));
-        hitung_jml_pegawai();
-    });
-    $("#pppk").keyup(function(){
-        $("#pppk").val(FormatAngka($(this).val()));
-        hitung_jml_pegawai();
-    });
-    $("#kontrak").keyup(function(){
-        $("#kontrak").val(FormatAngka($(this).val()));
-        hitung_jml_pegawai();
-    });
-    $("#pns").keyup(function(){
-        $("#pns").val(FormatAngka($(this).val()));
-        hitung_jml_pegawai();
-    });
-    $("#phd").keyup(function(){
-        $("#phd").val(FormatAngka($(this).val()));
-        hitung_jml_pegawai();
-    });
-    $("#outsourcing").keyup(function(){
-        $("#outsourcing").val(FormatAngka($(this).val()));
-        hitung_jml_pegawai();
-    });
     load_data();
     $("#form_update").validate({
         submitHandler:function(){
@@ -43,13 +19,6 @@ $(document).ready(function(){
             var eselon = $("#eselon").val();
             var golongan = $("#golongan").val();
             var urusan_pemerintahan = $("#urusan_pemerintahan").val();
-            var blud = StrToNumber($("#blud").val());
-            var pppk = StrToNumber($("#pppk").val());
-            var kontrak = StrToNumber($("#kontrak").val());
-            var pns = StrToNumber($("#pns").val());
-            var phd = StrToNumber($("#phd").val());
-            var outsourcing = StrToNumber($("#outsourcing").val());
-            var jml_pegawai = StrToNumber($("#jml_pegawai").val());
             var data = new FormData();
             data.append("id", id);
             data.append("tahun", tahun);
@@ -61,13 +30,6 @@ $(document).ready(function(){
             data.append("master_eselon_id", eselon);
             data.append("master_golongan_id", golongan);
             data.append("master_urusan_pemerintahan_ids", urusan_pemerintahan);
-            data.append("blud", blud);
-            data.append("pppk", pppk);
-            data.append("kontrak", kontrak);
-            data.append("pns", pns);
-            data.append("phd", phd);
-            data.append("outsourcing", outsourcing);
-            data.append("jml_pegawai", jml_pegawai);
             $.ajax({
                 type:'post',
                 url:'/ajax/jabatan/edit',
@@ -86,8 +48,7 @@ $(document).ready(function(){
                             toastr["error"](res.msg);
                         }
                     }else{
-                        toastr["success"](res.msg);
-                        window.location = "/jabatan"
+                        jml_pegawai_update();
                     }
                 },error:function(){
                     $("#form_update").loading("stop");
@@ -97,15 +58,45 @@ $(document).ready(function(){
         }
     });
 });
-function hitung_jml_pegawai(){
-    var blud = StrToNumber($("#blud").val());
-    var pppk = StrToNumber($("#pppk").val());
-    var kontrak = StrToNumber($("#kontrak").val());
-    var pns = StrToNumber($("#pns").val());
-    var phd = StrToNumber($("#phd").val());
-    var outsourcing = StrToNumber($("#outsourcing").val());
-    var jml_pegawai = blud + pppk + kontrak + pns + phd + outsourcing;
-    $("#jml_pegawai").val(FormatAngka(jml_pegawai));
+function jml_pegawai_update(){
+    var data = new FormData();
+    var input_array = [];
+    var jabatan_id = $("#id").val();
+    $(".jml_pegawai").each(function(k,v){
+        var child_input_array = [];
+        child_input_array.push(jabatan_id);
+        child_input_array.push($(this).attr("data-master-status-pegawai-id"));
+        child_input_array.push($(this).val());
+        input_array.push(child_input_array);
+    });
+    var jml_pegawai = $("#jml_pegawai").val();
+    data.append("input_array", JSON.stringify(input_array));
+    data.append("jml_pegawai", jml_pegawai);
+    data.append("jabatan_id", jabatan_id);
+    $.ajax({
+        type:'post',
+        url:'/ajax/jabatan/jml_pegawai_update',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                }
+            }else{
+                toastr["success"](res.msg);
+                window.location = "/jabatan";
+            }
+        },error:function(){
+            toastr["error"]("Gagal edit data, coba lagi nanti");
+        }
+    });
 }
 function load_data(){
     $("#form_update").loading();
@@ -129,13 +120,8 @@ function load_data(){
                 $("#kode").val(data['kode']);
                 $("#nama").val(data['nama']);
                 $("#unit").val(data['unit']);
-                $("#blud").val(data['blud']);
-                $("#pppk").val(data['pppk']);
-                $("#kontrak").val(data['kontrak']);
-                $("#pns").val(data['pns']);
-                $("#phd").val(data['phd']);
-                $("#outsourcing").val(data['outsourcing']);
                 $("#jml_pegawai").val(data['jml_pegawai']);
+                jml_pegawai();
                 dropdown_opd(data['master_opd_id'],data['jabatan_id']);
                 dropdown_jenis_jabatan(data['master_jenis_jabatan_id']);
                 dropdown_eselon(data['master_eselon_id']);
@@ -350,4 +336,48 @@ function dropdown_jabatan(jabatan_id){
             }
         });
     }
+}
+function jml_pegawai(){
+    $("#div_jml_pegawai").loading();
+    var jabatan_id = $("#id").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/jabatan/jml_pegawai',
+        data:{jabatan_id:jabatan_id},
+        success:function(resp){
+            $("#div_jml_pegawai").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                }
+            }else{
+                var html = "";
+                $.each(res.data,function(k,v){
+                    html += "<div class='form-group'>";
+                    html += "<label>" + v['nama'] + "</label>";
+                    html += "<input type='text' class='form-control jml_pegawai' data-master-status-pegawai-id='" + v['master_status_pegawai_id'] + "' id='master_status_pegawai_id_" + v['id'] + "' name='master_status_pegawai_id_" + v['id'] + "' value='" + v['nilai'] + "'>";
+                    html += "</div>";
+                });
+                $("#div_jml_pegawai").html(html);
+                $(".jml_pegawai").keyup(function(){
+                    $(this).val(FormatAngka($(this).val()));
+                    hitung_jml_pegawai();
+                });
+            }
+        },error:function(){
+            $("#div_jml_pegawai").loading("stop");
+            toastr["error"]("Gagal memuat data, coba lagi nanti");
+        }
+    });
+}
+function hitung_jml_pegawai(){
+    var jml_pegawai = 0;
+    $(".jml_pegawai").each(function(k,v){
+        var jml = StrToNumber($(this).val());
+        jml_pegawai = jml_pegawai + jml;
+    });
+    $("#jml_pegawai").val(FormatAngka(jml_pegawai));
 }

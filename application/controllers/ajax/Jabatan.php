@@ -44,13 +44,6 @@ class Jabatan extends CI_Controller {
         $master_eselon_id = $this->input->post("master_eselon_id");
         $master_golongan_id = $this->input->post("master_golongan_id");
         $master_urusan_pemerintahan_ids = $this->input->post("master_urusan_pemerintahan_ids");
-        $blud = $this->input->post("blud");
-        $pppk = $this->input->post("pppk");
-        $kontrak = $this->input->post("kontrak");
-        $pns = $this->input->post("pns");
-        $phd = $this->input->post("phd");
-        $outsourcing = $this->input->post("outsourcing");
-        $jml_pegawai = $this->input->post("jml_pegawai");
         $param = array(
             "token"=>$token,
             "tahun"=>$tahun,
@@ -62,14 +55,7 @@ class Jabatan extends CI_Controller {
             "master_jenis_jabatan_id"=>$master_jenis_jabatan_id,
             "master_eselon_id"=>$master_eselon_id,
             "master_golongan_id"=>$master_golongan_id,
-            "master_urusan_pemerintahan_ids"=>$master_urusan_pemerintahan_ids,
-            "blud"=>$blud,
-            "pppk"=>$pppk,
-            "kontrak"=>$kontrak,
-            "pns"=>$pns,
-            "phd"=>$phd,
-            "outsourcing"=>$outsourcing,
-            "jml_pegawai"=>$jml_pegawai
+            "master_urusan_pemerintahan_ids"=>$master_urusan_pemerintahan_ids
         );
         $data = $this->Api->Call("jabatan/tambah",$param);
         echo $data;
@@ -88,13 +74,6 @@ class Jabatan extends CI_Controller {
         $master_eselon_id = $this->input->post("master_eselon_id");
         $master_golongan_id = $this->input->post("master_golongan_id");
         $master_urusan_pemerintahan_ids = $this->input->post("master_urusan_pemerintahan_ids");
-        $blud = $this->input->post("blud");
-        $pppk = $this->input->post("pppk");
-        $kontrak = $this->input->post("kontrak");
-        $pns = $this->input->post("pns");
-        $phd = $this->input->post("phd");
-        $outsourcing = $this->input->post("outsourcing");
-        $jml_pegawai = $this->input->post("jml_pegawai");
         $param = array(
             "token"=>$token,
             "id"=>$id,
@@ -107,14 +86,7 @@ class Jabatan extends CI_Controller {
             "master_jenis_jabatan_id"=>$master_jenis_jabatan_id,
             "master_eselon_id"=>$master_eselon_id,
             "master_golongan_id"=>$master_golongan_id,
-            "master_urusan_pemerintahan_ids"=>$master_urusan_pemerintahan_ids,
-            "blud"=>$blud,
-            "pppk"=>$pppk,
-            "kontrak"=>$kontrak,
-            "pns"=>$pns,
-            "phd"=>$phd,
-            "outsourcing"=>$outsourcing,
-            "jml_pegawai"=>$jml_pegawai
+            "master_urusan_pemerintahan_ids"=>$master_urusan_pemerintahan_ids
         );
         $data = $this->Api->Call("jabatan/edit",$param);
         echo $data;
@@ -125,6 +97,24 @@ class Jabatan extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("token"=>$token,"id"=>$id);
         $data = $this->Api->Call("jabatan/detail",$param);
+        echo $data;
+    }
+    public function jml_pegawai()
+    {
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $param = array("token"=>$token,"jabatan_id"=>$jabatan_id);
+        $data = $this->Api->Call("jabatan/jml_pegawai",$param);
+        echo $data;
+    }
+    public function jml_pegawai_update()
+    {
+        $token = $this->session->userdata("token");
+        $input_array = $this->input->post("input_array");
+        $jml_pegawai = $this->input->post("jml_pegawai");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $param = array("token"=>$token,"input_array"=>$input_array,"jml_pegawai"=>$jml_pegawai,"jabatan_id"=>$jabatan_id);
+        $data = $this->Api->Call("jabatan/jml_pegawai_update",$param);
         echo $data;
     }
     public function hapus()
