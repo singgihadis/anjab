@@ -358,7 +358,7 @@ function jml_pegawai(){
                 $.each(res.data,function(k,v){
                     html += "<div class='form-group'>";
                     html += "<label>" + v['nama'] + "</label>";
-                    html += "<input type='text' class='form-control jml_pegawai' data-master-status-pegawai-id='" + v['master_status_pegawai_id'] + "' id='master_status_pegawai_id_" + v['id'] + "' name='master_status_pegawai_id_" + v['id'] + "' value='" + v['nilai'] + "'>";
+                    html += "<input type='text' class='form-control jml_pegawai' data-master-status-pegawai-id='" + v['master_status_pegawai_id'] + "' id='master_status_pegawai_id_" + v['id'] + "' name='master_status_pegawai_id_" + v['id'] + "' value='" + v['jml'] + "'>";
                     html += "</div>";
                 });
                 $("#div_jml_pegawai").html(html);
