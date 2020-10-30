@@ -148,15 +148,13 @@ function html_data_builder(v,no){
     }else if(v['abk'] == "2"){
         abk = "Inputan";
     }
-    var verifikasi = "";
-    if(v['verifikasi'] == "1"){
-        verifikasi = "<span class='badge badge-success'>Data Kosong</span>";
-    }else if(v['verifikasi'] == "2"){
-        verifikasi = "<span class='badge badge-success'>Belum</span>";
-    }else if(v['verifikasi'] == "3"){
-        verifikasi = "<span class='badge badge-success'>Ditolak</span>";
-    }else if(v['verifikasi'] == "4"){
-        verifikasi = "<span class='badge badge-success'>Disetujui</span>";
+    var evjab_verifikasi = "";
+    if(v['evjab_verifikasi'] == "0"){
+        evjab_verifikasi = "<span class='badge badge-secondary'>Belum</span>";
+    }else if(v['evjab_verifikasi'] == "1"){
+        evjab_verifikasi = "<span class='badge badge-danger'>Ditolak</span>";
+    }else if(v['evjab_verifikasi'] == "2"){
+        evjab_verifikasi = "<span class='badge badge-success'>Disetujui</span>";
     }
     html += "<tr>";
     html += "<td><b>" + no + "</b></td>";
@@ -165,7 +163,7 @@ function html_data_builder(v,no){
     html += "<td>" + v['nama_jenis_jabatan'] + "</td>";
     html += "<td>" + (!IsEmpty(v['nama_eselon'])?v['nama_eselon']:"") + "</td>";
     html += "<td>" + FormatAngka(v['jml_pegawai']) + "</td>";
-    html += "<td>" + v['nama_jenis_jabatan'] + "</td>";
+    html += "<td>" + evjab_verifikasi + "</td>";
     html += "<td class='nowrap'>";
     html += "<a title='Evaluasi Jabatan' href='/evjab/edit/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";
     html += "<a title='Print Faktor' target='_blank' href='/evjab/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a> ";

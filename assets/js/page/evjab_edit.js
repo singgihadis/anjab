@@ -1,6 +1,7 @@
 var data_evjab = [];
 $(document).ready(function(){
     get_opd_name(function(){
+        is_verifikasi();
         data();
     });
     $("#form_edit").validate({
@@ -21,7 +22,44 @@ $(document).ready(function(){
            tim_analisis_update();
        }
     });
+    $("#form_verifikasi").validate({
+        submitHandler:function(){
+            verifikasi();
+        }
+    });
 });
+function modal_verifikasi(){
+    $("#modal_verifikasi").modal("show");
+}
+function verifikasi(){
+    $("#form_verifikasi").loading();
+    var jabatan_id = $("#jabatan_id").val();
+    var tahun = $("#tahun").val();
+    var verifikasi = $("#verifikasi").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/evjab/verifikasi',
+        data:{jabatan_id:jabatan_id,tahun:tahun,verifikasi:verifikasi},
+        success:function(resp){
+            $("#form_verifikasi").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                }
+            }else{
+                toastr["success"](res.msg);
+                $("#modal_verifikasi").modal("hide");
+                $("#btn_verifikasi").remove();
+            }
+        },error:function(){
+            $("#form_verifikasi").loading("stop");
+            toastr["error"]("Gagal melakukan verifikasi, coba lagi nanti");
+        }
+    });
+}
 function tim_analisis_update(){
     $("#form_tim_analisis").loading();
     var jabatan_id = $("#jabatan_id").val();
@@ -299,4 +337,30 @@ function modal_panduan(itu){
         $("#modal_panduan").modal("show");
         $("#panduan_text").html(panduan);
     }
+}
+function is_verifikasi(){
+    var jabatan_id = $("#jabatan_id").val();
+    var tahun = $("#tahun").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/evjab/is_verifikasi',
+        data:{jabatan_id:jabatan_id,tahun:tahun},
+        success:function(resp){
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    $("#btn_verifikasi").show();
+                }
+            }else{
+                if(res.data[0]['verifikasi'] != "0"){
+                    $("#btn_verifikasi").remove();
+                }else{
+                    $("#btn_verifikasi").show();
+                }
+            }
+        },error:function(){
+        }
+    });
 }

@@ -41,7 +41,8 @@
                     </div>
                 </div>
                 <div class="card-body" id="card-body">
-                    <input type="hidden" id="jabatan_id" name="jabatan_id" value="<?php echo $id; ?>">
+                    <input type="hidden" id="jabatan_id" name="jabatan_id" value="<?php echo $id; ?>" />
+                    <input type="hidden" id="tahun" name="tahun" value="" />
                     <table class="table table-striped">
                         <thead>
                             <tr>

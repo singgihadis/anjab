@@ -5,6 +5,7 @@ var cur_master_standar_kompetensi_id = "";
 var ajax_kamus_kompetensi_skj_level_is_run = false;
 $(document).ready(function(){
     get_opd_name(function(){
+        is_verifikasi();
         standar_kompetensi();
     });
     $('#tab_persyaratan_jabatan').on('click', function (e) {
@@ -61,7 +62,15 @@ $(document).ready(function(){
     $('#indikator_kinerja_jabatan').summernote({
         height: 200
     });
+    $("#form_verifikasi").validate({
+        submitHandler:function(){
+            verifikasi();
+        }
+    });
 });
+function modal_verifikasi(){
+    $("#modal_verifikasi").modal("show");
+}
 function hapus_skj_urusan_pemerintahan(itu,id){
     $.confirm({
         title: 'Konfirmasi',
@@ -124,6 +133,10 @@ function get_opd_name(callback){
                 $("#tahun").val(res.data[0]['tahun']);
                 $("#master_urusan_pemerintahan_ids").val(res.data[0]['master_urusan_pemerintahan_ids']);
 
+                $("#mdl_opd").html(toTitleCase(res.data[0]['nama']));
+                $("#mdl_jabatan").html(toTitleCase(res.data[0]['nama_jabatan']));
+                $("#mdl_tahun").html(res.data[0]['tahun']);
+
                 $("#nama_jabatan_cap").html(toTitleCase(res.data[0]['nama_jabatan']));
                 $("#kode_jabatan_cap").html(res.data[0]['kode_jabatan']);
                 $("#tahun_cap").html(res.data[0]['tahun']);
@@ -169,7 +182,7 @@ function urusan_pemerintahan(ids){
                 if(res.must_login){
                     window.location = "/login";
                 }else{
-                    toastr["error"]("Gagal memuat data, coba lagi nanti");
+                    //toastr["error"]("Gagal memuat data, coba lagi nanti");
                 }
             }else{
                 var arr_urusan_pemerintahan = [];
@@ -863,6 +876,61 @@ function syarat_jabatan_indikator_kinerja_jabatan_update(itu){
             $(itu).parent().parent().loading("stop");
             toastr["error"]("Gagal update data, coba lagi nanti");
             syarat_jabatan_indikator_kinerja_jabatan();
+        }
+    });
+}
+function verifikasi(){
+    $("#form_verifikasi").loading();
+    var jabatan_id = $("#jabatan_id").val();
+    var tahun = $("#tahun").val();
+    var verifikasi = $("#verifikasi").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/verifikasi',
+        data:{jabatan_id:jabatan_id,tahun:tahun,verifikasi:verifikasi},
+        success:function(resp){
+            $("#form_verifikasi").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    toastr["error"](res.msg);
+                }
+            }else{
+                toastr["success"](res.msg);
+                $("#modal_verifikasi").modal("hide");
+                $("#btn_verifikasi").remove();
+            }
+        },error:function(){
+            $("#form_verifikasi").loading("stop");
+            toastr["error"]("Gagal melakukan verifikasi, coba lagi nanti");
+        }
+    });
+}
+function is_verifikasi(){
+    var jabatan_id = $("#jabatan_id").val();
+    var tahun = $("#tahun").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/skj/is_verifikasi',
+        data:{jabatan_id:jabatan_id,tahun:tahun},
+        success:function(resp){
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    $("#btn_verifikasi").show();
+                }
+            }else{
+                if(res.data[0]['verifikasi'] != "0"){
+                    $("#btn_verifikasi").remove();
+                }else{
+                    $("#btn_verifikasi").show();
+                }
+            }
+        },error:function(){
         }
     });
 }

@@ -151,6 +151,14 @@ function html_data_builder(v,no){
     }else if(v['abk'] == "2"){
         abk = "Inputan";
     }
+    var skj_verifikasi = "";
+    if(v['skj_verifikasi'] == "0"){
+        skj_verifikasi = "<span class='badge badge-secondary'>Belum</span>";
+    }else if(v['skj_verifikasi'] == "1"){
+        skj_verifikasi = "<span class='badge badge-danger'>Ditolak</span>";
+    }else if(v['skj_verifikasi'] == "2"){
+        skj_verifikasi = "<span class='badge badge-success'>Disetujui</span>";
+    }
     html += "<tr>";
     html += "<td><b>" +  no + "</b></td>";
     html += "<td>" + v['nama'] + "</td>";
@@ -158,9 +166,10 @@ function html_data_builder(v,no){
     html += "<td>" + v['nama_jenis_jabatan'] + "</td>";
     html += "<td>" + (!IsEmpty(v['nama_eselon'])?v['nama_eselon']:"") + "</td>";
     html += "<td>" + FormatAngka(v['jml_pegawai']) + "</td>";
+    html += "<td>" + skj_verifikasi + "</td>";
     html += "<td class='nowrap'>";
     html += "<a href='/skj/edit/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";
-    html += "<a href='/skj/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a>";
+    html += "<a href='/skj/printdata/" + v['id'] + "' target='_blank' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a>";
     html += "</td>";
     html += "</tr>";
     return html;

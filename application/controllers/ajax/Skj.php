@@ -30,6 +30,15 @@ class Skj extends CI_Controller {
         $data = $this->Api->Call("skj/non_urusan_pemerintahan",$param);
         echo $data;
     }
+    public function non_urusan_pemerintahan_with_level_value(){
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
+        $master_standar_kompetensi_id = $this->input->post("master_standar_kompetensi_id");
+        $param = array("token"=>$token,"tahun"=>$tahun,"jabatan_id"=>$jabatan_id,"master_standar_kompetensi_id"=>$master_standar_kompetensi_id);
+        $data = $this->Api->Call("skj/non_urusan_pemerintahan_with_level_value",$param);
+        echo $data;
+    }
     public function urusan_pemerintahan(){
         $token = $this->session->userdata("token");
         $jabatan_id = $this->input->post("jabatan_id");
@@ -37,6 +46,15 @@ class Skj extends CI_Controller {
         $master_standar_kompetensi_id = $this->input->post("master_standar_kompetensi_id");
         $param = array("token"=>$token,"tahun"=>$tahun,"jabatan_id"=>$jabatan_id,"master_standar_kompetensi_id"=>$master_standar_kompetensi_id);
         $data = $this->Api->Call("skj/urusan_pemerintahan",$param);
+        echo $data;
+    }
+    public function urusan_pemerintahan_with_value(){
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
+        $master_standar_kompetensi_id = $this->input->post("master_standar_kompetensi_id");
+        $param = array("token"=>$token,"tahun"=>$tahun,"jabatan_id"=>$jabatan_id,"master_standar_kompetensi_id"=>$master_standar_kompetensi_id);
+        $data = $this->Api->Call("skj/urusan_pemerintahan_with_value",$param);
         echo $data;
     }
     public function update()
@@ -165,6 +183,23 @@ class Skj extends CI_Controller {
             "uraian"=>$uraian
         );
         $data = $this->Api->Call("skj/syarat_jabatan_indikator_kinerja_jabatan_update",$param);
+        echo $data;
+    }
+    public function verifikasi(){
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
+        $verifikasi = $this->input->post("verifikasi");
+        $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token,"verifikasi"=>$verifikasi);
+        $data = $this->Api->Call("skj/verifikasi",$param);
+        echo $data;
+    }
+    public function is_verifikasi(){
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
+        $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token);
+        $data = $this->Api->Call("skj/is_verifikasi",$param);
         echo $data;
     }
 }

@@ -303,11 +303,12 @@ function prestasi_kerja_diharapkan_kelengkapan(){
 function verifikasi(){
     $("#form_verifikasi").loading();
     var jabatan_id = $("#jabatan_id").val();
+    var tahun = $("#tahun").val();
     var verifikasi = $("#verifikasi").val();
     $.ajax({
         type:'post',
         url:'/ajax/anjab/verifikasi',
-        data:{id:jabatan_id,verifikasi:verifikasi},
+        data:{jabatan_id:jabatan_id,tahun:tahun,verifikasi:verifikasi},
         success:function(resp){
             $("#form_verifikasi").loading("stop");
             var res = JSON.parse(resp);
@@ -347,6 +348,30 @@ function get_opd_name(){
                 $("#mdl_opd").html(toTitleCase(res.data[0]['nama']));
                 $("#mdl_jabatan").html(toTitleCase(res.data[0]['nama_jabatan']));
                 $("#mdl_tahun").html(res.data[0]['tahun']);
+                $("#tahun").val(res.data[0]['tahun']);
+
+               is_verifikasi();
+            }
+        },error:function(){
+        }
+    });
+}
+function is_verifikasi(){
+    var jabatan_id = $("#jabatan_id").val();
+    var tahun = $("#tahun").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/anjab/is_verifikasi',
+        data:{jabatan_id:jabatan_id,tahun:tahun},
+        success:function(resp){
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/login";
+                }else{
+                    $("#btn_verifikasi").show();
+                }
+            }else{
                 if(res.data[0]['verifikasi'] != "0"){
                     $("#btn_verifikasi").remove();
                 }else{

@@ -187,6 +187,19 @@
                 <span class="fa fa-suitcase mr-2"></span> SKJ
             </a>
         </li>
+        <li class="list-group-item list-group-item-action bg-white">
+            <span class="menu-title">Menu User</span>
+        </li>
+        <li class="list-group-item list-group-item-action bg-white">
+            <a href="/user" class="<?php echo ($menu == "8"?"active":""); ?>">
+                <span class="fa fa-address-book mr-2"></span> User
+            </a>
+        </li>
+        <li class="list-group-item list-group-item-action bg-white">
+            <a href="/log_user" class="<?php echo ($menu == "9"?"active":""); ?>">
+                <span class="fa fa-history mr-2"></span> Log User
+            </a>
+        </li>
     </ul>
     <br>
 </div>

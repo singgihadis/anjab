@@ -3,7 +3,7 @@
 <body>
 <div class="d-flex" id="wrapper">
     <?php
-    $menu = "7";
+    $menu = "8";
     $sub_menu = "";
     include("sidebar.php");
     ?>
@@ -17,44 +17,29 @@
         <div class="container-fluid">
             <div class="custom-breadcrumb mb-4">
                 <ul>
-                    <li>Standar Kompetensi Jabatan</li>
+                    <li>User</li>
                 </ul>
             </div>
             <div class="card">
                 <div class="card-header bg-white">
                     <div class="row">
                         <div class="col-md-6">
-                            <span class="fa fa-lg fa-list-alt mr-1"></span> <b>Daftar Jabatan <span id="sub_title"></span></b>
+                            <span class="fa fa-lg fa-list-alt mr-1"></span> <b>Daftar User</b>
                         </div>
                         <div class="col-md-6 text-right">
-
+                            <a href="/user/tambah" class="btn btn-sm btn-primary"><span class="fa fa-plus"></span> Tambah</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body" id="card-body">
                     <div class="text-right">
                         <form id="form_filter">
-                            <div class="d-inline-block mx-1 align-middle">
-                                <select id="filter_opd" name="filter_opd" class="form-control form-control-sm">
-                                    <option value="">Pilih OPD</option>
-                                </select>
-                            </div>
-                            <div class="d-inline-block mx-1 align-middle">
-                                <select id="filter_tahun" name="filter_tahun" class="form-control form-control-sm">
-
-                                </select>
-                            </div>
-                            <div class="d-inline-block mx-1 align-middle">
-                                <select id="filter_jenis_jabatan" name="filter_jenis_jabatan" class="form-control form-control-sm">
-
-                                </select>
-                            </div>
-                            <div class="d-inline-block align-middle">
+                            <div class="d-inline-block">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
                                     </div>
-                                    <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Keyword">
+                                    <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Nama OPD">
                                 </div>
                             </div>
                         </form>
@@ -65,21 +50,17 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Jabatan</th>
-                                <th>Nama Unit</th>
-                                <th>Jenis Jabatan</th>
-                                <th>Eselon</th>
-                                <th>Jumlah</th>
-                                <th>Verifikasi</th>
+                                <th>Nama</th>
+                                <th>Username</th>
+                                <th>OPD</th>
+                                <th>Email</th>
+                                <th>Level</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody id="listdata">
-                            <tr>
-                                <td colspan="8">
-                                    Silahkan pilih OPD terlebih dahulu
-                                </td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -88,7 +69,7 @@
                         <div class="col-md-6" id="info_page">
 
                         </div>
-                        <div class="col-md-6 text-right" id="pagination" style="display: none">
+                        <div class="col-md-6 text-right" id="pagination">
 
                         </div>
                     </div>
@@ -98,9 +79,10 @@
         </div>
     </div>
     <!-- /#page-content-wrapper -->
+
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/skj.js"></script>
+<script type="text/javascript" src="/assets/js/page/user.js"></script>
 </body>
 </html>

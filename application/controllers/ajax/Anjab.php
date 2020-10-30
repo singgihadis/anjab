@@ -796,10 +796,19 @@ class Anjab extends CI_Controller {
     }
     public function verifikasi(){
         $token = $this->session->userdata("token");
-        $id = $this->input->post("id");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
         $verifikasi = $this->input->post("verifikasi");
-        $param = array("id"=>$id,"token"=>$token,"verifikasi"=>$verifikasi);
+        $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token,"verifikasi"=>$verifikasi);
         $data = $this->Api->Call("anjab/verifikasi",$param);
+        echo $data;
+    }
+    public function is_verifikasi(){
+        $token = $this->session->userdata("token");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $tahun = $this->input->post("tahun");
+        $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token);
+        $data = $this->Api->Call("anjab/is_verifikasi",$param);
         echo $data;
     }
     public function abk(){

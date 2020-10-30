@@ -41,6 +41,7 @@
                         </div>
                         <div class="col-md-2 text-right">
                             <div class="d-inline-block pt-1"><span id="loader" class="fa fa-spinner fa-spin" style="display: none;"></span></div>
+                            <a id="btn_verifikasi" style="display: none;" href="javascript:void(0);" onclick="modal_verifikasi();" class="btn btn-sm btn-primary"><span class="fa fa-check"></span> Verifikasi</a>
                         </div>
                     </div>
                 </div>
@@ -170,6 +171,56 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal" id="modal_verifikasi">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Verifikasi Data Anjab</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form_verifikasi">
+                <div class="modal-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td>OPD</td>
+                            <td> : </td>
+                            <td id="mdl_opd"></td>
+                        </tr>
+                        <tr>
+                            <td>Jabatan</td>
+                            <td> : </td>
+                            <td id="mdl_jabatan"></td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td> : </td>
+                            <td id="mdl_tahun"></td>
+                        </tr>
+                        <tr>
+                            <td>Status Verifikasi</td>
+                            <td> : </td>
+                            <td>
+                                <select id="verifikasi" name="verifikasi" class="form-control form-control-sm" required="required">
+                                    <option value="">Pilih</option>
+                                    <option value="1">Tolak</option>
+                                    <option value="2">Setuju</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" >Simpan</button>
                 </div>
             </form>
         </div>
