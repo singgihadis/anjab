@@ -46,7 +46,7 @@ function load_data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='6'>" + res.msg + "</td></tr>");
                 }
@@ -112,7 +112,7 @@ function hapus(itu){
                             var res = JSON.parse(resp);
                             if(res.is_error){
                                 if(res.must_login){
-                                    window.location = "/login";
+                                    window.location = "/logout";;
                                 }else{
                                     toastr["error"](res.msg);
                                 }
@@ -140,7 +140,7 @@ function dropdown_standar_kompetensi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#filter_standar_kompetensi").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -170,7 +170,7 @@ function dropdown_urusan_pemerintahan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#filter_urusan_pemerintahan").html("<option value=''>" + res.msg + "</option>");
                 }

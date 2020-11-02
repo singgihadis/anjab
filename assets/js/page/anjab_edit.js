@@ -23,7 +23,7 @@ function ikhtisiar_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_anjab tr:nth-child(1) td:nth-child(3)").html("0%");
                 }
@@ -45,7 +45,7 @@ function kualifikasi_jabatan_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_anjab tr:nth-child(2) td:nth-child(3)").html("0%");
                 }
@@ -67,7 +67,7 @@ function tugas_pokok_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_anjab tr:nth-child(3) td:nth-child(3)").html("0%");
                 }
@@ -89,7 +89,7 @@ function hasil_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_anjab tr:nth-child(4) td:nth-child(3)").html("0%");
                 }
@@ -111,7 +111,7 @@ function bahan_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_anjab tr:nth-child(5) td:nth-child(3)").html("0%");
                 }
@@ -133,7 +133,7 @@ function perangkat_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_anjab tr:nth-child(6) td:nth-child(3)").html("0%");
                 }
@@ -155,7 +155,7 @@ function tanggung_jawab_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(7) td:nth-child(3)").html("0%");
                 }
@@ -177,7 +177,7 @@ function wewenang_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(8) td:nth-child(3)").html("0%");
                 }
@@ -199,7 +199,7 @@ function korelasi_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(9) td:nth-child(3)").html("0%");
                 }
@@ -221,7 +221,7 @@ function kondisi_lingkungan_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(10) td:nth-child(3)").html("0%");
                 }
@@ -243,7 +243,7 @@ function resiko_bahaya_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(11) td:nth-child(3)").html("0%");
                 }
@@ -265,7 +265,7 @@ function syarat_jabatan_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(12) td:nth-child(3)").html("0%");
                 }
@@ -288,7 +288,7 @@ function prestasi_kerja_diharapkan_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(13) td:nth-child(3)").html("0%");
                 }
@@ -314,7 +314,7 @@ function verifikasi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -339,7 +339,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{
@@ -367,7 +367,7 @@ function is_verifikasi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#btn_verifikasi").show();
                 }

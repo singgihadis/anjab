@@ -45,7 +45,7 @@ function verifikasi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -88,7 +88,7 @@ function tim_analisis_update(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -113,7 +113,7 @@ function tim_analisis(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     //toastr["error"](res.msg);
                 }
@@ -161,7 +161,7 @@ function update(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -212,7 +212,7 @@ function dropdown_level(master_faktor_evjab_id,master_faktor_evjab_level_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#master_faktor_evjab_level_id").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -247,7 +247,7 @@ function data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='9'>" + res.msg + "</td></tr>");
                 }
@@ -287,7 +287,7 @@ function get_opd_name(callback){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{
@@ -307,7 +307,7 @@ function get_opd_name(callback){
                         var res = JSON.parse(resp);
                         if(res.is_error){
                             if(res.must_login){
-                                window.location = "/login";
+                                window.location = "/logout";;
                             }else{
                                 toastr["error"]("Gagal memuat data, coba lagi nanti");
                             }
@@ -349,7 +349,7 @@ function is_verifikasi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#btn_verifikasi").show();
                 }

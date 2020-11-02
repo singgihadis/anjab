@@ -27,7 +27,7 @@ function syarat_jabatan_temperamen_kerja(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='3'>" + res.msg + "</td></tr>");
                 }
@@ -73,7 +73,7 @@ function data_temperamen_kerja(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_temperamenkerja").html("<tr><td colspan='4'>" + res.msg + "</td></tr>");
                 }
@@ -136,7 +136,7 @@ function syarat_jabatan_temperamen_kerja_tambah(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -183,7 +183,7 @@ function hapus(itu){
                             var res = JSON.parse(resp);
                             if(res.is_error){
                                 if(res.must_login){
-                                    window.location = "/login";
+                                    window.location = "/logout";;
                                 }else{
                                     toastr["error"](res.msg);
                                 }
@@ -221,7 +221,7 @@ function syarat_jabatan_temperamen_kerja_hapus(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -252,7 +252,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{

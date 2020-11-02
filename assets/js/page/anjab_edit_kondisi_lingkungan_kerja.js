@@ -15,7 +15,7 @@ function wewenang(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_kondisilingkungankerja").html("<tr><td colspan='3'>Data tidak tersedia</td></tr>");
                 }
@@ -67,7 +67,7 @@ function simpan(){
                 var res = JSON.parse(resp);
                 if(res.is_error){
                     if(res.must_login){
-                        window.location = "/login";
+                        window.location = "/logout";;
                     }else{
                         toastr["error"](res.msg);
                     }
@@ -91,7 +91,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{

@@ -35,7 +35,7 @@ $(document).ready(function(){
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             toastr["error"](res.msg);
                         }
@@ -65,7 +65,7 @@ function load_data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"]("Gagal memuat data, coba lagi nanti");
                 }

@@ -43,7 +43,7 @@ $(document).ready(function(){
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             toastr["error"](res.msg);
                         }
@@ -85,7 +85,7 @@ function jml_pegawai_update(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -110,7 +110,7 @@ function load_data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"]("Gagal memuat data, coba lagi nanti");
                 }
@@ -145,7 +145,7 @@ function dropdown_urusan_pemerintahan(id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#urusan_pemerintahan").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -179,7 +179,7 @@ function dropdown_golongan(id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#golongan").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -213,7 +213,7 @@ function dropdown_eselon(id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#eselon").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -248,7 +248,7 @@ function dropdown_jenis_jabatan(id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#jenis_jabatan").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -283,7 +283,7 @@ function dropdown_opd(id,jabatan_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#filter_opd").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -317,7 +317,7 @@ function dropdown_jabatan(jabatan_id){
                 var res = JSON.parse(resp);
                 if(res.is_error){
                     if(res.must_login){
-                        window.location = "/login";
+                        window.location = "/logout";;
                     }else{
                         $("#jabatan_id").val(jabatan_id);
                     }
@@ -349,7 +349,7 @@ function jml_pegawai(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }

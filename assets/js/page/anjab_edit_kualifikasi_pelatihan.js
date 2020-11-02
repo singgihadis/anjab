@@ -25,7 +25,7 @@ function kualifikasi_jabatan_pelatihan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='4'>" + res.msg + "</td></tr>");
                 }
@@ -85,7 +85,7 @@ function hapus(itu){
                             var res = JSON.parse(resp);
                             if(res.is_error){
                                 if(res.must_login){
-                                    window.location = "/login";
+                                    window.location = "/logout";;
                                 }else{
                                     toastr["error"](res.msg);
                                 }
@@ -125,7 +125,7 @@ function kualifikasi_jabatan_pelatihan_tambah(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -164,7 +164,7 @@ function kualifikasi_jabatan_pelatihan_edit(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -213,7 +213,7 @@ function dropdown_jenispelatihan(callback){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#jenis_pelatihan").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -244,7 +244,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{

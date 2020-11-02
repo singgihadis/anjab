@@ -19,7 +19,7 @@ function syarat_jabatan_fungsi_pekerjaan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     dropdown_fungsi_pekerjaan_data("");
                     dropdown_fungsi_pekerjaan_orang("");
@@ -48,7 +48,7 @@ function dropdown_fungsi_pekerjaan_data(master_fungsi_pekerjaan_data_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#fungsi_pekerjaan_data").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -80,7 +80,7 @@ function dropdown_fungsi_pekerjaan_orang(master_fungsi_pekerjaan_orang_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#fungsi_pekerjaan_orang").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -112,7 +112,7 @@ function dropdown_fungsi_pekerjaan_benda(master_fungsi_pekerjaan_benda_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#fungsi_pekerjaan_benda").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -157,7 +157,7 @@ function syarat_jabatan_fungsi_pekerjaan_update(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -180,7 +180,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
 
                 }

@@ -29,6 +29,20 @@ class Login extends CI_Controller {
             $this->session->set_userdata("profil",json_encode($json_login['data'][0]));
             $this->session->set_userdata("token",$json_login['token']);
             $this->session->set_userdata("is_login",true);
+
+            //Simpan log
+//            $param_log = array(
+//                "user_id"=>$json_login['data'][0]['user_id'],
+//                "menu"=>"",
+//                "menu_sub"=>"",
+//                "jenis_aksi"=>"1",
+//                "aksi"=>"Login",
+//                "uraian"=>"",
+//                "ip"=>$this->PublicFunction->get_client_ip(),
+//                "browser"=>$this->PublicFunction->getOS(),
+//                "os"=>$this->PublicFunction->getBrowser(),
+//            );
+//            $this->Api->Call("log_user/tambah",$param_log);
         }
         echo $login;
     }

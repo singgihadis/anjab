@@ -7,20 +7,94 @@ $(document).ready(function(){
             load_data();
         }
     });
+    $("#filter_level").change(function(){
+        page = 1;
+        load_data();
+    });
+    $("#filter_status").change(function(){
+        page = 1;
+        load_data();
+    });
+    $("#password").keyup(function(){
+        $("#hidden_password").val(CryptoJS.MD5($("#password").val()));
+    });
+    $("#password").blur(function(){
+        $("#hidden_password").val(CryptoJS.MD5($("#password").val()));
+    });
+    $("#hidden_password").val(CryptoJS.MD5($("#password").val()));
+    $("#form_update_password").validate({
+       submitHandler:function(){
+           $.confirm({
+               title: 'Konfirmasi',
+               content: 'Mengubah password menyebabkan sesi login di hapus dari user yang bersangkutan. Apa anda yakin untuk melanjutkan ?',
+               buttons: {
+                   cancel: {
+                       text: 'Batal',
+                       action: function(){
+
+                       }
+                   },
+                   confirm: {
+                       text: 'Konfirmasi',
+                       btnClass: 'btn-blue',
+                       action: function(){
+                           edit_password();
+                       }
+                   }
+               }
+           });
+       }
+    });
 });
+function edit_password(){
+    $("#form_update_password").loading();
+    var id = $("#id").val();
+    var password = $("#hidden_password").val();
+    var data = new FormData();
+    data.append("id", id);
+    data.append("password", password);
+    $.ajax({
+        type:'post',
+        url:'/ajax/user/edit_password',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $("#form_update_password").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/logout";
+                }else{
+                    toastr["error"](res.msg);
+                }
+            }else{
+                toastr["success"](res.msg);
+                $("#modal_password").modal("hide");
+            }
+        },error:function(){
+            $("#form_update_password").loading("stop");
+            toastr["error"]("Gagal edit data, coba lagi nanti");
+        }
+    });
+}
 function load_data(){
     $("#listdata").loading();
     var keyword = $("#keyword").val();
+    var level = $("#filter_level").val();
+    var status = $("#filter_status").val();
     $.ajax({
         type:'post',
         url:'/ajax/user',
-        data:{page:page,keyword:keyword},
+        data:{page:page,keyword:keyword,level:level,status:status},
         success:function(resp){
             $("#listdata").loading("stop");
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='8'>" + res.msg + "</td></tr>");
                 }
@@ -45,13 +119,13 @@ function load_data(){
                     html += "<td>" + no + "</td>";
                     html += "<td>" + v['nama'] + "</td>";
                     html += "<td>" + v['username'] + "</td>";
-                    html += "<td>" + v['username'] + "</td>";
-                    html += "<td>" + v['email'] + "</td>";
                     html += "<td>" + level + "</td>";
+                    html += "<td>" + v['nama_opd'] + "</td>";
+                    html += "<td>" + v['email'] + "</td>";
                     html += "<td>" + status + "</td>";
-                    html += "<td>";
+                    html += "<td class='nowrap'>";
                     html += "<a href='/user/edit/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";
-                    html += "<a onclick='hapus(this)' data-id='" + v['id'] + "' href='javascript:void(0);' class='btn btn-sm btn-danger'><span class='fa fa-trash'></span></a>";
+                    html += "<a href='javascript:void(0);' onclick='modal_password(this)' data-id='" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-key'></span></a> ";
                     html += "</td>";
                     html += "</tr>";
                 });
@@ -72,47 +146,10 @@ function next_page(){
     page = page + 1;
     load_data();
 }
-function hapus(itu){
+function modal_password(itu){
     var id = $(itu).attr("data-id");
-    $.confirm({
-        title: 'Konfirmasi',
-        content: 'Apa anda yakin menghapus data ini?',
-        buttons: {
-            cancel: {
-                text: 'Batal',
-                action: function(){
-
-                }
-            },
-            confirm: {
-                text: 'Konfirmasi',
-                btnClass: 'btn-blue',
-                action: function(){
-                    $(itu).parent().parent().loading();
-                    $.ajax({
-                        type:'post',
-                        url:'/ajax/opd/hapus',
-                        data:{id:id},
-                        success:function(resp){
-                            $(itu).parent().parent().loading("stop");
-                            var res = JSON.parse(resp);
-                            if(res.is_error){
-                                if(res.must_login){
-                                    window.location = "/login";
-                                }else{
-                                    toastr["error"](res.msg);
-                                }
-                            }else{
-                                toastr["success"]("Berhasil menghapus data");
-                                load_data();
-                            }
-                        },error:function(resp){
-                            $(itu).parent().parent().loading("stop");
-                            toastr["error"]("Gagal menghapus, coba lagi nanti");
-                        }
-                    });
-                }
-            }
-        }
-    });
+    $("#id").val(id);
+    $("#password").val("");
+    $("#hidden_password").val("");
+    $("#modal_password").modal("show");
 }

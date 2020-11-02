@@ -22,7 +22,7 @@ function dropdown_pendidikan(callback){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#pendidikan").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -65,7 +65,7 @@ function kualifikasi_jabatan_pendidikan_update(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -96,7 +96,7 @@ function kualifikasi_jabatan_pendidikan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#pendidikan").val("").trigger('change');
                     $("#jurusan").val("");
@@ -123,7 +123,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{

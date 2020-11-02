@@ -29,5 +29,76 @@ class User extends CI_Controller {
         $data = $this->Api->Call("user",$param);
         echo $data;
     }
+    public function tambah()
+    {
+        $token = $this->session->userdata("token");
+        $username = $this->input->post("username");
+        $password = $this->input->post("password");
+        $email = $this->input->post("email");
+        $nama = $this->input->post("nama");
+        $level = $this->input->post("level");
+        $jabatan = $this->input->post("jabatan");
+        $master_opd_id = $this->input->post("master_opd_id");
+        $param = array(
+            "token"=>$token,
+            "username"=>$username,
+            "password"=>$password,
+            "email"=>$email,
+            "nama"=>$nama,
+            "level"=>$level,
+            "jabatan"=>$jabatan,
+            "master_opd_id"=>$master_opd_id
+        );
+        $data = $this->Api->Call("user/tambah",$param);
+        echo $data;
+    }
+    public function edit()
+    {
+        $token = $this->session->userdata("token");
+        $id = $this->input->post("id");
+        $username = $this->input->post("username");
+        $password = $this->input->post("password");
+        $email = $this->input->post("email");
+        $nama = $this->input->post("nama");
+        $level = $this->input->post("level");
+        $jabatan = $this->input->post("jabatan");
+        $master_opd_id = $this->input->post("master_opd_id");
+        $status = $this->input->post("status");
+        $param = array(
+            "token"=>$token,
+            "id"=>$id,
+            "username"=>$username,
+            "password"=>$password,
+            "email"=>$email,
+            "nama"=>$nama,
+            "level"=>$level,
+            "jabatan"=>$jabatan,
+            "master_opd_id"=>$master_opd_id,
+            "status"=>$status
+        );
+        $data = $this->Api->Call("user/edit",$param);
+        echo $data;
+    }
+    public function detail()
+    {
+        $token = $this->session->userdata("token");
+        $id = $this->input->post("id");
+        $param = array("token"=>$token,"id"=>$id);
+        $data = $this->Api->Call("user/detail",$param);
+        echo $data;
+    }
+    public function edit_password()
+    {
+        $token = $this->session->userdata("token");
+        $id = $this->input->post("id");
+        $password = $this->input->post("password");
+        $param = array(
+            "token"=>$token,
+            "id"=>$id,
+            "password"=>$password
+        );
+        $data = $this->Api->Call("user/edit_password",$param);
+        echo $data;
+    }
 }
 ?>

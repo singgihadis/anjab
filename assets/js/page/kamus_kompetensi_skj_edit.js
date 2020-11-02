@@ -34,7 +34,7 @@ $(document).ready(function(){
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             toastr["error"](res.msg);
                         }
@@ -64,7 +64,7 @@ function load_data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"]("Gagal memuat data, coba lagi nanti");
                 }
@@ -92,7 +92,7 @@ function dropdown_standar_kompetensi(master_standar_kompetensi_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#standar_kompetensi").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -137,7 +137,7 @@ function dropdown_urusan_pemerintahan(master_urusan_pemerintahan_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#urusan_pemerintahan").html("<option value=''>" + res.msg + "</option>");
                 }

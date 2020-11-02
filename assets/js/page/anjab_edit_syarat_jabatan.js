@@ -15,7 +15,7 @@ function syarat_jabatan_keterampilan_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(1) td:nth-child(3)").html("0%");
                 }
@@ -37,7 +37,7 @@ function syarat_jabatan_bakat_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(2) td:nth-child(3)").html("0%");
                 }
@@ -59,7 +59,7 @@ function syarat_jabatan_temperamen_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(3) td:nth-child(3)").html("0%");
                 }
@@ -81,7 +81,7 @@ function syarat_jabatan_minat_kerja_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(4) td:nth-child(3)").html("0%");
                 }
@@ -103,7 +103,7 @@ function syarat_jabatan_upaya_fisik_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(5) td:nth-child(3)").html("0%");
                 }
@@ -125,7 +125,7 @@ function syarat_jabatan_kondisi_fisik_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(6) td:nth-child(3)").html("0%");
                 }
@@ -147,7 +147,7 @@ function syarat_jabatan_fungsi_pekerjaan_kelengkapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_anjab tr:nth-child(7) td:nth-child(3)").html("0%");
                 }
@@ -168,7 +168,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{

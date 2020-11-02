@@ -43,7 +43,7 @@ $(document).ready(function(){
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             toastr["error"](res.msg);
                         }
@@ -96,7 +96,7 @@ function hapus_skj_urusan_pemerintahan(itu,id){
                             var res = JSON.parse(resp);
                             if(res.is_error){
                                 if(res.must_login){
-                                    window.location = "/login";
+                                    window.location = "/logout";;
                                 }else{
                                     toastr["error"](res.msg);
                                 }
@@ -124,7 +124,7 @@ function get_opd_name(callback){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{
@@ -158,7 +158,7 @@ function jenis_jabatan(id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"]("Gagal memuat data, coba lagi nanti");
                 }
@@ -180,7 +180,7 @@ function urusan_pemerintahan(ids){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     //toastr["error"]("Gagal memuat data, coba lagi nanti");
                 }
@@ -211,7 +211,7 @@ function ikhtisiar_jabatan(jabatan_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{
@@ -234,7 +234,7 @@ function standar_kompetensi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#tab_content_standar_kompetensi").html(res.msg);
                 }
@@ -296,7 +296,7 @@ function skj_urusan_pemerintahan(elm_id,master_standar_kompetensi_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     var html_standar_kompetensi_list = "";
                     html_standar_kompetensi_list += "<br><a onclick='modal_kamus_kompetensi_skj_urusan_pemerintahan()' href='javascript:void(0);' class='btn btn-sm btn-primary'><span class='fa fa-plus'></span> Tambah Kompetensi</a>";
@@ -356,7 +356,7 @@ function skj_non_urusan_pemerintahan(elm_id,master_standar_kompetensi_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     var html_standar_kompetensi_list = "";
                     html_standar_kompetensi_list += "<br><table class='table table-striped table-bordered'>";
@@ -414,7 +414,7 @@ function kamus_kompetensi_skj_level(elm_id,master_kamus_kompetensi_skj_id,master
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             var html_dropdown = "";
                             html_dropdown += "<select class='form-control form-control-sm'>";
@@ -464,7 +464,7 @@ function modal_kamus_kompetensi_skj_urusan_pemerintahan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Pilih</option>");
                 }
@@ -515,7 +515,7 @@ function skj_update(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                     var index = $(itu).parent().parent().index();
@@ -563,7 +563,7 @@ function kualifikasi_jabatan_pendidikan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#pendidikan_formal").html("");
                     $("#fakultas_jurusan").html("");
@@ -599,7 +599,7 @@ function syarat_jabatan_pelatihan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     var html_pendidikan_pelatihan = "";
                     html_pendidikan_pelatihan += "<table class='table table-striped table-bordered'>";
@@ -665,7 +665,7 @@ function skj_pelatihan_update(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                     syarat_jabatan_pelatihan();
@@ -699,7 +699,7 @@ function syarat_jabatan_pengalaman_kerja(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     var html_pengalaman_kerja = "";
                     html_pengalaman_kerja += "<table class='table table-striped table-bordered'>";
@@ -764,7 +764,7 @@ function skj_pengalaman_kerja_update(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                     syarat_jabatan_pengalaman_kerja();
@@ -798,7 +798,7 @@ function syarat_jabatan_golongan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#golongan_pangkat").html("-");
                 }
@@ -830,7 +830,7 @@ function syarat_jabatan_indikator_kinerja_jabatan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $('#indikator_kinerja_jabatan').summernote("code","");
                 }
@@ -863,7 +863,7 @@ function syarat_jabatan_indikator_kinerja_jabatan_update(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                     syarat_jabatan_indikator_kinerja_jabatan();
@@ -893,7 +893,7 @@ function verifikasi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -919,7 +919,7 @@ function is_verifikasi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#btn_verifikasi").show();
                 }

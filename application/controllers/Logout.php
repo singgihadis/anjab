@@ -20,6 +20,9 @@ class Logout extends CI_Controller {
      */
     public function index()
     {
+        $token = $this->session->userdata("token");
+        $param = array("token"=>$token);
+        $this->Api->Call("logout",$param);
         session_destroy();
         redirect("login");
     }

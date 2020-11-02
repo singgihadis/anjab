@@ -18,7 +18,7 @@ $(document).ready(function(){
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             toastr["error"](res.msg);
                         }

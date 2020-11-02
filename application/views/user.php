@@ -34,12 +34,26 @@
                 <div class="card-body" id="card-body">
                     <div class="text-right">
                         <form id="form_filter">
+                            <div class="d-inline-block mx-1">
+                                <select id="filter_level" name="filter_level" class="form-control form-control-sm">
+                                    <option value="">Semua level</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">OPD</option>
+                                </select>
+                            </div>
+                            <div class="d-inline-block mx-1">
+                                <select id="filter_status" name="filter_status" class="form-control form-control-sm">
+                                    <option value="">Semua Status</option>
+                                    <option value="1" selected>Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                            </div>
                             <div class="d-inline-block">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
                                     </div>
-                                    <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Nama OPD">
+                                    <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Keyword">
                                 </div>
                             </div>
                         </form>
@@ -52,9 +66,9 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Username</th>
+                                <th>Level</th>
                                 <th>OPD</th>
                                 <th>Email</th>
-                                <th>Level</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -80,6 +94,31 @@
     </div>
     <!-- /#page-content-wrapper -->
 
+</div>
+<div class="modal" id="modal_password">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form_update_password">
+                <div class="modal-body">
+                    <input type="hidden" id="id" value="id">
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Input password baru" required />
+                        <input type="hidden" id="hidden_password" name="hidden_password" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>

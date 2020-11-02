@@ -64,7 +64,7 @@ function load_data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='8'>" + res.msg + "</td></tr>");
                 }
@@ -183,7 +183,7 @@ function move_up(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -211,7 +211,7 @@ function move_down(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -259,7 +259,7 @@ function hapus(itu){
                             var res = JSON.parse(resp);
                             if(res.is_error){
                                 if(res.must_login){
-                                    window.location = "/login";
+                                    window.location = "/logout";;
                                 }else{
                                     toastr["error"](res.msg);
                                 }
@@ -288,7 +288,7 @@ function dropdown_opd(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#filter_opd").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -318,7 +318,7 @@ function dropdown_jenis_jabatan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#filter_jenis_jabatan").html("<option value=''>" + res.msg + "</option>");
                 }

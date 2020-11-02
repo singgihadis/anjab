@@ -63,7 +63,7 @@ function load_data(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata").html("<tr><td colspan='8'>" + res.msg + "</td></tr>");
                 }
@@ -183,7 +183,7 @@ function dropdown_opd(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#filter_opd").html("<option value=''>" + res.msg + "</option>");
                 }

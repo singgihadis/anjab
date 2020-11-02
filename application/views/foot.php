@@ -12,4 +12,5 @@
 <script type="text/javascript" src="/assets/js/crypto/md5.js"></script>
 <script type="text/javascript" src="/assets/js/crypto/sha1.js"></script>
 <script type="text/javascript" src="/assets/js/summernote-bs4.js"></script>
+<script type="text/javascript" src="/assets/js/daterangepicker.min.js"></script>
 <script type="text/javascript" src="/assets/js/public.js"></script>

@@ -14,7 +14,7 @@ function keterangan_waktu(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_abk").html("<tr><td colspan='7'>" + res.msg + "</td></tr>");
                 }
@@ -40,7 +40,7 @@ function abk(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     $("#listdata_abk").html("<tr><td colspan='7'>" + res.msg + "</td></tr>");
                 }
@@ -178,7 +178,7 @@ function update(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -201,7 +201,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";
                 }else{
                 }
             }else{

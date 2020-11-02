@@ -55,7 +55,7 @@ function tugas_pokok_tahapan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     var html = "";
                     html += "<div class='input-group mb-3'>";
@@ -116,7 +116,7 @@ function simpan_tahapan(){
                 var res = JSON.parse(resp);
                 if(res.is_error){
                     if(res.must_login){
-                        window.location = "/login";
+                        window.location = "/logout";;
                     }else{
                         toastr["error"](res.msg);
                     }
@@ -153,7 +153,7 @@ function tugas_pokok(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#listdata_tugaspokok").html("<tr><td colspan='4'>" + res.msg + "</td></tr>");
                 }
@@ -205,7 +205,7 @@ function tugas_pokok_tambah(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -252,7 +252,7 @@ function hapus(itu){
                             var res = JSON.parse(resp);
                             if(res.is_error){
                                 if(res.must_login){
-                                    window.location = "/login";
+                                    window.location = "/logout";;
                                 }else{
                                     toastr["error"](res.msg);
                                 }
@@ -292,7 +292,7 @@ function tugas_pokok_edit(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -317,7 +317,7 @@ function get_opd_name(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                 }
             }else{
@@ -339,7 +339,7 @@ function move_up(order){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }
@@ -364,7 +364,7 @@ function move_down(order){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     toastr["error"](res.msg);
                 }

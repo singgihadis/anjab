@@ -33,7 +33,7 @@ $(document).ready(function(){
                     var res = JSON.parse(resp);
                     if(res.is_error){
                         if(res.must_login){
-                            window.location = "/login";
+                            window.location = "/logout";;
                         }else{
                             toastr["error"](res.msg);
                         }
@@ -61,7 +61,7 @@ function dropdown_standar_kompetensi(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#standar_kompetensi").html("<option value=''>" + res.msg + "</option>");
                 }
@@ -97,7 +97,7 @@ function dropdown_urusan_pemerintahan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/login";
+                    window.location = "/logout";;
                 }else{
                     $("#urusan_pemerintahan").html("<option value=''>" + res.msg + "</option>");
                 }
