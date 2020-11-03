@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Logout extends CI_Controller {
+class Print_dokumen extends CI_Controller {
 
     /**
      * Index Page for this controller.
@@ -20,15 +20,11 @@ class Logout extends CI_Controller {
      */
     public function index()
     {
-        $token = $this->session->userdata("token");
-        $param = array("token"=>$token);
-        $this->Api->Call("logout",$param);
-
-        //Simpan log
-        $this->PublicFunction->SimpanLog("Logout","");
-
-        session_destroy();
-        redirect("login");
+        if($this->session->userdata("is_login")){
+            $this->load->view("print_dokumen");
+        }else{
+            redirect("login");
+        }
     }
 }
 ?>

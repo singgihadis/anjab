@@ -16,8 +16,8 @@ $profil = json_decode($this->session->userdata("profil"),true);
                         <?php echo $profil['nama']; ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button">Action</button>
-                        <button class="dropdown-item" type="button">Another action</button>
+                        <a href="/pengaturan" class="dropdown-item">Pengaturan</a>
+                        <a href="/ganti_password" class="dropdown-item">Ganti Password</a>
                         <a href="/logout" class="dropdown-item">Logout</a>
                     </div>
                 </div>

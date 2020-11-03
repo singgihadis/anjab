@@ -49,6 +49,11 @@ class EvJab extends CI_Controller {
             "master_faktor_evjab_level_id"=>$master_faktor_evjab_level_id,
             "nilai"=>$nilai);
         $data = $this->Api->Call("evjab/update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Evaluasi Jabatan",json_encode($param));
+        }
         echo $data;
     }
     public function tim_analisis(){
@@ -75,6 +80,11 @@ class EvJab extends CI_Controller {
             "jabatan_pimpinan_unit_kerja"=>$jabatan_pimpinan_unit_kerja,
             "nama_pimpinan_unit_kerja"=>$nama_pimpinan_unit_kerja);
         $data = $this->Api->Call("evjab/tim_analisis_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Tim Analisis Jabatan",json_encode($param));
+        }
         echo $data;
     }
     public function verifikasi(){
@@ -84,6 +94,11 @@ class EvJab extends CI_Controller {
         $verifikasi = $this->input->post("verifikasi");
         $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token,"verifikasi"=>$verifikasi);
         $data = $this->Api->Call("anjab/verifikasi",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Verifikasi Evaluasi Jabatan",json_encode($param));
+        }
         echo $data;
     }
     public function is_verifikasi(){

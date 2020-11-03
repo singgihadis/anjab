@@ -1,4 +1,5 @@
 var data_evjab = [];
+var data_level = [];
 $(document).ready(function(){
     get_opd_name(function(){
         is_verifikasi();
@@ -26,6 +27,12 @@ $(document).ready(function(){
         submitHandler:function(){
             verifikasi();
         }
+    });
+    $("#master_faktor_evjab_level_id").change(function(){
+        var k = $(this).find("option:selected").attr("data-k");
+        var data = data_level[k];
+        $('#summernote').summernote("code",data['uraian']);
+        $("#dampak").val(data['dampak']);
     });
 });
 function modal_verifikasi(){
@@ -212,18 +219,19 @@ function dropdown_level(master_faktor_evjab_id,master_faktor_evjab_level_id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/logout";;
+                    window.location = "/logout";
                 }else{
                     $("#master_faktor_evjab_level_id").html("<option value=''>" + res.msg + "</option>");
                 }
             }else{
+                data_level = res.data;
                 var html = "";
                 html += "<option value='' data-nilai='0'>Pilih</option>";
                 $.each(res.data,function(k,v){
                     if(master_faktor_evjab_level_id == v['id']){
-                        html += "<option value='" + v['id'] + "' data-nilai='" + v['nilai'] + "' selected>" + FormatAngka(v['level']) + " - " + FormatAngka(v['nilai']) + "</option>";
+                        html += "<option value='" + v['id'] + "' data-k='" + k + "' data-nilai='" + v['nilai'] + "' selected>" + FormatAngka(v['level']) + " - " + FormatAngka(v['nilai']) + "</option>";
                     }else{
-                        html += "<option value='" + v['id'] + "' data-nilai='" + v['nilai'] + "'>" + FormatAngka(v['level']) + " - " + FormatAngka(v['nilai']) + "</option>";
+                        html += "<option value='" + v['id'] + "' data-k='" + k + "' data-nilai='" + v['nilai'] + "'>" + FormatAngka(v['level']) + " - " + FormatAngka(v['nilai']) + "</option>";
                     }
                 });
                 $("#master_faktor_evjab_level_id").html(html);

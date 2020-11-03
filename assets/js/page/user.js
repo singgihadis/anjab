@@ -118,7 +118,7 @@ function load_data(){
                     html += "<tr>";
                     html += "<td>" + no + "</td>";
                     html += "<td>" + v['nama'] + "</td>";
-                    html += "<td>" + v['username'] + "</td>";
+                    html += "<td>@" + v['username'] + "</td>";
                     html += "<td>" + level + "</td>";
                     html += "<td>" + v['nama_opd'] + "</td>";
                     html += "<td>" + v['email'] + "</td>";

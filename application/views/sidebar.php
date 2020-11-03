@@ -200,6 +200,31 @@
                 <span class="fa fa-history mr-2"></span> Log User
             </a>
         </li>
+        <li class="list-group-item list-group-item-action bg-white">
+            <span class="menu-title">Menu Laporan</span>
+        </li>
+        <li class="list-group-item list-group-item-action bg-white" class="<?php echo ($menu == "10"?"active":""); ?>">
+            <a href="#menu10" data-toggle="collapse">
+                <span class="fa fa-file-o mr-2"></span> Laporan <span class="fa fa-angle-right float-right mt-1"></span>
+            </a>
+            <ul id="menu10" class="list-group list-group-sub-menu list-group-flush collapse  <?php echo ($menu == "10"?"show":""); ?>">
+                <li class="list-group-item list-group-item-action bg-white">
+                    <a href="/print_dokumen" class="<?php echo ($menu == "10" && $sub_menu == "1"?"active":""); ?>">
+                        <span class="fa fa-circle-o"></span> Print Dokumen
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action bg-white">
+                    <a href="/rekapitulasi" class="<?php echo ($menu == "10" && $sub_menu == "2"?"active":""); ?>">
+                        <span class="fa fa-circle-o"></span> Rekapitulasi
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action bg-white">
+                    <a href="/rekapitulasi_abk" class="<?php echo ($menu == "10" && $sub_menu == "3"?"active":""); ?>">
+                        <span class="fa fa-circle-o"></span> Rekapitulasi ABK
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
     <br>
 </div>

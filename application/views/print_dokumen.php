@@ -3,8 +3,8 @@
 <body>
 <div class="d-flex" id="wrapper">
     <?php
-    $menu = "9";
-    $sub_menu = "";
+    $menu = "10";
+    $sub_menu = "1";
     include("sidebar.php");
     ?>
     <!-- Sidebar -->
@@ -17,14 +17,14 @@
         <div class="container-fluid">
             <div class="custom-breadcrumb mb-4">
                 <ul>
-                    <li>Log User</li>
+                    <li>Print Dokumen</li>
                 </ul>
             </div>
             <div class="card">
                 <div class="card-header bg-white">
                     <div class="row">
                         <div class="col-md-6">
-                            <span class="fa fa-lg fa-list-alt mr-1"></span> <b>Log User</b>
+                            <span class="fa fa-lg fa-list-alt mr-1"></span> <b>Daftar Jabatan <span id="sub_title"></span></b>
                         </div>
                         <div class="col-md-6 text-right">
 
@@ -34,10 +34,22 @@
                 <div class="card-body" id="card-body">
                     <div class="text-right">
                         <form id="form_filter">
-                            <div class="d-inline-block mx-1">
-                                <input type="text" name="filter_tgl" id="filter_tgl" class="form-control" />
+                            <div class="d-inline-block mx-1 align-middle">
+                                <select id="filter_opd" name="filter_opd" class="form-control form-control-sm">
+                                    <option value="">Pilih OPD</option>
+                                </select>
                             </div>
-                            <div class="d-inline-block">
+                            <div class="d-inline-block mx-1 align-middle">
+                                <select id="filter_tahun" name="filter_tahun" class="form-control form-control-sm">
+
+                                </select>
+                            </div>
+                            <div class="d-inline-block mx-1 align-middle">
+                                <select id="filter_jenis_jabatan" name="filter_jenis_jabatan" class="form-control form-control-sm">
+
+                                </select>
+                            </div>
+                            <div class="d-inline-block align-middle">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
@@ -52,17 +64,23 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Waktu</th>
-                                <th>Username</th>
-                                <th>Nama</th>
-                                <th>Aksi</th>
-                                <th>IP</th>
-                                <th>Browser</th>
-<!--                                <th>Aksi</th>-->
+                                <th>No</th>
+                                <th>Nama Jabatan</th>
+                                <th>Nama Unit</th>
+                                <th>Jenis Jabatan</th>
+                                <th>Anjab</th>
+                                <th>ABK</th>
+                                <th>EvJab</th>
+                                <th>Form EvJab</th>
+                                <th>SKJ</th>
                             </tr>
                             </thead>
                             <tbody id="listdata">
-
+                            <tr>
+                                <td colspan="9">
+                                    Silahkan pilih OPD terlebih dahulu
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -71,7 +89,7 @@
                         <div class="col-md-6" id="info_page">
 
                         </div>
-                        <div class="col-md-6 text-right" id="pagination">
+                        <div class="col-md-6 text-right" id="pagination" style="display: none">
 
                         </div>
                     </div>
@@ -81,27 +99,9 @@
         </div>
     </div>
     <!-- /#page-content-wrapper -->
-
-</div>
-<div class="modal" id="modal_detail">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Detail</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="detail">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/log_user.js"></script>
+<script type="text/javascript" src="/assets/js/page/print_dokumen.js"></script>
 </body>
 </html>

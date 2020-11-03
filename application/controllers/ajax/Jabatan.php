@@ -58,6 +58,11 @@ class Jabatan extends CI_Controller {
             "master_urusan_pemerintahan_ids"=>$master_urusan_pemerintahan_ids
         );
         $data = $this->Api->Call("jabatan/tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Jabatan",json_encode($param));
+        }
         echo $data;
     }
     public function edit()
@@ -89,6 +94,11 @@ class Jabatan extends CI_Controller {
             "master_urusan_pemerintahan_ids"=>$master_urusan_pemerintahan_ids
         );
         $data = $this->Api->Call("jabatan/edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Jabatan",json_encode($param));
+        }
         echo $data;
     }
     public function detail()
@@ -115,6 +125,11 @@ class Jabatan extends CI_Controller {
         $jabatan_id = $this->input->post("jabatan_id");
         $param = array("token"=>$token,"input_array"=>$input_array,"jml_pegawai"=>$jml_pegawai,"jabatan_id"=>$jabatan_id);
         $data = $this->Api->Call("jabatan/jml_pegawai_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Jabatan Jml Pegawai",json_encode($param));
+        }
         echo $data;
     }
     public function hapus()
@@ -123,6 +138,11 @@ class Jabatan extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("token"=>$token,"id"=>$id);
         $data = $this->Api->Call("jabatan/hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Jabatan",json_encode($param));
+        }
         echo $data;
     }
     public function move_up()
@@ -133,6 +153,11 @@ class Jabatan extends CI_Controller {
         $tingkat = $this->input->post("tingkat");
         $param = array("token"=>$token,"order"=>$order,"jabatan_id"=>$jabatan_id,"tingkat"=>$tingkat);
         $data = $this->Api->Call("jabatan/move_up",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Jabatan ke atas",json_encode($param));
+        }
         echo $data;
     }
     public function move_down()
@@ -143,6 +168,11 @@ class Jabatan extends CI_Controller {
         $tingkat = $this->input->post("tingkat");
         $param = array("token"=>$token,"order"=>$order,"jabatan_id"=>$jabatan_id,"tingkat"=>$tingkat);
         $data = $this->Api->Call("jabatan/move_down",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Jabatan ke bawah",json_encode($param));
+        }
         echo $data;
     }
 }

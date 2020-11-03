@@ -195,6 +195,11 @@ class Anjab extends CI_Controller {
         $ikhtisiar = $this->input->post("ikhtisiar");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"ikhtisiar"=>$ikhtisiar);
         $data = $this->Api->Call("anjab/ikhtisiar_jabatan_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Ikhtisiar Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function ikhtisiar_jabatan(){
@@ -211,6 +216,11 @@ class Anjab extends CI_Controller {
         $jurusan = $this->input->post("jurusan");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_pendidikan_id"=>$master_pendidikan_id,"jurusan"=>$jurusan);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pendidikan_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Pendidikan Formal Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function kualifikasi_jabatan_pendidikan(){
@@ -225,6 +235,7 @@ class Anjab extends CI_Controller {
         $jabatan_id = $this->input->post("jabatan_id");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pelatihan",$param);
+
         echo $data;
     }
     public function kualifikasi_jabatan_pelatihan_tambah(){
@@ -234,6 +245,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_jenis_pelatihan_id"=>$master_jenis_pelatihan_id,"nama"=>$nama);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pelatihan_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Pendidikan dan Pelatihan Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function kualifikasi_jabatan_pelatihan_edit(){
@@ -244,6 +260,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token,"master_jenis_pelatihan_id"=>$master_jenis_pelatihan_id,"nama"=>$nama);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pelatihan_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Pendidikan dan Pelatihan Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function kualifikasi_jabatan_pelatihan_hapus(){
@@ -251,6 +272,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pelatihan_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Pendidikan dan Pelatihan Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function kualifikasi_jabatan_pengalaman(){
@@ -266,6 +292,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"nama"=>$nama);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pengalaman_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Pengalaman Kerja Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function kualifikasi_jabatan_pengalaman_edit(){
@@ -274,6 +305,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("id"=>$id,"token"=>$token,"nama"=>$nama);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pengalaman_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Pengalaman Kerja Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function kualifikasi_jabatan_pengalaman_hapus(){
@@ -281,6 +317,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/kualifikasi_jabatan_pengalaman_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Pengalaman Kerja Kualifikasi Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function tugas_pokok(){
@@ -296,6 +337,11 @@ class Anjab extends CI_Controller {
         $uraian = $this->input->post("uraian");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"uraian"=>$uraian);
         $data = $this->Api->Call("anjab/tugas_pokok_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Tugas Pokok Tahapan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function tugas_pokok_edit(){
@@ -304,6 +350,11 @@ class Anjab extends CI_Controller {
         $uraian = $this->input->post("uraian");
         $param = array("id"=>$id,"token"=>$token,"uraian"=>$uraian);
         $data = $this->Api->Call("anjab/tugas_pokok_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Tugas Pokok Tahapan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function tugas_pokok_hapus(){
@@ -311,6 +362,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/tugas_pokok_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Tugas Pokok Tahapan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function tugas_pokok_move_up(){
@@ -319,6 +375,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/tugas_pokok_move_up",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Tugas Pokok Tahapan Anjab ke atas",json_encode($param));
+        }
         echo $data;
     }
     public function tugas_pokok_move_down(){
@@ -327,6 +388,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/tugas_pokok_move_down",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Tugas Pokok Tahapan Anjab ke bawah",json_encode($param));
+        }
         echo $data;
     }
     public function tugas_pokok_tahapan(){
@@ -342,6 +408,11 @@ class Anjab extends CI_Controller {
         $uraian_json = $this->input->post("uraian_json");
         $param = array("anjab_tugas_pokok_id"=>$anjab_tugas_pokok_id,"token"=>$token,"uraian_json"=>$uraian_json);
         $data = $this->Api->Call("anjab/tugas_pokok_tahapan_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Tugas Pokok Tahapan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function hasil_kerja(){
@@ -357,6 +428,11 @@ class Anjab extends CI_Controller {
         $param_json = $this->input->post("param_json");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"param_json"=>$param_json);
         $data = $this->Api->Call("anjab/hasil_kerja_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Hasil Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function bahan_kerja(){
@@ -373,6 +449,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"nama"=>$nama,"digunakan_dalam_tugas"=>$digunakan_dalam_tugas);
         $data = $this->Api->Call("anjab/bahan_kerja_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Bahan Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function bahan_kerja_edit(){
@@ -383,6 +464,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"id"=>$id,"token"=>$token,"nama"=>$nama,"digunakan_dalam_tugas"=>$digunakan_dalam_tugas);
         $data = $this->Api->Call("anjab/bahan_kerja_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Bahan Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function bahan_kerja_hapus(){
@@ -390,6 +476,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/bahan_kerja_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Bahan Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function bahan_kerja_move_up(){
@@ -398,6 +489,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/bahan_kerja_move_up",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Bahan Kerja Anjab ke atas",json_encode($param));
+        }
         echo $data;
     }
     public function bahan_kerja_move_down(){
@@ -406,6 +502,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/bahan_kerja_move_down",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Bahan Kerja Anjab ke bawah",json_encode($param));
+        }
         echo $data;
     }
     public function perangkat_kerja(){
@@ -422,6 +523,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"nama"=>$nama,"digunakan_dalam_tugas"=>$digunakan_dalam_tugas);
         $data = $this->Api->Call("anjab/perangkat_kerja_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Perangkat Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function perangkat_kerja_edit(){
@@ -432,6 +538,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"id"=>$id,"token"=>$token,"nama"=>$nama,"digunakan_dalam_tugas"=>$digunakan_dalam_tugas);
         $data = $this->Api->Call("anjab/perangkat_kerja_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Perangkat Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function perangkat_kerja_hapus(){
@@ -439,6 +550,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/perangkat_kerja_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Perangkat Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function perangkat_kerja_move_up(){
@@ -447,6 +563,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/perangkat_kerja_move_up",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Perangkat Kerja Anjab ke atas",json_encode($param));
+        }
         echo $data;
     }
     public function perangkat_kerja_move_down(){
@@ -455,6 +576,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/perangkat_kerja_move_down",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Perangkat Kerja Anjab ke bawah",json_encode($param));
+        }
         echo $data;
     }
     public function tanggung_jawab(){
@@ -470,6 +596,11 @@ class Anjab extends CI_Controller {
         $param_json = $this->input->post("param_json");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"param_json"=>$param_json);
         $data = $this->Api->Call("anjab/tanggung_jawab_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Tanggung Jawab Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function wewenang(){
@@ -485,6 +616,11 @@ class Anjab extends CI_Controller {
         $param_json = $this->input->post("param_json");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"param_json"=>$param_json);
         $data = $this->Api->Call("anjab/wewenang_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Wewenang Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function korelasi(){
@@ -502,6 +638,11 @@ class Anjab extends CI_Controller {
         $dalam_hal = $this->input->post("dalam_hal");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"nama_jabatan"=>$nama_jabatan,"unit_kerja"=>$unit_kerja,"dalam_hal"=>$dalam_hal);
         $data = $this->Api->Call("anjab/korelasi_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Korelasi Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function korelasi_edit(){
@@ -513,6 +654,11 @@ class Anjab extends CI_Controller {
         $dalam_hal = $this->input->post("dalam_hal");
         $param = array("jabatan_id"=>$jabatan_id,"id"=>$id,"token"=>$token,"nama_jabatan"=>$nama_jabatan,"unit_kerja"=>$unit_kerja,"dalam_hal"=>$dalam_hal);
         $data = $this->Api->Call("anjab/korelasi_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Korelasi Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function korelasi_hapus(){
@@ -520,6 +666,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/korelasi_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Korelasi Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function korelasi_move_up(){
@@ -528,6 +679,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/korelasi_move_up",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Korelasi Anjab ke atas",json_encode($param));
+        }
         echo $data;
     }
     public function korelasi_move_down(){
@@ -536,6 +692,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/korelasi_move_down",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Korelasi Anjab ke bawah",json_encode($param));
+        }
         echo $data;
     }
     public function kondisi_lingkungan_kerja(){
@@ -551,6 +712,11 @@ class Anjab extends CI_Controller {
         $param_json = $this->input->post("param_json");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"param_json"=>$param_json);
         $data = $this->Api->Call("anjab/kondisi_lingkungan_kerja_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Kondisi Lingkungan Kerja Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function resiko_bahaya(){
@@ -567,6 +733,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"nama"=>$nama,"penyebab"=>$penyebab);
         $data = $this->Api->Call("anjab/resiko_bahaya_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Resiko Bahaya Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function resiko_bahaya_edit(){
@@ -577,6 +748,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"id"=>$id,"token"=>$token,"nama"=>$nama,"penyebab"=>$penyebab);
         $data = $this->Api->Call("anjab/resiko_bahaya_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Resiko Bahaya Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function resiko_bahaya_hapus(){
@@ -584,6 +760,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/resiko_bahaya_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Resiko Bahaya Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function resiko_bahaya_move_up(){
@@ -592,6 +773,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/resiko_bahaya_move_up",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Resiko Bahaya Anjab ke atas",json_encode($param));
+        }
         echo $data;
     }
     public function resiko_bahaya_move_down(){
@@ -600,6 +786,11 @@ class Anjab extends CI_Controller {
         $order = $this->input->post("order");
         $param = array("id"=>$id,"token"=>$token,"order"=>$order);
         $data = $this->Api->Call("anjab/resiko_bahaya_move_down",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Memindahkan urutan Resiko Bahaya Anjab ke bawah",json_encode($param));
+        }
         echo $data;
     }
     public function prestasi_kerja_diharapkan(){
@@ -615,6 +806,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"nama"=>$nama);
         $data = $this->Api->Call("anjab/prestasi_kerja_diharapkan_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Prestasi Kerja Yang Diharapkan Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function prestasi_kerja_diharapkan_edit(){
@@ -624,6 +820,11 @@ class Anjab extends CI_Controller {
         $nama = $this->input->post("nama");
         $param = array("jabatan_id"=>$jabatan_id,"id"=>$id,"token"=>$token,"nama"=>$nama);
         $data = $this->Api->Call("anjab/prestasi_kerja_diharapkan_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Prestasi Kerja Yang Diharapkan Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function prestasi_kerja_diharapkan_hapus(){
@@ -631,6 +832,11 @@ class Anjab extends CI_Controller {
         $id = $this->input->post("id");
         $param = array("id"=>$id,"token"=>$token);
         $data = $this->Api->Call("anjab/prestasi_kerja_diharapkan_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Prestasi Kerja Yang Diharapkan Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_keterampilan_kerja(){
@@ -647,6 +853,11 @@ class Anjab extends CI_Controller {
         $uraian = $this->input->post("uraian");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"aspek"=>$aspek,"uraian"=>$uraian);
         $data = $this->Api->Call("anjab/syarat_jabatan_keterampilan_kerja_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Keterampilan Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_keterampilan_kerja_edit(){
@@ -657,6 +868,11 @@ class Anjab extends CI_Controller {
         $uraian = $this->input->post("uraian");
         $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token,"aspek"=>$aspek,"uraian"=>$uraian);
         $data = $this->Api->Call("anjab/syarat_jabatan_keterampilan_kerja_edit",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Keterampilan Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_bakat_kerja(){
@@ -672,6 +888,11 @@ class Anjab extends CI_Controller {
         $master_bakat_kerja_id = $this->input->post("master_bakat_kerja_id");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_bakat_kerja_id"=>$master_bakat_kerja_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_bakat_kerja_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Bakat Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_bakat_kerja_hapus(){
@@ -681,6 +902,11 @@ class Anjab extends CI_Controller {
         $master_bakat_kerja_id = $this->input->post("master_bakat_kerja_id");
         $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token,"master_bakat_kerja_id"=>$master_bakat_kerja_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_bakat_kerja_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Bakat Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_temperamen_kerja(){
@@ -696,6 +922,11 @@ class Anjab extends CI_Controller {
         $master_temperamen_kerja_id = $this->input->post("master_temperamen_kerja_id");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_temperamen_kerja_id"=>$master_temperamen_kerja_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_temperamen_kerja_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Temperamen Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_temperamen_kerja_hapus(){
@@ -705,6 +936,11 @@ class Anjab extends CI_Controller {
         $master_temperamen_kerja_id = $this->input->post("master_temperamen_kerja_id");
         $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token,"master_temperamen_kerja_id"=>$master_temperamen_kerja_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_temperamen_kerja_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Temperamen Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_minat_kerja(){
@@ -720,6 +956,11 @@ class Anjab extends CI_Controller {
         $master_minat_kerja_id = $this->input->post("master_minat_kerja_id");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_minat_kerja_id"=>$master_minat_kerja_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_minat_kerja_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Minat Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_minat_kerja_hapus(){
@@ -729,6 +970,11 @@ class Anjab extends CI_Controller {
         $master_minat_kerja_id = $this->input->post("master_minat_kerja_id");
         $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token,"master_minat_kerja_id"=>$master_minat_kerja_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_minat_kerja_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Minat Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_upaya_fisik(){
@@ -744,6 +990,11 @@ class Anjab extends CI_Controller {
         $master_upaya_fisik_id = $this->input->post("master_upaya_fisik_id");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_upaya_fisik_id"=>$master_upaya_fisik_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_upaya_fisik_tambah",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Upaya Fisik Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_upaya_fisik_hapus(){
@@ -753,6 +1004,11 @@ class Anjab extends CI_Controller {
         $master_upaya_fisik_id = $this->input->post("master_upaya_fisik_id");
         $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token,"master_tupaya_fisik_id"=>$master_upaya_fisik_id);
         $data = $this->Api->Call("anjab/syarat_jabatan_upaya_fisik_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Upaya Fisik Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_kondisi_fisik(){
@@ -769,6 +1025,11 @@ class Anjab extends CI_Controller {
         $master_kondisi_fisik_id = $this->input->post("master_kondisi_fisik_id");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"master_kondisi_fisik_id"=>$master_kondisi_fisik_id,"keterangan"=>$keterangan);
         $data = $this->Api->Call("anjab/syarat_jabatan_kondisi_fisik_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Kondisi Fisik Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_fungsi_pekerjaan(){
@@ -792,6 +1053,11 @@ class Anjab extends CI_Controller {
             "master_fungsi_pekerjaan_benda_id"=>$master_fungsi_pekerjaan_benda_id
         );
         $data = $this->Api->Call("anjab/syarat_jabatan_fungsi_pekerjaan_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Fungsi Pekerjaan Syarat Jabatan Anjab",json_encode($param));
+        }
         echo $data;
     }
     public function verifikasi(){
@@ -801,6 +1067,11 @@ class Anjab extends CI_Controller {
         $verifikasi = $this->input->post("verifikasi");
         $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token,"verifikasi"=>$verifikasi);
         $data = $this->Api->Call("anjab/verifikasi",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Verifikasi Analisa Jabatan dan Beban Kerja",json_encode($param));
+        }
         echo $data;
     }
     public function is_verifikasi(){
@@ -831,6 +1102,10 @@ class Anjab extends CI_Controller {
         $json = $this->input->post("json");
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token,"json"=>$json);
         $data = $this->Api->Call("anjab/abk_update",$param);
+
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Analisa Beban Kerja",json_encode($param));
+        }
         echo $data;
     }
 }

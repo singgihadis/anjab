@@ -72,6 +72,11 @@ class Skj extends CI_Controller {
             "master_kamus_kompetensi_skj_level_id"=>$master_kamus_kompetensi_skj_level_id
         );
         $data = $this->Api->Call("skj/update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update SKJ",json_encode($param));
+        }
         echo $data;
     }
     public function tambah_skj_urusan_pemerintahan()
@@ -89,6 +94,11 @@ class Skj extends CI_Controller {
             "master_kamus_kompetensi_skj_level_id"=>$master_kamus_kompetensi_skj_level_id
         );
         $data = $this->Api->Call("skj/tambah_skj_urusan_pemerintahan",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Tambah Kompetensi SKJ Urusan Pemerintahan",json_encode($param));
+        }
         echo $data;
     }
     public function hapus_skj_urusan_pemerintahan()
@@ -100,6 +110,11 @@ class Skj extends CI_Controller {
             "id"=>$id
         );
         $data = $this->Api->Call("skj/hapus_skj_urusan_pemerintahan",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Kompetensi SKJ Urusan Pemerintahan",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_pelatihan()
@@ -124,6 +139,11 @@ class Skj extends CI_Controller {
             "tingkat_penting"=>$tingkat_penting
         );
         $data = $this->Api->Call("skj/syarat_jabatan_pelatihan_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Pendidikan/Pelatihan Syarat Jabatan SKJ",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_pengalaman_kerja()
@@ -148,6 +168,11 @@ class Skj extends CI_Controller {
             "tingkat_penting"=>$tingkat_penting
         );
         $data = $this->Api->Call("skj/syarat_jabatan_pengalaman_kerja_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Pengalaman Kerja Syarat Jabatan SKJ",json_encode($param));
+        }
         echo $data;
     }
     public function syarat_jabatan_golongan()
@@ -183,6 +208,11 @@ class Skj extends CI_Controller {
             "uraian"=>$uraian
         );
         $data = $this->Api->Call("skj/syarat_jabatan_indikator_kinerja_jabatan_update",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Update Indikator Kinerja Jabatan Syarat Jabatan SKJ",json_encode($param));
+        }
         echo $data;
     }
     public function verifikasi(){
@@ -192,6 +222,11 @@ class Skj extends CI_Controller {
         $verifikasi = $this->input->post("verifikasi");
         $param = array("jabatan_id"=>$jabatan_id,"tahun"=>$tahun,"token"=>$token,"verifikasi"=>$verifikasi);
         $data = $this->Api->Call("skj/verifikasi",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Verifikasi SKJ",json_encode($param));
+        }
         echo $data;
     }
     public function is_verifikasi(){

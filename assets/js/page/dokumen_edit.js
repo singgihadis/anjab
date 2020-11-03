@@ -1,8 +1,18 @@
+var update_dokumen = "0";
 $(document).ready(function(){
     load_data();
     $("#dokumen").change(function(e){
         var fileName = e. target. files[0]. name;
         $("label[for='dokumen']").html(fileName);
+    });
+    $("#cb_update_dokumen").change(function(e){
+        if($(this).is(":checked") == "1"){
+            update_dokumen = "1";
+            $("#div_dokumen").show();
+        }else{
+            update_dokumen = "0";
+            $("#div_dokumen").hide();
+        }
     });
     $("#form_update").validate({
         submitHandler:function(){
@@ -19,11 +29,13 @@ $(document).ready(function(){
             data.append("id", id);
             data.append("nama", nama);
             data.append("is_tampil", is_tampil);
+            data.append("update_dokumen",update_dokumen);
             if($("#dokumen").val() != ""){
                 data.append("dokumen", $("#dokumen")[0].files[0]);
             }else{
                 data.append("dokumen", "");
             }
+
             $.ajax({
                 type:'post',
                 url:'/ajax/dokumen/edit',

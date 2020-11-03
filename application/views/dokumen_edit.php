@@ -53,10 +53,20 @@
                         </div>
                         <div class="form-group">
                             <label>Dokumen</label>
-                            <div class="input-group mb-3">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="dokumen" name="dokumen" accept="application/pdf">
-                                    <label class="custom-file-label" for="dokumen">Pilih pdf</label>
+                            <div class="mb-3">
+                                <div class="d-inline-block align-middle mr-3">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="cb_update_dokumen" value="1">
+                                        <label class="custom-control-label" for="cb_update_dokumen">Update Dokumen</label>
+                                    </div>
+                                </div>
+                                <div class="d-inline-block align-middle">
+                                    <div id="div_dokumen" class="input-group" style="display: none">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="dokumen" name="dokumen" accept="application/pdf">
+                                            <label class="custom-file-label" for="dokumen">Pilih pdf</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

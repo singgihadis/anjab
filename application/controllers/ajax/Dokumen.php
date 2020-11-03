@@ -51,16 +51,28 @@ class Dokumen extends CI_Controller {
         $id = $this->input->post("id");
         $nama = $this->input->post("nama");
         $is_tampil = $this->input->post("is_tampil");
-        $base64_dokumen = "";
-        if(!empty($_FILES['dokumen']['name'])){
-            $file_tmp= $_FILES['dokumen']['tmp_name'];
+        $update_dokumen = $this->input->post("update_dokumen");
+
+        $param = array(
+            "id"=>$id,
+            "token"=>$token,
+            "nama"=>$nama,
+            "is_tampil"=>$is_tampil,
+            "update_dokumen"=>$update_dokumen);
+        if($update_dokumen == "1"){
             $base64_dokumen = "";
-            if(filesize($file_tmp) > 0){
-                $dokumen_content = file_get_contents($file_tmp);
-                $base64_dokumen = base64_encode($dokumen_content);
+            if(!empty($_FILES['dokumen']['name'])){
+                $file_tmp= $_FILES['dokumen']['tmp_name'];
+                $base64_dokumen = "";
+                if(filesize($file_tmp) > 0){
+                    $dokumen_content = file_get_contents($file_tmp);
+                    $base64_dokumen = base64_encode($dokumen_content);
+                }
             }
+            $param['dokumen'] = $base64_dokumen;
         }
-        $param = array("id"=>$id,"token"=>$token,"nama"=>$nama,"is_tampil"=>$is_tampil,"dokumen"=>$base64_dokumen);
+
+
         $data = $this->Api->Call("dokumen/edit",$param);
         echo $data;
     }
