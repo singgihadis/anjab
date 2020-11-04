@@ -79,6 +79,18 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><b>TOTAL</b></td>
+                                        <td class="text-right"><b id="total"></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>KELAS JABATAN</b></td>
+                                        <td class="text-right"><b id="kelas_jabatan"></b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane fade" id="tim_analisis">
                             <form id="form_tim_analisis">

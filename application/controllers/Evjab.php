@@ -195,8 +195,8 @@ class Evjab extends CI_Controller {
         $nama_jenis_jabatan = "";
         $tipe = "";
         $kelas_jabatan = "";
-        $kelas_jabatan_batas_awal = "";
-        $kelas_jabatan_batas_akhir = "";
+        $kelas_jabatan_batas_awal = "0";
+        $kelas_jabatan_batas_akhir = "0";
         $html_tingkat_faktor = "";
         $html_tim_analisis = "";
         $total_nilai = 0;
@@ -232,20 +232,24 @@ class Evjab extends CI_Controller {
                 }
             }
 
-            $param_kelas_jabatan = array("token"=>$token,"nama"=>"","page"=>"1","tahun"=>$tahun);
+            $param_kelas_jabatan = array("token"=>$token,"nama"=>"","page"=>"x","tahun"=>$tahun);
             $get_kelas_jabatan = $this->Api->Call("kelas_jabatan",$param_kelas_jabatan);
             $json_kelas_jabatan = json_decode($get_kelas_jabatan,true);
             if($json_kelas_jabatan['is_error']){
 
             }else{
-                $kelas_jabatan = $json_kelas_jabatan['data'][0]['kelas'];
-                $kelas_jabatan_batas_awal = $json_kelas_jabatan['data'][0]['batas_awal'];
-                $kelas_jabatan_batas_akhir = $json_kelas_jabatan['data'][0]['batas_akhir'];
+                foreach($json_kelas_jabatan['data'] as $k=>$item_kelas_jabatan){
+                    if($item_kelas_jabatan['batas_awal'] <= $total_nilai && $item_kelas_jabatan['batas_akhir'] >= $total_nilai){
+                        $kelas_jabatan = $json_kelas_jabatan['data'][$k]['kelas'];
+                        $kelas_jabatan_batas_awal = $json_kelas_jabatan['data'][$k]['batas_awal'];
+                        $kelas_jabatan_batas_akhir = $json_kelas_jabatan['data'][$k]['batas_akhir'];
+                    }
+                }
             }
 
             $get_tim_analisis = $this->Api->Call("evjab/tim_analisis",$param);
             $json_tim_analisis = json_decode($get_tim_analisis,true);
-            if($json_kelas_jabatan['is_error']){
+            if($json_tim_analisis['is_error']){
 
             }else{
                 $data_analisis = $json_tim_analisis['data'][0];
@@ -285,7 +289,7 @@ class Evjab extends CI_Controller {
         $html .= "<tr><td colspan='2' style='border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;'><b>Faktor Evaluasi</b></td><td style='border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;'><b>Nilai Yang Diberikan</b></td><td style='border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;'><b>Standar Jabatan Administrator Yang Digunakan</b></td><td style='border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;'><b>Keterangan</b></td></tr>";
         $html .= $html_tingkat_faktor;
         $html .= "<tr><td style='vertical-align: top;border-left: 1px solid black;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-right:1px solid black;vertical-align: middle;text-align: center;'><b>Total Nilai</b></td><td style='vertical-align: top;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;vertical-align: middle;'><b>" . $this->PublicFunction->FormatAngka($total_nilai) . "</b></td><td style='border-bottom: 1px solid black;border-right: 1px solid black;height:50px;'>&nbsp;</td><td style='vertical-align: top;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;'>&nbsp;</td></tr>";
-        $html .= "<tr><td style='vertical-align: top;border-left: 1px solid black;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-right:1px solid black;vertical-align: middle;text-align: center;'><b>Kelas Jabatan</b></td><td style='vertical-align: top;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;vertical-align: middle;'><b>" . $kelas_jabatan . "</b></td><td style='border-bottom: 1px solid black;border-right: 1px solid black;height:50px;'>&nbsp;</td><td style='vertical-align: middle;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;'>( " . $this->PublicFunction->FormatAngka($kelas_jabatan_batas_awal) . " - " . $this->PublicFunction->FormatAngka($kelas_jabatan_batas_akhir) . " )</td></tr>";
+        $html .= "<tr><td style='vertical-align: top;border-left: 1px solid black;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-right:1px solid black;vertical-align: middle;text-align: center;'><b>Kelas Jabatan</b></td><td style='vertical-align: top;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;vertical-align: middle;'><b>" . $kelas_jabatan . "</b></td><td style='border-bottom: 1px solid black;border-right: 1px solid black;height:50px;'>&nbsp;</td><td style='vertical-align: middle;border-bottom: 1px solid black;border-right:1px solid black;text-align:center;'>( " . $this->PublicFunction->FormatAngka($kelas_jabatan_batas_awal,true) . " - " . $this->PublicFunction->FormatAngka($kelas_jabatan_batas_akhir,true) . " )</td></tr>";
         $html .= "</table>";
         $html .= "<br><br>";
         $html .= $html_tim_analisis;

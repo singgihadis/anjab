@@ -13,9 +13,8 @@ $(document).ready(function(){
     $("#form_print").validate({
         submitHandler:function(){
             var opd = $("#opd").val();
-            var jenis_laporan = $("#jenis_laporan").val();
             var tahun = $("#tahun").val();
-            window.open("/rekapitulasi/printdata_lampiran" + jenis_laporan + "/" + tahun + "/" + opd,"_blank");
+            window.open("/rekapitulasi_abk/printdata_lampiran/" + tahun + "/" + opd,"_blank");
         }
     });
 });

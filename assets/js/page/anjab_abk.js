@@ -80,6 +80,7 @@ function abk(){
                     }
                 });
                 $("#listdata_abk").html(html);
+                total_kebutuhan_pegawai();
                 $(".satuan_waktu").select2({
                     theme:"bootstrap",
                     width:'100px'

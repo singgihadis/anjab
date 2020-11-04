@@ -3,7 +3,7 @@ var data_level = [];
 $(document).ready(function(){
     get_opd_name(function(){
         is_verifikasi();
-        data();
+        data_load();
     });
     $("#form_edit").validate({
        submitHandler:function(){
@@ -13,7 +13,7 @@ $(document).ready(function(){
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var index = $(e.target).parent().index();
         if(index == 0){
-            data();
+            data_load();
         }else if(index == 1){
             tim_analisis();
         }
@@ -175,7 +175,7 @@ function update(){
             }else{
                 $("#modal_edit").modal("hide");
                 toastr["success"](res.msg);
-                data();
+                data_load();
             }
         },error:function(){
             $("#form_edit").loading("stop");
@@ -241,7 +241,7 @@ function dropdown_level(master_faktor_evjab_id,master_faktor_evjab_level_id){
         }
     });
 }
-function data(){
+function data_load(){
     $("#listdata").loading();
     var jabatan_id = $("#jabatan_id").val();
     var tahun = $("#tahun").val();
@@ -261,6 +261,7 @@ function data(){
                 }
             }else{
                 data_evjab = res.data;
+                var total = 0;
                 var html = "";
                 var no = 0;
                 $.each(res.data,function(k,v){
@@ -276,12 +277,44 @@ function data(){
                     html += "<td>" + v['nilai'] + "</td>";
                     html += "<td class='text-center'><a href='javascript:void(0);' onclick='modal_edit(this)' data-id='" + v['id'] + "' data-master-faktor-evjab-id='" + v['master_faktor_evjab_id'] + "' data-master-faktor-evjab-level-id='" + v['master_faktor_evjab_level_id'] + "' class='btn btn-sm btn-primary'><span class='fa fa-edit'></span></a></td>";
                     html += "</tr>";
+                    total = total + parseInt(v['nilai']);
                 });
                 $("#listdata").html(html);
+                $("#total").html(FormatAngka(total));
+                kelas_jabatan(total);
             }
         },error:function(){
             $("#listdata").loading("stop");
             $("#listdata").html("<tr><td colspan='9'>Gagal memuat data, coba lagi nanti</td></tr>");
+        }
+    });
+}
+function kelas_jabatan(total){
+    $("#kelas_jabatan").loading();
+    var tahun = $("#tahun").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/kelas_jabatan',
+        data:{page:"x",nama:"",tahun:tahun},
+        success:function(resp){
+            $("#kelas_jabatan").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/logout";;
+                }else{
+                }
+            }else{
+                var html = "";
+                $.each(res.data,function(k,v){
+                    if(parseInt(v['batas_awal']) <= total && parseInt(v['batas_akhir']) >= total){
+                        html = v['kelas'];
+                    }
+                });
+                $("#kelas_jabatan").html(html);
+            }
+        },error:function(){
+            $("#kelas_jabatan").loading("stop");
         }
     });
 }
