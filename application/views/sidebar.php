@@ -2,8 +2,8 @@
     <div class="sidebar-heading mb-2"><img src="/assets/img/logo.png" class="logo" /></div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item list-group-item-action bg-white">
-            <a href="/dashboard.html">
-                <span class="fa fa-tv mr-2"></span> Dashboard
+            <a href="/dashboard" class="<?php echo ($menu == "1" && $sub_menu == ""?"active":""); ?>">
+                <span class="fa fa-desktop mr-2"></span> Dashboard
             </a>
         </li>
         <li class="list-group-item list-group-item-action bg-white">

@@ -33,6 +33,7 @@ class Rekapitulasi_abk extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";
@@ -44,8 +45,8 @@ class Rekapitulasi_abk extends CI_Controller {
 
         }else{
             $nama_opd = $json_opd['data'][0]['nama'];
-            $html_data .= "<tr><th style='text-align: center;width: 5%;font-size: 12px;'>NO</th><th style='text-align: center;width: 45%;font-size: 12px;'>NAMA JABATAN</th><th style='text-align: center;width: 15%;font-size: 12px;'>JUMLAH PEMANGKU JABATAN</th><th style='text-align: center;width: 15%;font-size: 12px;'>HASIL ABK</th><th style='text-align: center;width: 15%;font-size: 12px;'>KELEBIHAN / KEKURANGAN</th></tr>";
-            $html_data .= "<tr><td style='text-align: center'>1</td><td style='text-align: center'>2</td><td style='text-align: center'>3</td><td style='text-align: center'>4</td><td style='text-align: center'>5</td></tr>";
+            $html_data .= "<tr><th style='text-align: center;width: 5%;font-size: 12px;'>NO</th><th style='text-align: center;width: 45%;font-size: 12px;'>NAMA JABATAN</th><th style='text-align: center;width: 15%;font-size: 12px;'>JUMLAH PEMANGKU JABATAN</th><th style='text-align: center;width: 15%;font-size: 12px;'>HASIL ABK</th><th style='text-align: center;width: 15%;font-size: 12px;' colspan='2'>KELEBIHAN / KEKURANGAN</th></tr>";
+            $html_data .= "<tr><td style='text-align: center;'>1</td><td style='text-align: center'>2</td><td style='text-align: center'>3</td><td style='text-align: center'>4</td><td colspan='2' style='text-align: center'>5</td></tr>";
 
             $param_jabatan = array("token"=>$token,"nama"=>"","master_opd_id"=>$id,"tahun"=>$tahun,"page"=>"x","master_jenis_jabatan"=>"","max_tingkat"=>"");
             $get_jabatan = $this->Api->Call("jabatan",$param_jabatan);
@@ -53,11 +54,22 @@ class Rekapitulasi_abk extends CI_Controller {
             if($json_jabatan['is_error']){
 
             }else{
+                $total_pegawai = 0;
+                $total_kebutuhan_pegawai = 0;
+                $total_kelebihan = 0;
+                $total_kekurangan = 0;
                 $no1 = 0;
                 foreach($json_jabatan['data'] as $item){
                     if($item['tingkat'] == "0"){
                         $no1++;
                         $data_builder = $this->htmlbuilder_for_printdata($no1,$token,$item);
+                        $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                        $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                        if(intval(str_replace("+","",$data_builder[2])) < 0){
+                            $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                        }else{
+                            $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                        }
                         $html_data .= $data_builder[3];
                         $jabatan_id_0 = $item['id'];
                         $no2 = 0;
@@ -65,20 +77,99 @@ class Rekapitulasi_abk extends CI_Controller {
                             if($item1['tingkat'] == "1" && $jabatan_id_0 == $item1['jabatan_id']){
                                 $no2++;
                                 $data_builder = $this->htmlbuilder_for_printdata($no1 . "." .$no2,$token,$item1);
+                                $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                                $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                                if(intval(str_replace("+","",$data_builder[2])) < 0){
+                                    $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                                }else{
+                                    $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                                }
                                 $html_data .= $data_builder[3];
-                                $jabatan_id_1 = $item['id'];
+                                $jabatan_id_1 = $item1['id'];
                                 $no3 = 0;
                                 foreach($json_jabatan['data'] as $item2){
                                     if($item2['tingkat'] == "2" && $jabatan_id_1 == $item2['jabatan_id']){
                                         $no3++;
                                         $data_builder = $this->htmlbuilder_for_printdata($no1 . "." .$no2 . "." .$no3,$token,$item2);
+                                        $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                                        $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                                        if(intval(str_replace("+","",$data_builder[2])) < 0){
+                                            $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                                        }else{
+                                            $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                                        }
                                         $html_data .= $data_builder[3];
+                                        $jabatan_id_2 = $item2['id'];
+                                        $no4 = 0;
+                                        foreach($json_jabatan['data'] as $item3){
+                                            if($item3['tingkat'] == "3" && $jabatan_id_2 == $item3['jabatan_id']){
+                                                $no4++;
+                                                $data_builder = $this->htmlbuilder_for_printdata($no1 . "." .$no2 . "." .$no3 . "." .$no4,$token,$item3);
+                                                $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                                                $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                                                if(intval(str_replace("+","",$data_builder[2])) < 0){
+                                                    $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                                                }else{
+                                                    $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                                                }
+                                                $html_data .= $data_builder[3];
+                                                $jabatan_id_3 = $item3['id'];
+                                                $no5 = 0;
+                                                foreach($json_jabatan['data'] as $item4){
+                                                    if($item4['tingkat'] == "3" && $jabatan_id_3 == $item4['jabatan_id']){
+                                                        $no5++;
+                                                        $data_builder = $this->htmlbuilder_for_printdata($no1 . "." .$no2 . "." .$no3 . "." .$no4 . "." .$no5,$token,$item4);
+                                                        $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                                                        $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                                                        if(intval(str_replace("+","",$data_builder[2])) < 0){
+                                                            $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                                                        }else{
+                                                            $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                                                        }
+                                                        $html_data .= $data_builder[3];
+                                                        $jabatan_id_4 = $item3['id'];
+                                                        $no6 = 0;
+                                                        foreach($json_jabatan['data'] as $item5){
+                                                            if($item5['tingkat'] == "4" && $jabatan_id_4 == $item5['jabatan_id']){
+                                                                $no6++;
+                                                                $data_builder = $this->htmlbuilder_for_printdata($no1 . "." .$no2 . "." .$no3 . "." .$no4 . "." .$no5 . "." .$no6,$token,$item5);
+                                                                $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                                                                $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                                                                if(intval(str_replace("+","",$data_builder[2])) < 0){
+                                                                    $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                                                                }else{
+                                                                    $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                                                                }
+                                                                $html_data .= $data_builder[3];
+                                                                $jabatan_id_5 = $item3['id'];
+                                                                $no7 = 0;
+                                                                foreach($json_jabatan['data'] as $item6){
+                                                                    if($item6['tingkat'] == "5" && $jabatan_id_5 == $item6['jabatan_id']){
+                                                                        $no7++;
+                                                                        $data_builder = $this->htmlbuilder_for_printdata($no1 . "." .$no2 . "." .$no3 . "." .$no4 . "." .$no5 . "." .$no6 . "." .$no7,$token,$item6);
+                                                                        $total_pegawai = $total_pegawai + intval($data_builder[0]);
+                                                                        $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + intval($data_builder[1]);
+                                                                        if(intval(str_replace("+","",$data_builder[2])) < 0){
+                                                                            $total_kekurangan = $total_kekurangan + intval($data_builder[2]);
+                                                                        }else{
+                                                                            $total_kelebihan = $total_kelebihan + intval(str_replace("+","",$data_builder[2]));
+                                                                        }
+                                                                        $html_data .= $data_builder[3];
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+                $html_data .= "<tr><td colspan='2' style='text-align: center'><b>TOTAL</b></td><td style='text-align: center;'><b>" . $this->PublicFunction->FormatAngka($total_pegawai) . "</b></td><td style='text-align: center;'><b>" . $this->PublicFunction->FormatAngka($total_kebutuhan_pegawai) . "</b></td><td style='text-align: center;'><b>" . $this->PublicFunction->FormatAngka($total_kelebihan) . "</b></td><td style='text-align: center;'><b>" . $this->PublicFunction->FormatAngka($total_kekurangan) . "</b></td></tr>";
             }
         }
 
@@ -134,13 +225,12 @@ class Rekapitulasi_abk extends CI_Controller {
                 $total_kebutuhan_pegawai = $total_kebutuhan_pegawai + doubleval($item_abk['kebutuhan_pegawai']);
             }
         }
-
         $rounded_total_kebutuhan_pegawai = round($total_kebutuhan_pegawai);
         $kelebihan_kekurangan = $jml_pegawai - $rounded_total_kebutuhan_pegawai;
         if($kelebihan_kekurangan > 0){
             $kelebihan_kekurangan = "+" . $kelebihan_kekurangan;
         }
-        $html_data .= "<tr><td>" . $no . "</td><td>" . $item['nama'] . "</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($jml_pegawai) . "</td><td style='text-align: center;'>" . $rounded_total_kebutuhan_pegawai . "</td><td style='text-align: center;'>" . $kelebihan_kekurangan . "</td></tr>";
+        $html_data .= "<tr><td style='text-align: center;'>" . $no . "</td><td>" . $item['nama'] . "</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($jml_pegawai) . "</td><td style='text-align: center;'>" . $rounded_total_kebutuhan_pegawai . "</td><td colspan='2' style='text-align: center;'>" . $kelebihan_kekurangan . "</td></tr>";
         return array($jml_pegawai,$rounded_total_kebutuhan_pegawai,$kelebihan_kekurangan,$html_data);
     }
 }

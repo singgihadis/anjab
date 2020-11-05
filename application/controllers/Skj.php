@@ -42,6 +42,7 @@ class Skj extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token);
 
         $jabatan_nama = "";
@@ -99,7 +100,7 @@ class Skj extends CI_Controller {
                 $ikhtisiar_jabatan = $json_ikhtisiar_jabatan['data'][0]['ikhtisiar'];
             }
 
-            $token = $this->session->userdata("token");
+
             $param_standar_kompetensi = array("token"=>$token,"nama"=>"","page"=>"x");
             $get_standar_kompetensi = $this->Api->Call("standar_kompetensi",$param_standar_kompetensi);
             $json_standar_kompetensi = json_decode($get_standar_kompetensi,true);

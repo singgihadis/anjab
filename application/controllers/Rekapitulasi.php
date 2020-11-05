@@ -33,6 +33,7 @@ class Rekapitulasi extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";
@@ -165,6 +166,7 @@ class Rekapitulasi extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";
@@ -287,6 +289,7 @@ class Rekapitulasi extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";
@@ -409,6 +412,7 @@ class Rekapitulasi extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";
@@ -550,6 +554,7 @@ class Rekapitulasi extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";

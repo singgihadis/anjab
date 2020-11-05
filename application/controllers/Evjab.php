@@ -54,6 +54,7 @@ class Evjab extends CI_Controller {
         $html_hasil_kerja = "";
         $html_tingkat_faktor = "";
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token);
         $get_opd = $this->Api->Call("anjab/get_opd_name",$param);
         $json_opd = json_decode($get_opd,true);
@@ -184,6 +185,7 @@ class Evjab extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $param = array("jabatan_id"=>$jabatan_id,"token"=>$token);
         $get_opd = $this->Api->Call("anjab/get_opd_name",$param);
         $json_opd = json_decode($get_opd,true);

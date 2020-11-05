@@ -100,6 +100,7 @@ class Anjab extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $jabatan_id = $id;
         $jabatan_nama = "";
         $jabatan_kode = "";
@@ -560,6 +561,7 @@ class Anjab extends CI_Controller {
         $options->set('defaultFont', 'Serif');
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
+        session_write_close();
         $jabatan_id = $id;
         $jabatan_nama = "";
         $nama_opd = "";
