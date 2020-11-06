@@ -92,53 +92,16 @@
                             </table>
                         </div>
                         <div class="col-md-8">
-                            <div class="overflow-auto" id="jabatan_bagan">
-                                <ul class="tree">
-                                    <li> <span>Home</span>
-                                        <ul>
-                                            <li> <span>About us</span>
-                                                <ul>
-                                                    <li> <span>Our history</span>
-                                                        <ul>
-                                                            <li><span>Founder</span></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li> <span>Our board</span>
-                                                        <ul>
-                                                            <li><span>Brad Whiteman</span></li>
-                                                            <li><span>Cynthia Tolken</span></li>
-                                                            <li><span>Bobby Founderson</span></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> <span>Our products</span>
-                                                <ul>
-                                                    <li> <span>The Widget 2000™</span>
-                                                        <ul>
-                                                            <li><span>Order form</span></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li> <span>The McGuffin V2</span>
-                                                        <ul>
-                                                            <li><span>Order form</span></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li> <span>Contact us</span>
-                                                <ul>
-                                                    <li> <span>Social media</span>
-                                                        <ul>
-                                                            <li><span>Facebook</span></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <a href="javascript:void(0);" onclick="print_bagan()" class="btn btn-sm btn-light float-left"><span class="fa fa-print"></span></a>
+                                    <h6 class="card-title">Struktur Organisasi <span class="tahun"></span></h6>
+                                    <div class="overflow-auto d-inline-block mt-2 w-100" id="jabatan_bagan">
+
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

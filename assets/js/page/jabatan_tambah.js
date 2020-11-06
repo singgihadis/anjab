@@ -70,6 +70,7 @@ $(document).ready(function(){
     });
 });
 function jml_pegawai_update(jabatan_id){
+    $("#form_update").loading();
     var data = new FormData();
     var input_array = [];
     $(".jml_pegawai").each(function(k,v){
@@ -92,6 +93,7 @@ function jml_pegawai_update(jabatan_id){
         contentType: false,
         processData: false,
         success:function(resp){
+            $("#form_update").loading("stop");
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
@@ -104,6 +106,7 @@ function jml_pegawai_update(jabatan_id){
                 window.location = "/jabatan";
             }
         },error:function(){
+            $("#form_update").loading("stop");
             toastr["error"]("Gagal edit data, coba lagi nanti");
         }
     });

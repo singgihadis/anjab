@@ -7,7 +7,7 @@
             </a>
         </li>
         <li class="list-group-item list-group-item-action bg-white">
-            <span class="menu-title">Menu Master</span>
+            <span class="menu-title">Master Data</span>
         </li>
         <li class="list-group-item list-group-item-action bg-white">
             <a href="#menu2" data-toggle="collapse" class="<?php echo ($menu == "2"?"active":""); ?>">
@@ -158,7 +158,7 @@
             </ul>
         </li>
         <li class="list-group-item list-group-item-action bg-white">
-            <span class="menu-title">Menu Input Data</span>
+            <span class="menu-title">Analisa</span>
         </li>
         <li class="list-group-item list-group-item-action bg-white" class="<?php echo ($menu == "6"?"active":""); ?>">
             <a href="#menu6" data-toggle="collapse">
@@ -188,7 +188,7 @@
             </a>
         </li>
         <li class="list-group-item list-group-item-action bg-white">
-            <span class="menu-title">Menu User</span>
+            <span class="menu-title">User</span>
         </li>
         <li class="list-group-item list-group-item-action bg-white">
             <a href="/user" class="<?php echo ($menu == "8"?"active":""); ?>">
@@ -201,7 +201,7 @@
             </a>
         </li>
         <li class="list-group-item list-group-item-action bg-white">
-            <span class="menu-title">Menu Laporan</span>
+            <span class="menu-title">Laporan</span>
         </li>
         <li class="list-group-item list-group-item-action bg-white" class="<?php echo ($menu == "10"?"active":""); ?>">
             <a href="#menu10" data-toggle="collapse">
@@ -224,6 +224,14 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li class="list-group-item list-group-item-action bg-white">
+            <span class="menu-title">Lainnya</span>
+        </li>
+        <li class="list-group-item list-group-item-action bg-white">
+            <a href="/pengaturan" class="<?php echo ($menu == "11"?"active":""); ?>">
+                <span class="fa fa-cog mr-2"></span> Pengaturan
+            </a>
         </li>
     </ul>
     <br>

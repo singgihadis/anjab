@@ -237,7 +237,7 @@ function hapus(itu){
     var id = $(itu).attr("data-id");
     $.confirm({
         title: 'Konfirmasi',
-        content: 'Apa anda yakin menghapus data ini?',
+        content: 'Jabatan di dalam jabatan ini otomatis akan terhapus juga.<br>Apa anda yakin menghapus data ini? ',
         buttons: {
             cancel: {
                 text: 'Batal',
