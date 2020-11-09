@@ -21,7 +21,13 @@ class Faktor_evjab extends CI_Controller {
     public function index()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("faktor_evjab");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("faktor_evjab");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -29,7 +35,13 @@ class Faktor_evjab extends CI_Controller {
     public function tambah()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("faktor_evjab_tambah");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("faktor_evjab_tambah");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -37,7 +49,13 @@ class Faktor_evjab extends CI_Controller {
     public function edit($id)
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("faktor_evjab_edit",array("id"=>$id));
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("faktor_evjab_edit",array("id"=>$id));
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -45,7 +63,13 @@ class Faktor_evjab extends CI_Controller {
     public function panduan($id)
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("faktor_evjab_panduan",array("id"=>$id));
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("faktor_evjab_panduan",array("id"=>$id));
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -53,12 +77,18 @@ class Faktor_evjab extends CI_Controller {
     public function level($master_faktor_evjab_id,$aksi = "",$id="")
     {
         if($this->session->userdata("is_login")){
-            if($aksi == ""){
-                $this->load->view("faktor_evjab_level",array("master_faktor_evjab_id"=>$master_faktor_evjab_id));
-            }else if($aksi == "tambah"){
-                $this->load->view("faktor_evjab_level_tambah",array("master_faktor_evjab_id"=>$master_faktor_evjab_id));
-            }else if($aksi == "edit"){
-                $this->load->view("faktor_evjab_level_edit",array("master_faktor_evjab_id"=>$master_faktor_evjab_id,"id"=>$id));
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                if($aksi == ""){
+                    $this->load->view("faktor_evjab_level",array("master_faktor_evjab_id"=>$master_faktor_evjab_id));
+                }else if($aksi == "tambah"){
+                    $this->load->view("faktor_evjab_level_tambah",array("master_faktor_evjab_id"=>$master_faktor_evjab_id));
+                }else if($aksi == "edit"){
+                    $this->load->view("faktor_evjab_level_edit",array("master_faktor_evjab_id"=>$master_faktor_evjab_id,"id"=>$id));
+                }
+            }else{
+                redirect("dashboard");
             }
         }else{
             redirect("login");

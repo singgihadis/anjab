@@ -21,7 +21,13 @@ class Status_pegawai extends CI_Controller {
     public function index()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("status_pegawai");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("status_pegawai");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -29,7 +35,13 @@ class Status_pegawai extends CI_Controller {
     public function tambah()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("status_pegawai_tambah");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("status_pegawai_tambah");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -37,7 +49,13 @@ class Status_pegawai extends CI_Controller {
     public function edit($id)
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("status_pegawai_edit",array("id"=>$id));
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("status_pegawai_edit",array("id"=>$id));
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }

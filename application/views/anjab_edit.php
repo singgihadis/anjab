@@ -36,7 +36,13 @@
                         </div>
                         <div class="col-md-4 text-right">
                             <div class="d-inline-block pt-1"><span id="loader" class="fa fa-spinner fa-spin" style="display: none;"></span></div>
-                            <a id="btn_verifikasi" style="display: none;" href="javascript:void(0);" onclick="modal_verifikasi();" class="btn btn-sm btn-primary"><span class="fa fa-check"></span> Verifikasi</a>
+                            <?php
+                            if($level == "1"){
+?>
+                                <a id="btn_verifikasi" style="display: none;" href="javascript:void(0);" onclick="modal_verifikasi();" class="btn btn-sm btn-primary"><span class="fa fa-check"></span> Verifikasi</a>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

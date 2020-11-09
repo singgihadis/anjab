@@ -21,7 +21,13 @@ class Satuan_kerja extends CI_Controller {
     public function index()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("satuan_kerja");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("satuan_kerja");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -29,7 +35,13 @@ class Satuan_kerja extends CI_Controller {
     public function tambah()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("satuan_kerja_tambah");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("satuan_kerja_tambah");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -37,7 +49,13 @@ class Satuan_kerja extends CI_Controller {
     public function edit($id)
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("satuan_kerja_edit",array("id"=>$id));
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("satuan_kerja_edit",array("id"=>$id));
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }

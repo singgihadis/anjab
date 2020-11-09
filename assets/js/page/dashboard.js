@@ -15,7 +15,16 @@ $(document).ready(function(){
         total_jabatan();
     });
     $("#filter_opd").change(function(){
-        total_jabatan();
+        var master_opd_id = $("#filter_opd").val();
+        if(master_opd_id == ""){
+            $("#opd_notselected").show();
+            $("#content").hide();
+        }else{
+            $("#opd_notselected").hide();
+            $("#content").show();
+            $("#sub_title").html(" - " + toTitleCase($("#filter_opd").find("option:selected").html()));
+            total_jabatan();
+        }
     });
 });
 function dropdown_opd(){
@@ -34,7 +43,7 @@ function dropdown_opd(){
                     $("#filter_opd").html("<option value=''>" + res.msg + "</option>");
                 }
             }else{
-                var html = "";
+                var html = "<option value=''>Pilih OPD</option>";
                 $.each(res.data,function(k,v){
                     html += "<option value='"  + v['id'] + "'>" + v['nama'] + "</option>";
                 });
@@ -42,7 +51,9 @@ function dropdown_opd(){
                 $("#filter_opd").select2({
                     theme: "bootstrap"
                 });
-                total_jabatan();
+
+                var first_value = $("#filter_opd").find("option:nth-child(2)").val();
+                $("#filter_opd").val(first_value).trigger("change");
             }
         },error:function(){
             $("#filter_opd").html("<option value=''>Gagal memuat data, coba lagi nanti</option>");

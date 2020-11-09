@@ -1,16 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Log_user extends CI_Controller {
+class Ganti_password extends CI_Controller
+{
 
     /**
      * Index Page for this controller.
      *
      * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
+     *        http://example.com/index.php/welcome
+     *    - or -
+     *        http://example.com/index.php/welcome/index
+     *    - or -
      * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
      *
@@ -20,15 +21,9 @@ class Log_user extends CI_Controller {
      */
     public function index()
     {
-        if($this->session->userdata("is_login")){
-            $Permission = $this->PublicFunction->Get_Permission();
-            $level = $Permission[0];
-            if($level == "1"){
-                $this->load->view("log_user");
-            }else{
-                redirect("dashboard");
-            }
-        }else{
+        if ($this->session->userdata("is_login")) {
+            $this->load->view("ganti_password");
+        } else {
             redirect("login");
         }
     }

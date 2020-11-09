@@ -22,7 +22,13 @@ class Pengaturan extends CI_Controller
     public function index()
     {
         if ($this->session->userdata("is_login")) {
-            $this->load->view("pengaturan");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("pengaturan");
+            }else{
+                redirect("dashboard");
+            }
         } else {
             redirect("login");
         }

@@ -45,6 +45,7 @@
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Upload</button>
                                 </div>
+                                <br>
                             </form>
                             <div id="logo_alert">
 
@@ -107,6 +108,8 @@
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Upload</button>
                                 </div>
+                                <br>
+                                <br>
                             </form>
                             <div id="favicon_alert">
 

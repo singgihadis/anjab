@@ -66,7 +66,7 @@ function load_data(){
                 if(res.must_login){
                     window.location = "/logout";;
                 }else{
-                    $("#listdata").html("<tr><td colspan='8'>" + res.msg + "</td></tr>");
+                    $("#listdata").html("<tr><td colspan='9'>" + res.msg + "</td></tr>");
                 }
             }else{
                 var html = "";
@@ -133,7 +133,7 @@ function load_data(){
             }
         },error:function(){
             $("#listdata").loading("stop");
-            $("#listdata").html("<tr><td colspan='8'>Gagal memuat data, coba lagi nanti</td></tr>");
+            $("#listdata").html("<tr><td colspan='9'>Gagal memuat data, coba lagi nanti</td></tr>");
         }
     });
 }
@@ -184,6 +184,9 @@ function dropdown_opd(){
                 $("#filter_opd").select2({
                     theme: "bootstrap"
                 });
+
+                var first_value = $("#filter_opd").find("option:nth-child(2)").val();
+                $("#filter_opd").val(first_value).trigger("change");
             }
         },error:function(){
             $("#filter_opd").html("<option value=''>Gagal memuat data, coba lagi nanti</option>");

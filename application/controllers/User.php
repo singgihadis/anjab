@@ -21,7 +21,13 @@ class User extends CI_Controller {
     public function index()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("user");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("user");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -29,7 +35,13 @@ class User extends CI_Controller {
     public function tambah()
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("user_tambah");
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("user_tambah");
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }
@@ -37,7 +49,13 @@ class User extends CI_Controller {
     public function edit($id)
     {
         if($this->session->userdata("is_login")){
-            $this->load->view("user_edit",array("id"=>$id));
+            $Permission = $this->PublicFunction->Get_Permission();
+            $level = $Permission[0];
+            if($level == "1"){
+                $this->load->view("user_edit",array("id"=>$id));
+            }else{
+                redirect("dashboard");
+            }
         }else{
             redirect("login");
         }

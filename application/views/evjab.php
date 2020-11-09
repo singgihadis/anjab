@@ -95,6 +95,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/evjab.js"></script>
+<script type="text/javascript" src="/assets/js/page/evjab.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

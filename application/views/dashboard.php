@@ -24,7 +24,7 @@
                 <div class="card-header bg-white">
                     <div class="row">
                         <div class="col-md-6">
-                            <span class="fa fa-lg fa-desktop mr-1"></span> <b>Dashboard</b>
+                            <span class="fa fa-lg fa-desktop mr-1"></span> <b>Dashboard <span id="sub_title"></span></b>
                         </div>
                         <div class="col-md-6 text-right">
 
@@ -46,38 +46,43 @@
                             </div>
                         </form>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card bg-success d-inline-block mr-2" id="card_jabatan">
-                                <div class="card-body p-3">
-                                    <div class="media">
-                                        <span class="fa fa-3x fa-address-card text-white mr-3 mb-0"></span>
-                                        <div class="media-body text-white">
-                                            <div><b>JABATAN (<span class="tahun"></span>)</b></div>
-                                            <span id="total_jabatan"></span> jabatan
+                    <div class="text-center" id="opd_notselected">
+                        <br><br>
+                        Silahkan pilih OPD terlebih dahulu
+                    </div>
+                    <div id="content" style="display: none;">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card bg-success d-inline-block mr-2" id="card_jabatan">
+                                    <div class="card-body p-3">
+                                        <div class="media">
+                                            <span class="fa fa-3x fa-address-card text-white mr-3 mb-0"></span>
+                                            <div class="media-body text-white">
+                                                <div><b>JABATAN (<span class="tahun"></span>)</b></div>
+                                                <span id="total_jabatan"></span> jabatan
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card bg-info d-inline-block" id="card_pegawai">
-                                <div class="card-body p-3">
-                                    <div class="media">
-                                        <span class="fa fa-3x fa-user text-white mr-3 mb-0"></span>
-                                        <div class="media-body text-white">
-                                            <div><b>PEGAWAI (<span class="tahun"></span>)</b></div>
-                                            <span id="total_pegawai"></span> pegawai
+                                <div class="card bg-info d-inline-block" id="card_pegawai">
+                                    <div class="card-body p-3">
+                                        <div class="media">
+                                            <span class="fa fa-3x fa-user text-white mr-3 mb-0"></span>
+                                            <div class="media-body text-white">
+                                                <div><b>PEGAWAI (<span class="tahun"></span>)</b></div>
+                                                <span id="total_pegawai"></span> pegawai
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <table class="table table-bordered">
-                                <thead>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <table class="table table-bordered">
+                                    <thead>
                                     <tr class="bg-secondary text-white">
                                         <th colspan="2">Rincian Status Pegawai (<span class="tahun"></span>)</th>
                                     </tr>
@@ -85,23 +90,24 @@
                                         <th>Status Pegawai</th>
                                         <th class='text-right'>Jumlah</th>
                                     </tr>
-                                </thead>
-                                <tbody id="status_pegawai">
+                                    </thead>
+                                    <tbody id="status_pegawai">
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <a href="javascript:void(0);" onclick="print_bagan()" class="btn btn-sm btn-light float-left"><span class="fa fa-print"></span></a>
-                                    <h6 class="card-title">Struktur Organisasi <span class="tahun"></span></h6>
-                                    <div class="overflow-auto d-inline-block mt-2 w-100" id="jabatan_bagan">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <a href="javascript:void(0);" onclick="print_bagan()" class="btn btn-sm btn-light float-left"><span class="fa fa-print"></span></a>
+                                        <h6 class="card-title">Struktur Organisasi <span class="tahun"></span></h6>
+                                        <div class="overflow-auto d-inline-block mt-2 w-100" id="jabatan_bagan">
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,6 +119,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/dashboard.js"></script>
+<script type="text/javascript" src="/assets/js/page/dashboard.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

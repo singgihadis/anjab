@@ -100,5 +100,18 @@ class User extends CI_Controller {
         $data = $this->Api->Call("user/edit_password",$param);
         echo $data;
     }
+    public function update_password_by_user()
+    {
+        $token = $this->session->userdata("token");
+        $password_lama = $this->input->post("password_lama");
+        $password_baru = $this->input->post("password_baru");
+        $param = array(
+            "token"=>$token,
+            "password_lama"=>$password_lama,
+            "password_baru"=>$password_baru
+        );
+        $data = $this->Api->Call("user/update_password_by_user",$param);
+        echo $data;
+    }
 }
 ?>

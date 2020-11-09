@@ -301,6 +301,9 @@ function dropdown_opd(){
                 $("#filter_opd").select2({
                     theme: "bootstrap"
                 });
+
+                var first_value = $("#filter_opd").find("option:nth-child(2)").val();
+                $("#filter_opd").val(first_value).trigger("change");
             }
         },error:function(){
             $("#filter_opd").html("<option value=''>Gagal memuat data, coba lagi nanti</option>");

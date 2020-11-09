@@ -37,6 +37,14 @@ class PublicFunction extends CI_Model {
         );
         $this->Api->Call("log_user/tambah",$param_log);
     }
+    public function Get_Permission(){
+        //Permission
+        $profil = $this->session->userdata("profil");
+        $json_profil = json_decode($profil,true);
+        $level = $json_profil['level'];
+        $master_opd_id = $json_profil['master_opd_id'];
+        return array($level,$master_opd_id);
+    }
     public function ToFixed($angka,$decimal_places,$zero_to_empty = false) {
         $angka = (string) $angka;
         if($zero_to_empty){

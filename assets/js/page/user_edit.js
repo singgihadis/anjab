@@ -1,4 +1,11 @@
 $(document).ready(function(){
+    $("#password").keyup(function(){
+        $("#hidden_password").val(CryptoJS.MD5($("#password").val()));
+    });
+    $("#password").blur(function(){
+        $("#hidden_password").val(CryptoJS.MD5($("#password").val()));
+    });
+    $("#hidden_password").val(CryptoJS.MD5($("#password").val()));
     load_data();
     $("#level").change(function(){
         if($("#level").val() == "2"){
@@ -70,7 +77,7 @@ function simpan(){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/logout";;
+                    window.location = "/logout";
                 }else{
                     toastr["error"](res.msg);
                 }
