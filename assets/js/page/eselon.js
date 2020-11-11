@@ -22,7 +22,7 @@ function load_data(){
                 if(res.must_login){
                     window.location = "/logout";;
                 }else{
-                    $("#listdata").html("<tr><td colspan='4'>" + res.msg + "</td></tr>");
+                    $("#listdata").html("<tr><td colspan='3'>" + res.msg + "</td></tr>");
                 }
             }else{
                 var html = "";
@@ -32,7 +32,7 @@ function load_data(){
                     html += "<tr>";
                     html += "<td>" + no + "</td>";
                     html += "<td>" + v['nama'] + "</td>";
-                    html += "<td>" + v['kelas'] + "</td>";
+                    //html += "<td>" + v['kelas'] + "</td>";
                     html += "<td>";
                     html += "<a href='/eselon/edit/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";
                     html += "<a onclick='hapus(this)' data-id='" + v['id'] + "' href='javascript:void(0);' class='btn btn-sm btn-danger'><span class='fa fa-trash'></span></a>";
@@ -44,7 +44,7 @@ function load_data(){
             }
         },error:function(){
             $("#listdata").loading("stop");
-            $("#listdata").html("<tr><td colspan='4'>Gagal memuat data, coba lagi nanti</td></tr>");
+            $("#listdata").html("<tr><td colspan='3'>Gagal memuat data, coba lagi nanti</td></tr>");
         }
     });
 }

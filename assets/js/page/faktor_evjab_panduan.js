@@ -68,7 +68,7 @@ function load_data(){
                 }
             }else{
                 var data = res.data[0];
-                $("#panduan").val(data['panduan']);
+                $(".summernote").summernote("code",data['panduan']);
             }
         },error:function(){
             $("#form_update").loading("stop");

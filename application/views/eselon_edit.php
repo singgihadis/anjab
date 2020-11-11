@@ -39,10 +39,10 @@
                             <label>Nama Eselon</label>
                             <input id="nama" name="nama" type="text" class="form-control" placeholder="Input nama opd" required="">
                         </div>
-                        <div class="form-group">
-                            <label>Kelas</label>
-                            <input id="kelas" name="kelas" type="text" class="form-control" placeholder="Input kelas" required="">
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label>Kelas</label>-->
+<!--                            <input id="kelas" name="kelas" type="text" class="form-control" placeholder="Input kelas" required="">-->
+<!--                        </div>-->
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Simpan</button>
                         </div>
@@ -56,6 +56,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/eselon_edit.js"></script>
+<script type="text/javascript" src="/assets/js/page/eselon_edit.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

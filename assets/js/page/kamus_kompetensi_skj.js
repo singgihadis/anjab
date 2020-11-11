@@ -181,7 +181,8 @@ function dropdown_urusan_pemerintahan(){
                 });
                 $("#filter_urusan_pemerintahan").html(html);
                 $("#filter_urusan_pemerintahan").select2({
-                    theme: "bootstrap"
+                    theme: "bootstrap",
+                    width: '300px'
                 });
             }
         },error:function(){

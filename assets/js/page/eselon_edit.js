@@ -5,11 +5,11 @@ $(document).ready(function(){
             $("#form_update").loading();
             var id = $("#id").val();
             var nama = $("#nama").val();
-            var kelas = $("#kelas").val();
+            //var kelas = $("#kelas").val();
             var data = new FormData();
             data.append("id", id);
             data.append("nama", nama);
-            data.append("kelas", kelas);
+            //data.append("kelas", kelas);
             $.ajax({
                 type:'post',
                 url:'/ajax/eselon/edit',

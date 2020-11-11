@@ -39,7 +39,7 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
                                     </div>
-                                    <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Nama OPD">
+                                    <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Nama Eselon">
                                 </div>
                             </div>
                         </form>
@@ -51,7 +51,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Eselon</th>
-                                <th>Kelas</th>
+<!--                                <th>Kelas</th>-->
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -79,6 +79,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/eselon.js"></script>
+<script type="text/javascript" src="/assets/js/page/eselon.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

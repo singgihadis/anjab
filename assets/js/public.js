@@ -73,7 +73,12 @@ function toTitleCase(str) {
     });
 }
 function StripTags(str) {
-   return $(str).text();
+    var rex = /(<([^>]+)>)/ig;
+    if(str != null){
+        return str.replace(rex , "");
+    }else{
+        return "";
+    }
 }
 function FormatAngka(str,zero_to_empty){
     if(zero_to_empty === undefined) zero_to_empty=false;

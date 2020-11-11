@@ -53,7 +53,7 @@ function load_data(){
                     var grup = "";
                     if(v['grup'] == "1"){
                         grup = "Detail";
-                    }else if(v['abk'] == "2"){
+                    }else if(v['grup'] == "2"){
                         grup = "Rangkuman";
                     }
                     no++;

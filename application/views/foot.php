@@ -13,4 +13,4 @@
 <script type="text/javascript" src="/assets/js/crypto/sha1.js"></script>
 <script type="text/javascript" src="/assets/js/summernote-bs4.js"></script>
 <script type="text/javascript" src="/assets/js/daterangepicker.min.js"></script>
-<script type="text/javascript" src="/assets/js/public.js"></script>
+<script type="text/javascript" src="/assets/js/public.js?v=<?php echo $this->config->item("js_version"); ?>"></script>

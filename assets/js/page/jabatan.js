@@ -299,7 +299,8 @@ function dropdown_opd(){
                 });
                 $("#filter_opd").html(html);
                 $("#filter_opd").select2({
-                    theme: "bootstrap"
+                    theme: "bootstrap",
+                    width: '300px'
                 });
 
                 var first_value = $("#filter_opd").find("option:nth-child(2)").val();

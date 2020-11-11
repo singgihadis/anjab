@@ -1,5 +1,5 @@
 <div class="bg-white border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading mb-2"><img src="/assets/img/logo.png" class="logo" /></div>
+    <div class="sidebar-heading mb-2"><a href="/"><img src="/assets/img/logo.png" class="logo" /></a></div>
     <ul class="list-group list-group-flush">
     <?php
     $Permission = $this->PublicFunction->Get_Permission();

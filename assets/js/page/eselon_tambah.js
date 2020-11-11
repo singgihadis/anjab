@@ -3,10 +3,10 @@ $(document).ready(function(){
         submitHandler:function(){
             $("#form_update").loading();
             var nama = $("#nama").val();
-            var kelas = $("#kelas").val();
+            //var kelas = $("#kelas").val();
             var data = new FormData();
             data.append("nama", nama);
-            data.append("kelas", kelas);
+            //data.append("kelas", kelas);
             $.ajax({
                 type:'post',
                 url:'/ajax/eselon/tambah',
