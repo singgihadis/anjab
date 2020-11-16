@@ -140,6 +140,7 @@ function syarat_jabatan_upaya_fisik_tambah(itu){
                     toastr["error"](res.msg);
                 }
             }else{
+                data_syarat_jabatan_upaya_fisik_id.push(master_upaya_fisik_id);
                 toastr["success"](res.msg);
             }
         },error:function(){
@@ -225,6 +226,10 @@ function syarat_jabatan_upaya_fisik_hapus(itu){
                     toastr["error"](res.msg);
                 }
             }else{
+                var index_arr = data_syarat_jabatan_upaya_fisik_id.indexOf(master_upaya_fisik_id);
+                if (index_arr !== -1) {
+                    data_syarat_jabatan_upaya_fisik_id.splice(index_arr, 1);
+                }
                 toastr["success"](res.msg);
             }
         },error:function(){

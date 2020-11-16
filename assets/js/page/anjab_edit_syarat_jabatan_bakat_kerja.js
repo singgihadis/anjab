@@ -142,6 +142,7 @@ function syarat_jabatan_bakat_kerja_tambah(itu){
                     toastr["error"](res.msg);
                 }
             }else{
+                data_syarat_jabatan_bakat_kerja_id.push(master_bakat_kerja_id);
                 toastr["success"](res.msg);
             }
         },error:function(){
@@ -222,11 +223,15 @@ function syarat_jabatan_bakat_kerja_hapus(itu){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/logout";;
+                    window.location = "/logout";
                 }else{
                     toastr["error"](res.msg);
                 }
             }else{
+                var index_arr = data_syarat_jabatan_bakat_kerja_id.indexOf(master_bakat_kerja_id);
+                if (index_arr !== -1) {
+                    data_syarat_jabatan_bakat_kerja_id.splice(index_arr, 1);
+                }
                 toastr["success"](res.msg);
             }
         },error:function(){

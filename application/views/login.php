@@ -5,7 +5,18 @@ $title = "";
 include("head.php"); ?>
 <body class="body">
 <div class="container">
-    <br><br>
+    <br>
+    <div class="text-right">
+        <div class="dropdown">
+            <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                <span class="fa fa-question-circle"></span> Panduan
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/assets/doc/manual_book.pdf" target="_blank">PDF</a>
+                <a class="dropdown-item" href="/assets/doc/manual_book/MembukaAplikasi.html" target="_blank">HTML</a>
+            </div>
+        </div>
+    </div>
     <br><br>
     <div class="row">
         <div class="col-md-1"></div>
@@ -49,6 +60,7 @@ include("head.php"); ?>
                             <br>
                             <div class="text-center">
                                 @2020
+                                <br>
                             </div>
                         </div>
                     </div>

@@ -137,7 +137,7 @@ function load_data(){
         }
     });
 }
-function dropdown_urusan_pemerintahan(id){
+function dropdown_urusan_pemerintahan(ids){
     $("#urusan_pemerintahan").html("<option value=''>Memuat Data ...</option>");
     $.ajax({
         type:'post',
@@ -148,15 +148,22 @@ function dropdown_urusan_pemerintahan(id){
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
-                    window.location = "/logout";;
+                    window.location = "/logout";
                 }else{
                     $("#urusan_pemerintahan").html("<option value=''>" + res.msg + "</option>");
                 }
             }else{
+                var arr_ids = ids.split(",");
                 var html = "";
                 $.each(res.data,function(k,v){
-                    if(id == v['id']){
-                        html += "<option value='"  + v['id'] + "' selected='selected'>" + v['nama'] + "</option>";
+                    if(arr_ids.length > 0){
+                        $.each(arr_ids,function(k2,v2){
+                            if(v2 == v['id']){
+                                html += "<option value='"  + v['id'] + "' selected='selected'>" + v['nama'] + "</option>";
+                            }else{
+                                html += "<option value='"  + v['id'] + "'>" + v['nama'] + "</option>";
+                            }
+                        });
                     }else{
                         html += "<option value='"  + v['id'] + "'>" + v['nama'] + "</option>";
                     }

@@ -56,7 +56,7 @@ function abk(){
                         $.each(res.data,function(k2,v2){
                             if(v['id'] == v2['anjab_tugas_pokok_id']){
                                 html += "<tr class='tr_tahapan' data-tugas-pokok-tahapan-id='" + v2['id2'] + "'>";
-                                html += "<td>" + v['uraian_sub'] + "</td>";
+                                html += "<td>" + v2['uraian_sub'] + "</td>";
                                 html += "<td><input type='text' value='" + v2['hasil_kerja'] + "' class='form-control form-control-sm hasil_kerja' /></td>";
                                 html += "<td><input type='text' value='" + FormatAngka(v2['jumlah_hasil'], true) + "' class='form-control form-control-sm jumlah_hasil' /></td>";
                                 html += "<td><input type='text' value='" + FormatAngka(v2['waktu_penyelesaian'],true) + "' class='form-control form-control-sm waktu_penyelesaian' /></td>";

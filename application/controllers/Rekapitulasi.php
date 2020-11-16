@@ -457,13 +457,13 @@ class Rekapitulasi extends CI_Controller {
 
                 }else{
                     $html_data .= "<tr>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>NO</th>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>NAMA JABATAN</th>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>KELAS JABATAN</th>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>HARGA JABATAN</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width:3%;'>NO</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width: 20%;'>NAMA JABATAN</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width: 8%;'>KELAS JABATAN</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width: 8%;'>HARGA JABATAN</th>";
                     foreach($json_faktor_evjab['data'] as $item_faktor_evjab){
                         if($item_faktor_evjab['tipe'] == "1"){
-                            $html_data .= "<th colspan='2' style='font-size: 10px;text-align: center;'>FAKTOR " . $item_faktor_evjab['kode'] . "</th>";
+                            $html_data .= "<th colspan='2' style='font-size: 10px;text-align: center;width: 6%;'>FAKTOR " . $item_faktor_evjab['kode'] . "</th>";
                         }
                     }
                     $html_data .= "</tr>";
@@ -512,8 +512,13 @@ class Rekapitulasi extends CI_Controller {
                                 $html_data .= "<td style='text-align: center'>" . $kelas_jabatan . "</td>";
                                 $html_data .= "<td style='text-align: center'>" . $this->PublicFunction->FormatAngka($total_nilai) . "</td>";
                                 foreach($json_faktor['data'] as $k=>$item){
-                                    $html_data .= "<td style='text-align: center'>" . $item['kode'] . "</td>";
-                                    $html_data .= "<td style='text-align: center'>" . $this->PublicFunction->FormatAngka($item['nilai']) . "</td>";
+                                    if($item['nilai_kosong'] != ""){
+                                        $html_data .= "<td style='text-align: center'>" . $item['kode'] . "</td>";
+                                        $html_data .= "<td style='text-align: center'>" . $item['nilai'] . "</td>";
+                                    }else{
+                                        $html_data .= "<td style='text-align: center'></td>";
+                                        $html_data .= "<td style='text-align: center'></td>";
+                                    }
                                 }
                                 $html_data .= "</tr>";
                             }
@@ -599,13 +604,13 @@ class Rekapitulasi extends CI_Controller {
 
                 }else{
                     $html_data .= "<tr>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>NO</th>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>NAMA JABATAN</th>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>KELAS JABATAN</th>";
-                    $html_data .= "<th style='font-size: 10px;text-align: center;'>HARGA JABATAN</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width:3%;'>NO</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width:20%;'>NAMA JABATAN</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width:8%;'>KELAS JABATAN</th>";
+                    $html_data .= "<th style='font-size: 10px;text-align: center;width:8%;'>HARGA JABATAN</th>";
                     foreach($json_faktor_evjab['data'] as $item_faktor_evjab){
                         if($item_faktor_evjab['tipe'] == "2"){
-                            $html_data .= "<th colspan='2' style='font-size: 10px;text-align: center;'>FAKTOR " . $item_faktor_evjab['kode'] . "</th>";
+                            $html_data .= "<th colspan='2' style='font-size: 10px;text-align: center;width: 6%;'>FAKTOR " . $item_faktor_evjab['kode'] . "</th>";
                         }
                     }
                     $html_data .= "</tr>";
@@ -654,8 +659,13 @@ class Rekapitulasi extends CI_Controller {
                                 $html_data .= "<td style='text-align: center'>" . $kelas_jabatan . "</td>";
                                 $html_data .= "<td style='text-align: center'>" . $this->PublicFunction->FormatAngka($total_nilai) . "</td>";
                                 foreach($json_faktor['data'] as $k=>$item){
-                                    $html_data .= "<td style='text-align: center'>" . $item['kode'] . "</td>";
-                                    $html_data .= "<td style='text-align: center'>" . $this->PublicFunction->FormatAngka($item['nilai']) . "</td>";
+                                    if($item['nilai_kosong'] != ""){
+                                        $html_data .= "<td style='text-align: center'>" . $item['kode'] . "</td>";
+                                        $html_data .= "<td style='text-align: center'>" . $item['nilai'] . "</td>";
+                                    }else{
+                                        $html_data .= "<td style='text-align: center'></td>";
+                                        $html_data .= "<td style='text-align: center'></td>";
+                                    }
                                 }
                                 $html_data .= "</tr>";
                             }
@@ -685,6 +695,7 @@ class Rekapitulasi extends CI_Controller {
         $html .= "<br />";
         $html .= "</body>";
         $html .= "</html>";
+//        echo $html;
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'potrait');
         $dompdf->render();

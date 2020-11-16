@@ -126,6 +126,6 @@
     </div>
 </div>
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/anjab_edit_syarat_jabatan_upaya_fisik.js"></script>
+<script type="text/javascript" src="/assets/js/page/anjab_edit_syarat_jabatan_upaya_fisik.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

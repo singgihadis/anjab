@@ -1,6 +1,9 @@
 <head>
     <title><?php
-        if(isset($title)){
+        if(!isset($title)){
+            $title = "";
+        }
+        if($title != ""){
             echo $title;
         }else{
             echo "Anjab";

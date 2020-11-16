@@ -169,7 +169,7 @@ function html_data_builder(v,no){
     html += "<td>" + skj_verifikasi + "</td>";
     html += "<td class='nowrap'>";
     html += "<a href='/skj/edit/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";
-    html += "<a href='/skj/printdata/" + v['id'] + "' target='_blank' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a>";
+    html += "<a href='/skj/printdata/" + v['id'] + "' target='_blank' class='btn btn-sm btn-light' title='Print SKJ'><span class='fa fa-print'></span></a>";
     html += "</td>";
     html += "</tr>";
     return html;

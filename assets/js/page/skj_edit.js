@@ -456,40 +456,44 @@ function modal_kamus_kompetensi_skj_urusan_pemerintahan(){
     $("#modal_kamus_kompetensi_skj_urusan_pemerintahan").modal("show");
     $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Memuat Data ...</option>");
     var filter_urusan_pemerintahan = $("#master_urusan_pemerintahan_ids").val();
-    $.ajax({
-        type:'post',
-        url:'/ajax/kamus_kompetensi_skj',
-        data:{page:"x",master_urusan_pemerintahan_id:filter_urusan_pemerintahan},
-        success:function(resp){
-            var res = JSON.parse(resp);
-            if(res.is_error){
-                if(res.must_login){
-                    window.location = "/logout";;
+    if(filter_urusan_pemerintahan != ""){
+        $.ajax({
+            type:'post',
+            url:'/ajax/kamus_kompetensi_skj',
+            data:{page:"x",master_urusan_pemerintahan_id:filter_urusan_pemerintahan},
+            success:function(resp){
+                var res = JSON.parse(resp);
+                if(res.is_error){
+                    if(res.must_login){
+                        window.location = "/logout";;
+                    }else{
+                        $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Pilih</option>");
+                    }
                 }else{
-                    $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Pilih</option>");
-                }
-            }else{
-                var html = "";
-                $.each(res.data,function(k,v){
-                    if(cur_urusan_pemerintahan_ids.length > 0){
-                        if($.inArray(v['id'],cur_urusan_pemerintahan_ids) !== -1){
+                    var html = "";
+                    $.each(res.data,function(k,v){
+                        if(cur_urusan_pemerintahan_ids.length > 0){
+                            if($.inArray(v['id'],cur_urusan_pemerintahan_ids) !== -1){
 
+                            }else{
+                                html += "<option value='" + v['id'] + "'>" + v['nama'] + "</option>";
+                            }
                         }else{
                             html += "<option value='" + v['id'] + "'>" + v['nama'] + "</option>";
                         }
-                    }else{
-                        html += "<option value='" + v['id'] + "'>" + v['nama'] + "</option>";
-                    }
-                });
-                $("#kamus_kompetensi_skj_urusan_pemerintahan").html(html);
-                $("#kamus_kompetensi_skj_urusan_pemerintahan").select2({
-                    width:"100%"
-                });
+                    });
+                    $("#kamus_kompetensi_skj_urusan_pemerintahan").html(html);
+                    $("#kamus_kompetensi_skj_urusan_pemerintahan").select2({
+                        width:"100%"
+                    });
+                }
+            },error:function(){
+                $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Pilih</option>");
             }
-        },error:function(){
-            $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Pilih</option>");
-        }
-    });
+        });
+    }else{
+        $("#kamus_kompetensi_skj_urusan_pemerintahan").html("<option value=''>Pilih</option>");
+    }
 }
 function skj_update(itu){
     $(itu).parent().parent().loading();

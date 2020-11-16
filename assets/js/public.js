@@ -82,16 +82,24 @@ function StripTags(str) {
 }
 function FormatAngka(str,zero_to_empty){
     if(zero_to_empty === undefined) zero_to_empty=false;
-    if(zero_to_empty == true){
-        if(str.toString() == "0"){
-            return str;
+    if(str){
+        if(zero_to_empty == true){
+            if(str.toString() == "0"){
+                return str;
+            }
+        }
+        str = str.toString().replace(/\D/g,'');
+        if(str != ""){
+            str = parseInt(str);
+        }
+        return str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+    }else{
+        if(zero_to_empty == true){
+            return "";
+        }else{
+            return 0;
         }
     }
-    str = str.toString().replace(/\D/g,'');
-    if(str != ""){
-        str = parseInt(str);
-    }
-    return str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 }
 function StrToNumber(str){
     str = str.replace("Rp. ","").replace(/\./g,"");
