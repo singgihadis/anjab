@@ -1,146 +1,147 @@
 /* line 1, ../sass/global.scss */
 body {
   font-size: 14px;
+  background: linear-gradient(135deg, #faf9f9 0%, #faf7f7 46%, #fef9f9 88%);
 }
-/* line 3, ../sass/global.scss */
+/* line 4, ../sass/global.scss */
 body .logo {
   width: 140px;
 }
-/* line 6, ../sass/global.scss */
+/* line 7, ../sass/global.scss */
 body .nowrap {
   white-space: nowrap;
 }
-/* line 10, ../sass/global.scss */
+/* line 11, ../sass/global.scss */
 body td.fit, body th.fit {
   width: 1px;
   white-space: nowrap;
 }
-/* line 18, ../sass/global.scss */
+/* line 19, ../sass/global.scss */
 body .navbar .navbar-collapse li img {
   width: 24px;
 }
-/* line 22, ../sass/global.scss */
+/* line 23, ../sass/global.scss */
 body .navbar .navbar-collapse li .dropdown .dropdown-menu {
   right: 0 !important;
   left: auto;
 }
-/* line 32, ../sass/global.scss */
+/* line 33, ../sass/global.scss */
 body .nav.custom.nav-tabs .nav-item {
   margin: 0px 10px 0px 0px;
 }
-/* line 34, ../sass/global.scss */
+/* line 35, ../sass/global.scss */
 body .nav.custom.nav-tabs .nav-item .nav-link {
   color: #000000;
   padding: 0.5rem 0rem;
 }
-/* line 37, ../sass/global.scss */
+/* line 38, ../sass/global.scss */
 body .nav.custom.nav-tabs .nav-item .nav-link .fa {
   color: #007bff;
 }
-/* line 40, ../sass/global.scss */
+/* line 41, ../sass/global.scss */
 body .nav.custom.nav-tabs .nav-item .nav-link.active {
   border-color: #fff #fff #007bff;
 }
-/* line 43, ../sass/global.scss */
+/* line 44, ../sass/global.scss */
 body .nav.custom.nav-tabs .nav-item .nav-link:hover {
   border-color: #fff #fff #007bff;
 }
-/* line 51, ../sass/global.scss */
+/* line 52, ../sass/global.scss */
 body .custom-breadcrumb ul {
   list-style-type: none;
   padding-left: 0;
 }
-/* line 54, ../sass/global.scss */
+/* line 55, ../sass/global.scss */
 body .custom-breadcrumb ul li {
   display: inline-block;
 }
-/* line 56, ../sass/global.scss */
+/* line 57, ../sass/global.scss */
 body .custom-breadcrumb ul li:first-child {
   font-weight: bold;
 }
-/* line 59, ../sass/global.scss */
+/* line 60, ../sass/global.scss */
 body .custom-breadcrumb ul li:not(:last-child) {
   font-weight: bold;
 }
-/* line 60, ../sass/global.scss */
+/* line 61, ../sass/global.scss */
 body .custom-breadcrumb ul li:not(:last-child):after {
   content: ' \203A';
   margin-left: 5px;
   margin-right: 5px;
 }
-/* line 67, ../sass/global.scss */
+/* line 68, ../sass/global.scss */
 body .custom-breadcrumb ul li a {
   color: #007bff;
   font-weight: bold;
 }
-/* line 70, ../sass/global.scss */
+/* line 71, ../sass/global.scss */
 body .custom-breadcrumb ul li a:hover, body .custom-breadcrumb ul li a:focus {
   text-decoration: none;
   color: #0071ea;
 }
-/* line 81, ../sass/global.scss */
+/* line 82, ../sass/global.scss */
 body .custom-pagination ul li a {
   font-size: 12px;
 }
-/* line 83, ../sass/global.scss */
+/* line 84, ../sass/global.scss */
 body .custom-pagination ul li a.btn-secondary {
   background-color: #808080;
   border-color: #808080;
   color: #000000;
 }
-/* line 88, ../sass/global.scss */
+/* line 89, ../sass/global.scss */
 body .custom-pagination ul li a:not(.btn-secondary) {
   font-weight: bold;
 }
-/* line 91, ../sass/global.scss */
+/* line 92, ../sass/global.scss */
 body .custom-pagination ul li a.active {
   cursor: default;
 }
-/* line 98, ../sass/global.scss */
+/* line 99, ../sass/global.scss */
 body table {
   font-size: 12px;
 }
-/* line 101, ../sass/global.scss */
+/* line 102, ../sass/global.scss */
 body .text-nowrap {
   vertical-align: middle;
 }
-/* line 105, ../sass/global.scss */
+/* line 106, ../sass/global.scss */
 body label.error {
   margin-top: 4px;
   font-size: 12px;
   color: red;
 }
-/* line 113, ../sass/global.scss */
+/* line 114, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item {
   padding: 0px;
   border-bottom: 0px;
 }
-/* line 116, ../sass/global.scss */
+/* line 117, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item a {
   padding: 0.75rem 1.25rem;
   color: #212529;
   display: block;
 }
-/* line 120, ../sass/global.scss */
+/* line 121, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item a:hover, body #sidebar-wrapper .list-group .list-group-item a:focus {
   text-decoration: none;
   background-color: #f6f7fd;
 }
-/* line 124, ../sass/global.scss */
+/* line 125, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item a.active {
   background-color: #f6f7fd;
 }
-/* line 128, ../sass/global.scss */
+/* line 129, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item .menu-title {
   padding: 0.70rem 1.25rem;
   color: #767676;
   display: block;
 }
-/* line 135, ../sass/global.scss */
+/* line 136, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item .list-group-sub-menu li a {
   font-size: 13px;
 }
-/* line 138, ../sass/global.scss */
+/* line 139, ../sass/global.scss */
 body #sidebar-wrapper .list-group .list-group-item .list-group-sub-menu li a span.fa {
   font-size: 10px;
   vertical-align: middle;
