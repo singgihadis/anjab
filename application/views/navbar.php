@@ -5,7 +5,7 @@ $profil = json_decode($this->session->userdata("profil"),true);
     <button class="btn btn-light" id="menu-toggle"><span class="fa fa-bars"></span></button>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fa fa-bars"></span>
+        <span class="fa fa-bars text-white"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
