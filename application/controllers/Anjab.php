@@ -135,6 +135,7 @@ class Anjab extends CI_Controller {
         }else{
             $jabatan_nama = $json_opd['data'][0]['nama_jabatan'];
             $jabatan_kode = $json_opd['data'][0]['kode_jabatan'];
+            $jabatan_tahun = $json_opd['data'][0]['tahun'];
             $tingkat_jabatan = $json_opd['data'][0]['tingkat'];
 
             $get_ikhtisiar_jabatan = $this->Api->Call("anjab/ikhtisiar_jabatan",$param);
@@ -145,7 +146,7 @@ class Anjab extends CI_Controller {
                 $ikhtisiar_jabatan = $json_ikhtisiar_jabatan['data'][0]['ikhtisiar'];
             }
 
-            $param_unit_kerja = array("id"=>$jabatan_id,"token"=>$token,"tingkat"=>$tingkat_jabatan);
+            $param_unit_kerja = array("id"=>$jabatan_id,"token"=>$token,"tingkat"=>$tingkat_jabatan,"tahun"=>$jabatan_tahun);
             $get_unit_kerja = $this->Api->Call("anjab/unit_kerja",$param_unit_kerja);
             $json_unit_kerja = json_decode($get_unit_kerja,true);
             if($json_unit_kerja['is_error']){

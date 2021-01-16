@@ -97,7 +97,7 @@ function syarat_jabatan_keterampilan_kerja_edit(){
     var aspek = $("#aspek").val();
     var uraian = $("#uraian").val();
     var data = new FormData();
-    data.append("id", anjab_kualifikasi_pelatihan_id);
+    data.append("id", anjab_syarat_jabatan_keterampilan_kerja_id);
     data.append("jabatan_id", jabatan_id);
     data.append("aspek", aspek);
     data.append("uraian", uraian);
@@ -142,6 +142,7 @@ function modal_keterampilan_kerja(is_tambah,itu){
         var id = $(itu).attr("data-id");
         var pos = $(itu).attr("data-pos");
         var data = data_syarat_jabatan_keterampilan_kerja[pos];
+        $("#anjab_syarat_jabatan_keterampilan_kerja_id").val(id);
         $("#aspek").val(data['aspek']);
         $("#uraian").val(data['uraian']);
     }
