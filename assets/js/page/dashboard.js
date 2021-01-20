@@ -274,7 +274,7 @@ function html_builder(data_jabatan){
                                     html += "<span class='jabatan_item' data-id='" + v4['v']['id'] + "' data-master-jenis-jabatan-id='" + v4['v']['master_jenis_jabatan_id'] + "'>" + v4['v']['nama'] + "<br><div></div></span>";
                                     if(v4['child'].length > 0){
                                         html += "<ul>";
-                                        $.each(v5['child'],function(k5,v5){
+                                        $.each(v4['child'],function(k5,v5){
                                             html += "<li>";
                                             html += "<span class='jabatan_item' data-id='" + v5['v']['id'] + "' data-master-jenis-jabatan-id='" + v5['v']['master_jenis_jabatan_id'] + "'>" + v5['v']['nama'] + "<br><div></div></span>";
                                             if(v5['child'].length > 0){

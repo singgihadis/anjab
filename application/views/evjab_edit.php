@@ -248,6 +248,6 @@
     </div>
 </div>
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/evjab_edit.js"></script>
+<script type="text/javascript" src="/assets/js/page/evjab_edit.js?v=1.1.1"></script>
 </body>
 </html>

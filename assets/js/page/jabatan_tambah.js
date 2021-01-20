@@ -119,7 +119,7 @@ function dropdown_jabatan(){
         $.ajax({
             type:'post',
             url:'/ajax/jabatan',
-            data:{page:"x",nama:"",master_opd_id:opd,tahun:tahun,master_jenis_jabatan:"",max_tingkat:6},
+            data:{page:"x",nama:"",master_opd_id:opd,tahun:tahun,master_jenis_jabatan:"2,3,4",max_tingkat:6},
             success:function(resp){
                 $("#listdata").loading("stop");
                 var res = JSON.parse(resp);

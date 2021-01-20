@@ -317,7 +317,7 @@ function dropdown_opd(id,jabatan_id){
 function dropdown_jabatan(jabatan_id){
     var tahun = $("#tahun").val();
     var opd = $("#opd").val();
-    if(tahun != "" && opd != ""){
+    //if(tahun != "" && opd != ""){
         $.ajax({
             type:'post',
             url:'/ajax/jabatan',
@@ -345,7 +345,7 @@ function dropdown_jabatan(jabatan_id){
                 $("#jabatan_id").val(jabatan_id);
             }
         });
-    }
+    //}
 }
 function jml_pegawai(){
     $("#div_jml_pegawai").loading();

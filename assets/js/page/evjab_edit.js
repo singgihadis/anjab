@@ -298,6 +298,7 @@ function kelas_jabatan(total){
         data:{page:"x",nama:"",tahun:tahun},
         success:function(resp){
             $("#kelas_jabatan").loading("stop");
+            console.log(resp);
             var res = JSON.parse(resp);
             if(res.is_error){
                 if(res.must_login){
