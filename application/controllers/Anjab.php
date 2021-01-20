@@ -137,6 +137,8 @@ class Anjab extends CI_Controller {
             $jabatan_kode = $json_opd['data'][0]['kode_jabatan'];
             $jabatan_tahun = $json_opd['data'][0]['tahun'];
             $tingkat_jabatan = $json_opd['data'][0]['tingkat'];
+            $master_jenis_jabatan_id = $json_opd['data'][0]['master_jenis_jabatan_id'];
+            $tahun = $json_opd['data'][0]['tahun'];
 
             $get_ikhtisiar_jabatan = $this->Api->Call("anjab/ikhtisiar_jabatan",$param);
             $json_ikhtisiar_jabatan = json_decode($get_ikhtisiar_jabatan,true);
@@ -154,7 +156,7 @@ class Anjab extends CI_Controller {
             }else{
                 $alphas = range('a', 'z');
                 foreach($json_unit_kerja['data'] as $k=>$item){
-                    $html_unit_kerja .= "<tr><td>&nbsp;</td><td>" . $alphas[$k] . ".</td><td>" . $item['jenis_jabatan'] . "</td><td>:</td><td>" . $item['nama_jabatan'] . "</td></tr>";
+                    $html_unit_kerja .= "<tr><td>&nbsp;</td><td style='vertical-align: top;'>" . $alphas[$k] . ".</td><td style='vertical-align: top;'>" . $item['jenis_jabatan'] . "</td><td style='vertical-align: top;'>:</td><td style='vertical-align: top;'>" . $item['nama_jabatan'] . "</td></tr>";
                 }
             }
 
@@ -165,9 +167,9 @@ class Anjab extends CI_Controller {
             }else{
                 foreach($json_kualifikasi_jabatan_pendidikan['data'] as $k=>$item){
                     if($k == 0){
-                        $html_kualifikasi_pendidikan .= "<tr><td>&nbsp;</td><td>a.</td><td>Pendidikan Formal</td><td>:</td><td>" . $item['nama_pendidikan'] . " (" . $item['jurusan'] . ")" . "</td></tr>";
+                        $html_kualifikasi_pendidikan .= "<tr><td>&nbsp;</td><td>a.</td><td>Pendidikan Formal</td><td>:</td><td>" . $item['nama_pendidikan'] . ($item['jurusan']!=""?" (" . $item['jurusan'] . ")":"")  . "</td></tr>";
                     }else{
-                        $html_kualifikasi_pendidikan .= "<tr><td colspan='4'>&nbsp;</td><td>" . $item['nama_pendidikan'] . " (" . $item['jurusan'] . ")" . "</td></tr>";
+                        $html_kualifikasi_pendidikan .= "<tr><td colspan='4'>&nbsp;</td><td>" . $item['nama_pendidikan'] . ($item['jurusan']!=""?" (" . $item['jurusan'] . ")":"") . "</td></tr>";
                     }
                 }
             }
@@ -179,7 +181,7 @@ class Anjab extends CI_Controller {
             }else{
                 foreach($json_kualifikasi_jabatan_pelatihan['data'] as $k=>$item){
                     if($k == 0){
-                        $html_kualifikasi_pelatihan .= "<tr><td>&nbsp;</td><td>a.</td><td>Pendidikan & Pelatihan</td><td>:</td><td>" . $item['nama'] . "</td></tr>";
+                        $html_kualifikasi_pelatihan .= "<tr><td>&nbsp;</td><td>b.</td><td>Pendidikan & Pelatihan</td><td>:</td><td>" . $item['nama'] . "</td></tr>";
                     }else{
                         $html_kualifikasi_pelatihan .= "<tr><td colspan='4'>&nbsp;</td><td>" . $item['nama'] . "</td></tr>";
                     }
@@ -193,7 +195,7 @@ class Anjab extends CI_Controller {
             }else{
                 foreach($json_kualifikasi_jabatan_pengalaman['data'] as $k=>$item){
                     if($k == 0){
-                        $html_kualifikasi_pengalaman .= "<tr><td>&nbsp;</td><td>a.</td><td>Pengalaman Kerja</td><td>:</td><td>" . $item['nama'] . "</td></tr>";
+                        $html_kualifikasi_pengalaman .= "<tr><td>&nbsp;</td><td>c.</td><td>Pengalaman Kerja</td><td>:</td><td>" . $item['nama'] . "</td></tr>";
                     }else{
                         $html_kualifikasi_pengalaman .= "<tr><td colspan='4'>&nbsp;</td><td>" . $item['nama'] . "</td></tr>";
                     }
@@ -207,17 +209,18 @@ class Anjab extends CI_Controller {
             }else{
                 $html_tugas_pokok_dan_beban_kerja .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;'>";
                 $html_tugas_pokok_dan_beban_kerja .= "<tr>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>No</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td colspan='2' style='vertical-align: middle;text-align: center;border: 1px solid black;'>Uraian Tugas</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Hasil Kerja</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Jml Hasil</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Waktu Penyelesaian (JAM)</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Waktu Efektif</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Keb. Pegawai</td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;padding:5px;font-size:12px;width:5%;'><b>&nbsp;</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>NO</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td colspan='2' style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>URAIAN TUGAS</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>HASIL KERJA</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>JUMLAH HASIL</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>WAKTU PENYELESAIAN (JAM)</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>WAKTU EFEKTIF</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='background-color:#92d050;vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>KEBUTUHAN PEGAWAI</b></td>";
                 $html_tugas_pokok_dan_beban_kerja .= "</tr>";
-                $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='text-align: center;border: 1px solid black;'>1</td><td colspan='2' style='text-align: center;border: 1px solid black;'>2</td><td style='text-align: center;border: 1px solid black;'>3</td><td style='text-align: center;border: 1px solid black;'>4</td><td style='text-align: center;border: 1px solid black;'>5</td><td style='text-align: center;border: 1px solid black;'>6</td><td style='text-align: center;border: 1px solid black;'>7</td></tr>";
 
                 $total_jml_hasil = 0;
+                $total_waktu_penyelesaian = 0;
                 $total_keb_pegawai = 0;
 
                 $no = 0;
@@ -227,13 +230,14 @@ class Anjab extends CI_Controller {
                         $no++;
                         $last_id = $item['id'];
                         $anjab_tugas_pokok_id_parent = $item['id'];
-                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='vertical-align: middle;text-align: center;border-left: 1px solid black;'>" . $no . "</td><td colspan='2' style='border-left: 1px solid black;text-align: justify;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
+                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td>&nbsp;</td><td style='text-align: center;border-left: 1px solid black;vertical-align: top;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='font-size:16px;border-left: 1px solid black;padding-left:4px;padding-right:4px;vertical-align: top;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
                         foreach($json_abk['data'] as $k2=>$item2){
                             if($anjab_tugas_pokok_id_parent == $item2['anjab_tugas_pokok_id']){
                                 $html_tugas_pokok_dan_beban_kerja .= "<tr>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;'>&nbsp;</td>";
+                                $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;'>&nbsp;</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: top;border-left: 1px solid black;text-align: center;width:2%;'>-</td>";
-                                $html_tugas_pokok_dan_beban_kerja .= "<td style='text-align: justify;width:33%;'>" . $item2['uraian_sub'] . "</td>";
+                                $html_tugas_pokok_dan_beban_kerja .= "<td style='width:33%;font-size:16px;'>" . $item2['uraian_sub'] . "</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;vertical-align: top;text-align: center;'>" . $item2['hasil_kerja'] . "</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;vertical-align: top;text-align: center;'>" . $this->PublicFunction->FormatAngka($item2['jumlah_hasil'],false) . "</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;vertical-align: top;text-align: center;'>" . $this->PublicFunction->FormatAngka($item2['waktu_penyelesaian'],false) . "</td>";
@@ -242,14 +246,15 @@ class Anjab extends CI_Controller {
                                 $html_tugas_pokok_dan_beban_kerja .= "</tr>";
 
                                 $total_jml_hasil = $total_jml_hasil + $item2['jumlah_hasil'];
+                                $total_waktu_penyelesaian= $total_waktu_penyelesaian + $item2['waktu_penyelesaian'];
                                 $total_keb_pegawai = $total_keb_pegawai + $item2['kebutuhan_pegawai'];
                             }
                         }
                     }
                 }
-                $html_tugas_pokok_dan_beban_kerja .= "<tr><td colspan='4' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $this->PublicFunction->FormatAngka($total_jml_hasil,false) . "</td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $this->PublicFunction->ToFixed($total_keb_pegawai,4,false) . "</td></tr>";
+                $html_tugas_pokok_dan_beban_kerja .= "<tr><td>&nbsp;</td><td colspan='5' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>" . $this->PublicFunction->FormatAngka($total_waktu_penyelesaian,false) . "</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $this->PublicFunction->ToFixed($total_keb_pegawai,4,false) . "</td></tr>";
                 $total_keb_pegawai_rounded = round($total_keb_pegawai);
-                $html_tugas_pokok_dan_beban_kerja .= "<tr><td colspan='5' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH PEGAWAI</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $total_keb_pegawai_rounded . "</td></tr>";
+                $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='border-bottom: 1px solid white;'>&nbsp;</td><td colspan='6' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH PEGAWAI</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $total_keb_pegawai_rounded . "</td></tr>";
                 $html_tugas_pokok_dan_beban_kerja .= "</table>";
             }
 
@@ -269,9 +274,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_bahan_kerja .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_bahan_kerja .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>BAHAN KERJA</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>PENGGUNAAN DALAM TUGAS</b></td></tr>";
+                $html_bahan_kerja .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='width:7%;border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #92d050;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #92d050;'><b>BAHAN KERJA</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #92d050;'><b>PENGGUNAAN DALAM TUGAS</b></td></tr>";
                 foreach($json_bahan_kerja['data'] as $k=>$item){
-                    $html_bahan_kerja .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['digunakan_dalam_tugas'] . "</td></tr>";
+                    $html_bahan_kerja .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['digunakan_dalam_tugas'] . "</td></tr>";
                 }
                 $html_bahan_kerja .= "</table>";
             }
@@ -282,9 +287,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_perangkat_kerja .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_perangkat_kerja .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>PERANGKAT KERJA</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>PENGGUNAAN DALAM TUGAS</b></td></tr>";
+                $html_perangkat_kerja .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='width:7%;border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #92d050;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #92d050;'><b>PERANGKAT KERJA</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #92d050;'><b>PENGGUNAAN DALAM TUGAS</b></td></tr>";
                 foreach($json_perangkat_kerja['data'] as $k=>$item){
-                    $html_perangkat_kerja .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['digunakan_dalam_tugas'] . "</td></tr>";
+                    $html_perangkat_kerja .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['digunakan_dalam_tugas'] . "</td></tr>";
                 }
                 $html_perangkat_kerja .= "</table>";
             }
@@ -295,9 +300,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_tanggung_jawab .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_tanggung_jawab .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>URAIAN</b></td></tr>";
+                $html_tanggung_jawab .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='width:7%;border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>URAIAN</b></td></tr>";
                 foreach($json_tanggung_jawab['data'] as $k=>$item){
-                    $html_tanggung_jawab .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;width:5%;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['tanggung_jawab'] . "</td></tr>";
+                    $html_tanggung_jawab .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;width:5%;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['tanggung_jawab'] . "</td></tr>";
                 }
                 $html_tanggung_jawab .= "</table>";
             }
@@ -308,9 +313,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_wewenang .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_wewenang .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>URAIAN</b></td></tr>";
+                $html_wewenang .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>URAIAN</b></td></tr>";
                 foreach($json_wewenang['data'] as $k=>$item){
-                    $html_wewenang .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['wewenang'] . "</td></tr>";
+                    $html_wewenang .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['wewenang'] . "</td></tr>";
                 }
                 $html_wewenang .= "</table>";
             }
@@ -321,9 +326,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_korelasi .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_korelasi .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>NAMA JABATAN</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>UNIT KERJA/INSTANSI</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>DALAM HAL</b></td></tr>";
+                $html_korelasi .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>NAMA JABATAN</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>UNIT KERJA/INSTANSI</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>DALAM HAL</b></td></tr>";
                 foreach($json_korelasi['data'] as $k=>$item){
-                    $html_korelasi .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama_jabatan'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['unit_kerja'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['dalam_hal'] . "</td></tr>";
+                    $html_korelasi .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama_jabatan'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['unit_kerja'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['dalam_hal'] . "</td></tr>";
                 }
                 $html_korelasi .= "</table>";
             }
@@ -334,9 +339,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_kondisi_lingkungan_kerja .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_kondisi_lingkungan_kerja .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>ASPEK</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>FAKTOR</b></td></tr>";
+                $html_kondisi_lingkungan_kerja .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>ASPEK</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>FAKTOR</b></td></tr>";
                 foreach($json_kondisi_lingkungan_kerja['data'] as $k=>$item){
-                    $html_kondisi_lingkungan_kerja .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['faktor'] . "</td></tr>";
+                    $html_kondisi_lingkungan_kerja .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['faktor'] . "</td></tr>";
                 }
                 $html_kondisi_lingkungan_kerja .= "</table>";
             }
@@ -347,9 +352,9 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_resiko_bahaya .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;border-top: 1px solid black;'>";
-                $html_resiko_bahaya .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>NAMA RESIKO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #d3d3d3;'><b>PENYEBAB</b></td></tr>";
+                $html_resiko_bahaya .= "<tr><td style='width:5%;border-top:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;width:5%;'><b>NO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>NAMA RESIKO</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: middle;text-align: center;background-color: #fabf8f;'><b>PENYEBAB</b></td></tr>";
                 foreach($json_resiko_bahaya['data'] as $k=>$item){
-                    $html_resiko_bahaya .= "<tr><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'>" . ($k + 1) . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['penyebab'] . "</td></tr>";
+                    $html_resiko_bahaya .= "<tr><td style='border-bottom:1px solid white;'>&nbsp;</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;text-align: center;'><b>" . ($k + 1) . "</b></td><td style='border-bottom: 1px solid black;border-left: 1px solid black;vertical-align: top;'>" . $item['nama'] . "</td><td style='border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;vertical-align: top;'>" . $item['penyebab'] . "</td></tr>";
                 }
                 $html_resiko_bahaya .= "</table>";
             }
@@ -360,7 +365,7 @@ class Anjab extends CI_Controller {
 
             }else{
                 foreach($json_syarat_jabatan_keterampilan_kerja['data'] as $k=>$item){
-                    $html_syarat_jabatan_keterampilan_kerja .= "<tr><td colspan='2'></td><td colspan='3'>" . $item['aspek'] . ", " . $item['uraian'] . "</td></tr>";
+                    $html_syarat_jabatan_keterampilan_kerja .= "" . $item['aspek'] . ", " . $item['uraian'] . "";
                 }
             }
 
@@ -370,7 +375,7 @@ class Anjab extends CI_Controller {
 
             }else{
                 foreach($json_syarat_jabatan_bakat_kerja['data'] as $k=>$item){
-                    $html_syarat_jabatan_bakat_kerja .= "<tr><td colspan='2'></td><td colspan='3'>" . $item['nama'] . " : " . $item['uraian'] . "</td></tr>";
+                    $html_syarat_jabatan_bakat_kerja .= "- " . $item['nama'] . " (" . $item['uraian'] . ")<br>";
                 }
             }
 
@@ -380,7 +385,7 @@ class Anjab extends CI_Controller {
 
             }else{
                 foreach($json_syarat_jabatan_temperamen_kerja['data'] as $k=>$item){
-                    $html_syarat_jabatan_temperamen_kerja .= "<tr><td colspan='2'></td><td colspan='3'>" . $item['nama'] . " : " . $item['uraian'] . "</td></tr>";
+                    $html_syarat_jabatan_temperamen_kerja .= "- " . $item['nama'] . " (" . $item['uraian'] . ")<br>";
                 }
             }
 
@@ -390,7 +395,7 @@ class Anjab extends CI_Controller {
 
             }else{
                 foreach($json_syarat_jabatan_minat_kerja['data'] as $k=>$item){
-                    $html_syarat_jabatan_minat_kerja .= "<tr><td colspan='2'></td><td colspan='3'>" . $item['nama'] . " : " . $item['uraian'] . "</td></tr>";
+                    $html_syarat_jabatan_minat_kerja .= "- " . $item['nama'] . " (" . $item['uraian'] . ")<br>";
                 }
             }
 
@@ -400,7 +405,7 @@ class Anjab extends CI_Controller {
 
             }else{
                 foreach($json_syarat_jabatan_upaya_fisik['data'] as $k=>$item){
-                    $html_syarat_jabatan_upaya_fisik .= "<tr><td colspan='2'></td><td colspan='3'>- " . $item['nama'] . "</td></tr>";
+                    $html_syarat_jabatan_upaya_fisik .= "- " . $item['nama'] . "<br>";
                 }
             }
 
@@ -411,7 +416,7 @@ class Anjab extends CI_Controller {
             }else{
                 $html_syarat_jabatan_kondisi_fisik .= "<table style='border-collapse: collapse;width:100%;'>";
                 foreach($json_syarat_jabatan_kondisi_fisik['data'] as $k=>$item){
-                    $html_syarat_jabatan_kondisi_fisik .= "<tr><td style='width: 20%;'>- " . $item['nama'] . "</td><td> : " . $item['keterangan'] . "</td></tr>";
+                    $html_syarat_jabatan_kondisi_fisik .= "<tr><td style='width:10%;vertical-align: top;'>" . ($k + 1) . ")</td><td style='vertical-align: top;'>" . $item['nama'] . "</td><td style='width:5%;vertical-align: top;'> : </td><td style='width:50%;vertical-align: top;'>" . $item['keterangan'] . "</td></tr>";
                 }
                 $html_syarat_jabatan_kondisi_fisik .= "</table>";
             }
@@ -434,7 +439,45 @@ class Anjab extends CI_Controller {
 
             }else{
                 foreach($json_prestasi_kerja_yang_diharapkan['data'] as $k=>$item){
-                    $html_prestasi_kerja_yang_diharapkan .= "<tr><td>&nbsp;</td><td> - </td><td colspan='3'>" . $item['nama'] . "</td></tr>";
+                    $html_prestasi_kerja_yang_diharapkan .= " - " . $item['nama'] . "<br>";
+                }
+            }
+
+
+            //Get Kelas Jabatan
+            $kelas_jabatan = "";
+            $tipe = "";
+            $param_jenis_jabatan = array("token"=>$token,"id"=>$master_jenis_jabatan_id);
+            $jenis_jabatan = $this->Api->Call("jenis_jabatan/detail",$param_jenis_jabatan);
+            $json_jenis_jabatan = json_decode($jenis_jabatan,true);
+            if($json_jenis_jabatan['is_error']){
+
+            }else{
+                $tipe = $json_jenis_jabatan['data'][0]['tipe'];
+            }
+
+            $param_faktor = array("jabatan_id"=>$jabatan_id,"token"=>$token,"tahun"=>$tahun,"tipe"=>$tipe);
+            $get_faktor = $this->Api->Call("evjab/data",$param_faktor);
+            $json_faktor = json_decode($get_faktor,true);
+            $total_nilai = 0;
+            if($json_faktor['is_error']){
+
+            }else{
+                foreach($json_faktor['data'] as $k=>$item){
+                  $total_nilai = $total_nilai + $item['nilai'];
+                }
+            }
+
+            $param_kelas_jabatan = array("token"=>$token,"nama"=>"","page"=>"x","tahun"=>$tahun);
+            $get_kelas_jabatan = $this->Api->Call("kelas_jabatan",$param_kelas_jabatan);
+            $json_kelas_jabatan = json_decode($get_kelas_jabatan,true);
+            if($json_kelas_jabatan['is_error']){
+
+            }else{
+                foreach($json_kelas_jabatan['data'] as $k=>$item_kelas_jabatan){
+                    if($item_kelas_jabatan['batas_awal'] <= $total_nilai && $item_kelas_jabatan['batas_akhir'] >= $total_nilai){
+                        $kelas_jabatan = $json_kelas_jabatan['data'][$k]['kelas'];
+                    }
                 }
             }
         }
@@ -444,36 +487,30 @@ class Anjab extends CI_Controller {
         $html .= "<head>";
         $html .= "<title>Dokumen Anjab</title>";
         $html .= "<style type='text/css'>";
-        $html .= "@page { margin: 40px 20px 40px 20px; }";
-        $html .= "body { margin: 0px;font-size:14px;line-height: normal;}";
+        $html .= "@page { margin: 40px 40px 40px 40px; }";
+        $html .= "body { margin: 0px;font-size:16px;line-height: normal;page-break-inside: avoid;}td{padding-bottom:5px;vertical-align:top;}";
         $html .= "</style>";
         $html .= "</head>";
         $html .= "<body>";
-        $html .= "<div style='text-align:center;'><h4 style='margin-top:-20px;'>ANALISIS JABATAN DAN ANALISIS BEBAN KERJA</h4></div>";
+        $html .= "<div style='text-align:center;'><h4 style='margin-top:-20px;font-weight: bold;'>INFORMASI JABATAN</h4></div>";
+        $html .= "<br><br>";
         $html .= "<table style='width:100%;table-layout: fixed;'>";
-        $html .= "<tr><th style='width:5%;'></th><th style='width:3%;'></th><th style='width:25%;'></th><th style='width:5%;'></th><th style='width:62%;'></th></tr>";
-        $html .= "<tr><td>1.</td><td colspan='4'>NAMA JABATAN</td></tr>";
-        $html .= "<tr><td>&nbsp;</td><td colspan='4'>" . $jabatan_nama . "</td></tr>";
-        $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
+        $html .= "<tr><th style='width:5%;'></th><th style='width:3%;'></th><th style='width:27%;'></th><th style='width:5%;'></th><th style='width:60%;'></th></tr>";
+        $html .= "<tr><td>1.</td><td colspan='2'>NAMA JABATAN</td><td>:</td><td>" . $jabatan_nama . "</td></tr>";
         $html .= "<tr><td>2.</td><td colspan='2'>KODE JABATAN</td><td>:</td><td>"  . $jabatan_kode . "</td></tr>";
-        $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
         $html .= "<tr><td>3.</td><td colspan='4'>UNIT KERJA</td></tr>";
         $html .= $html_unit_kerja;
-        $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
-        $html .= "<tr><td>4.</td><td colspan='4'>IKHTISIAR JABATAN</td></tr>";
-        $html .= "<tr><td>&nbsp;</td><td colspan='4'>" . $ikhtisiar_jabatan . "</td></tr>";
-        $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
+        $html .= "<tr><td>4.</td><td colspan='2'>IKHTISIAR JABATAN</td><td>:</td><td>" . $ikhtisiar_jabatan . "</td></tr>";
         $html .= "<tr><td>5.</td><td colspan='4'>KUALIFIKASI JABATAN</td></tr>";
         $html .= $html_kualifikasi_pendidikan;
         $html .= $html_kualifikasi_pelatihan;
         $html .= $html_kualifikasi_pengalaman;
-        $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
-        $html .= "<tr><td>4.</td><td colspan='4'>TUGAS POKOK DAN BEBAN KERJA</td></tr>";
-        $html .= "</table>";
+        $html .= "<tr><td>4.</td><td colspan='4'>TUGAS POKOK</td></tr>";
         $html .= $html_tugas_pokok_dan_beban_kerja;
+        $html .= "</table>";
         $html .= "<br />";
         $html .= "<table style='width:100%;table-layout: fixed;'>";
-        $html .= "<tr><th style='width:5%;'></th><th style='width:3%;'></th><th style='width:25%;'></th><th style='width:5%;'></th><th style='width:62%;'></th></tr>";
+        $html .= "<tr><th style='width:5%;'></th><th style='width:5%;'></th><th style='width:25%;'></th><th style='width:5%;'></th><th style='width:60%;'></th></tr>";
         $html .= "<tr><td>7.</td><td colspan='4'>HASIL KERJA</td></tr>";
         $html .= $html_hasil_kerja;
         $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
@@ -518,35 +555,28 @@ class Anjab extends CI_Controller {
         $html .= $html_resiko_bahaya;
         $html .= "<br />";
         $html .= "<table style='width:100%;table-layout: fixed;'>";
-        $html .= "<tr><th style='width:5%;'></th><th style='width:3%;'></th><th style='width:25%;'></th><th style='width:5%;'></th><th style='width:62%;'></th></tr>";
+        $html .= "<tr><th style='width:5%;'></th><th style='width:3%;'></th><th style='width:27%;'></th><th style='width:3%;'></th><th style='width:62%;'></th></tr>";
         $html .= "<tr><td>15.</td><td colspan='4'>SYARAT JABATAN</td></tr>";
-        $html .= "<tr><td>&nbsp;</td><td>a. </td><td>Keterampilan Kerja</td><td colspan='2'>&nbsp;</td></tr>";
-        $html .= $html_syarat_jabatan_keterampilan_kerja;
-        $html .= "<tr><td>&nbsp;</td><td>b. </td><td>Bakat Kerja</td><td colspan='2'>&nbsp;</td></tr>";
-        $html .= $html_syarat_jabatan_bakat_kerja;
-        $html .= "<tr><td>&nbsp;</td><td>c. </td><td>Temperamen Kerja</td><td colspan='2'>&nbsp;</td></tr>";
-        $html .= $html_syarat_jabatan_temperamen_kerja;
-        $html .= "<tr><td>&nbsp;</td><td>d. </td><td>Minat Kerja</td><td colspan='2'>&nbsp;</td></tr>";
-        $html .= $html_syarat_jabatan_minat_kerja;
-        $html .= "<tr><td>&nbsp;</td><td>e. </td><td>Upaya Fisik</td><td colspan='2'>&nbsp;</td></tr>";
-        $html .= $html_syarat_jabatan_upaya_fisik;
-        $html .= "<tr><td>&nbsp;</td><td>f. </td><td>Kondisi Fisik</td><td colspan='2'>&nbsp;</td></tr>";
+        $html .= "<tr><td>&nbsp;</td><td>a. </td><td>Keterampilan Kerja</td><td>:</td><td>" . $html_syarat_jabatan_keterampilan_kerja . "</td></tr>";
+        $html .= "<tr><td>&nbsp;</td><td style='vertical-align: top;'>b. </td><td style='vertical-align: top;'>Bakat Kerja</td><td style='vertical-align: top;'>:</td><td style='vertical-align: top;'>" . $html_syarat_jabatan_bakat_kerja . "</td></tr>";
+        $html .= "<tr><td>&nbsp;</td><td style='vertical-align: top;'>c. </td><td style='vertical-align: top;'>Temperamen Kerja</td><td style='vertical-align: top;'>:</td><td>" . $html_syarat_jabatan_temperamen_kerja . "</td></tr>";
+        $html .= "<tr><td>&nbsp;</td><td>d. </td><td>Minat Kerja</td><td>:</td><td>" . $html_syarat_jabatan_minat_kerja . "</td></tr>";
+        $html .= "<tr><td>&nbsp;</td><td>e. </td><td>Upaya Fisik</td><td>:</td><td>" . $html_syarat_jabatan_upaya_fisik . "</td></tr>";
+        $html .= "<tr><td>&nbsp;</td><td>f. </td><td>Kondisi Fisik</td><td>:</td><td>&nbsp;</td></tr>";
         $html .= "<tr>";
-        $html .= "<td colspan='2'>&nbsp;</td>";
-        $html .= "<td colspan='3'>";
+        $html .= "<td colspan='4'>&nbsp;</td>";
+        $html .= "<td>";
         $html .= $html_syarat_jabatan_kondisi_fisik;
         $html .= "</td>";
         $html .= "</tr>";
-        $html .= "<tr><td>&nbsp;</td><td>g. </td><td>Fungsi Pekerjaan</td><td colspan='2'>&nbsp;</td></tr>";
-        $html .= "<tr>";
-        $html .= "<td colspan='2'>&nbsp;</td>";
-        $html .= "<td colspan='3'>";
-        $html .= $html_syarat_jabatan_fungsi_pekerjaan;
-        $html .= "</td>";
-        $html .= "</tr>";
+        $html .= "<tr><td>&nbsp;</td><td>g. </td><td>Fungsi Pekerjaan</td><td>:</td><td>" . $html_syarat_jabatan_fungsi_pekerjaan . "</td></tr>";
         $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
-        $html .= "<tr><td>16.</td><td colspan='4'>PRESTASI KERJA YANG DIHARAPKAN</td></tr>";
-        $html .= $html_prestasi_kerja_yang_diharapkan;
+       $html .= "</table>";
+        $html .= "<table style='width:100%;table-layout: fixed;'>";
+        $html .= "<tr><td style='width:6%;'>16.</td><td style='width:35%;'>PRESTASI KERJA YANG DIHARAPKAN</td><td style='width:3%;'>:</td><td style='width:68%;'>" . $html_prestasi_kerja_yang_diharapkan . "</td></tr>";
+        $html .= "</table>";
+        $html .= "<table style='width:100%;table-layout: fixed;'>";
+        $html .= "<tr><td style='width:6%;'>17.</td><td style='width:23%;'>KELAS JABATAN</td><td style='width:3%;'>:</td><td style='width:68%;'>" . $kelas_jabatan . "</td></tr>";
         $html .= "</table>";
         $html .= "</body>";
         $html .= "</html>";
@@ -594,19 +624,19 @@ class Anjab extends CI_Controller {
 
             }else{
                 $html_tugas_pokok_dan_beban_kerja .= "<table style='border-collapse: collapse;width:100%;border-bottom: 1px solid black;'>";
-                $html_tugas_pokok_dan_beban_kerja .= "<tr>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>No</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td colspan='2' style='vertical-align: middle;text-align: center;border: 1px solid black;'>Uraian Tugas</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Hasil Kerja</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Jml Hasil</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Waktu Penyelesaian (JAM)</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Waktu Efektif</td>";
-                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;'>Keb. Pegawai</td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<tr style='background-color:#92d050'>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>NO</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td colspan='2' style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>URAIAN TUGAS</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>HASIL KERJA</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>JUMLAH HASIL</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>WAKTU PENYELESAIAN (JAM)</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>WAKTU EFEKTIF</b></td>";
+                $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: middle;text-align: center;border: 1px solid black;padding:5px;font-size:12px;'><b>KEBUTUHAN PEGAWAI</b></td>";
                 $html_tugas_pokok_dan_beban_kerja .= "</tr>";
-                $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='text-align: center;border: 1px solid black;'>1</td><td colspan='2' style='text-align: center;border: 1px solid black;'>2</td><td style='text-align: center;border: 1px solid black;'>3</td><td style='text-align: center;border: 1px solid black;'>4</td><td style='text-align: center;border: 1px solid black;'>5</td><td style='text-align: center;border: 1px solid black;'>6</td><td style='text-align: center;border: 1px solid black;'>7</td></tr>";
 
                 $total_jml_hasil = 0;
                 $total_keb_pegawai = 0;
+                $total_waktu_penyelesaian = 0;
 
                 $no = 0;
                 $last_id = "";
@@ -615,13 +645,13 @@ class Anjab extends CI_Controller {
                         $no++;
                         $last_id = $item['id'];
                         $anjab_tugas_pokok_id_parent = $item['id'];
-                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='vertical-align: middle;text-align: center;border-left: 1px solid black;'>" . $no . "</td><td colspan='2' style='border-left: 1px solid black;text-align: justify;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
+                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='vertical-align: top;text-align: center;border-left: 1px solid black;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='border-left: 1px solid black;padding-left:5px;padding-right:5px;vertical-align:top;font-size:16px;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
                         foreach($json_abk['data'] as $k2=>$item2){
                             if($anjab_tugas_pokok_id_parent == $item2['anjab_tugas_pokok_id']){
                                 $html_tugas_pokok_dan_beban_kerja .= "<tr>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;'>&nbsp;</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: top;border-left: 1px solid black;text-align: center;width:2%;'>-</td>";
-                                $html_tugas_pokok_dan_beban_kerja .= "<td style='text-align: justify;width:33%;'>" . $item2['uraian_sub'] . "</td>";
+                                $html_tugas_pokok_dan_beban_kerja .= "<td style='width:33%;font-size:16px;'>" . $item2['uraian_sub'] . "</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;vertical-align: top;text-align: center;'>" . $item2['hasil_kerja'] . "</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;vertical-align: top;text-align: center;'>" . $this->PublicFunction->FormatAngka($item2['jumlah_hasil'],false) . "</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;vertical-align: top;text-align: center;'>" . $this->PublicFunction->FormatAngka($item2['waktu_penyelesaian'],false) . "</td>";
@@ -631,13 +661,14 @@ class Anjab extends CI_Controller {
 
                                 $total_jml_hasil = $total_jml_hasil + $item2['jumlah_hasil'];
                                 $total_keb_pegawai = $total_keb_pegawai + $item2['kebutuhan_pegawai'];
+                                $total_waktu_penyelesaian = $total_waktu_penyelesaian + $item2['waktu_penyelesaian'];
                             }
                         }
                     }
                 }
-                $html_tugas_pokok_dan_beban_kerja .= "<tr><td colspan='4' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $this->PublicFunction->FormatAngka($total_jml_hasil,false) . "</td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $this->PublicFunction->ToFixed($total_keb_pegawai,4,false) . "</td></tr>";
+                $html_tugas_pokok_dan_beban_kerja .= "<tr><td colspan='5' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>" . $this->PublicFunction->FormatAngka($total_waktu_penyelesaian,false) . "</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $this->PublicFunction->ToFixed($total_keb_pegawai,4,false) . "</td></tr>";
                 $total_keb_pegawai_rounded = round($total_keb_pegawai);
-                $html_tugas_pokok_dan_beban_kerja .= "<tr><td colspan='5' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH PEGAWAI</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $total_keb_pegawai_rounded . "</td></tr>";
+                $html_tugas_pokok_dan_beban_kerja .= "<tr><td colspan='6' style='border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;text-align: center;'><b>JUMLAH PEGAWAI</b></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'></td><td style='border-top: 1px solid black;border-right: 1px solid black;text-align: center;'>" . $total_keb_pegawai_rounded . "</td></tr>";
                 $html_tugas_pokok_dan_beban_kerja .= "</table>";
             }
         }
@@ -647,8 +678,8 @@ class Anjab extends CI_Controller {
         $html .= "<head>";
         $html .= "<title>Dokumen Anjab</title>";
         $html .= "<style type='text/css'>";
-        $html .= "@page { margin: 40px 20px 40px 20px; }";
-        $html .= "body { margin: 0px;font-size:14px;line-height: normal;}";
+        $html .= "@page { margin: 40px 40px 40px 40px; }";
+        $html .= "body { margin: 0px;font-size:14px;line-height: normal;page-break-inside: avoid;}td{padding-bottom:5px;vertical-align:top;}";
         $html .= "</style>";
         $html .= "</head>";
         $html .= "<body>";
