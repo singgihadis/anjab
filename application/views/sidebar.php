@@ -1,5 +1,5 @@
 <div class="bg-white border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading mb-2"><a href="/"><img src="/assets/img/logo.png" class="logo" /></a></div>
+    <div class="sidebar-heading mb-2"><a href="/"><img src="/assets/img/logo.png?t=<?php echo time(); ?>" class="logo" /></a></div>
     <ul class="list-group list-group-flush">
     <?php
     $Permission = $this->PublicFunction->Get_Permission();
@@ -132,7 +132,7 @@
                             <span class="fa fa-circle-o"></span> Jenis Jabatan
                         </a>
                     </li>
-                    <li class="list-group-item list-group-item-action bg-white">
+                    <li class="list-group-item list-group-item-action bg-white" style="display: none;">
                         <a href="/faktor_evjab" class="<?php echo ($menu == "4" && $sub_menu == "2"?"active":""); ?>">
                             <span class="fa fa-circle-o"></span> Faktor EvJab
                         </a>
@@ -144,7 +144,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="list-group-item list-group-item-action bg-white" class="<?php echo ($menu == "5"?"active":""); ?>">
+            <li class="list-group-item list-group-item-action bg-white" class="<?php echo ($menu == "5"?"active":""); ?>" style="display: none;">
                 <a href="#menu5" data-toggle="collapse">
                     <span class="fa fa-clone mr-2"></span> Data SKJ <span class="fa fa-angle-right float-right mt-1"></span>
                 </a>
@@ -184,17 +184,17 @@
                 </li>
                 <li class="list-group-item list-group-item-action bg-white">
                     <a href="/anjab" class="<?php echo ($menu == "6" && $sub_menu == "2"?"active":""); ?>">
-                        <span class="fa fa-circle-o"></span> Analisa Jabatan dan Beban Kerja
+                        <span class="fa fa-circle-o"></span> Analisis Jabatan dan Beban Kerja
                     </a>
                 </li>
-                <li class="list-group-item list-group-item-action bg-white">
+                <li class="list-group-item list-group-item-action bg-white" style="display: none;">
                     <a href="/evjab" class="<?php echo ($menu == "6" && $sub_menu == "3"?"active":""); ?>">
                         <span class="fa fa-circle-o"></span> Evaluasi Jabatan
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="list-group-item list-group-item-action bg-white">
+        <li class="list-group-item list-group-item-action bg-white" style="display: none;">
             <a href="/skj" class="<?php echo ($menu == "7"?"active":""); ?>">
                 <span class="fa fa-suitcase mr-2"></span> SKJ
             </a>

@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="custom-breadcrumb mb-4">
                 <ul>
-                    <li>Analisa Jabatan Dan Beban Kerja</li>
+                    <li>Analisis Jabatan Dan Beban Kerja</li>
                 </ul>
             </div>
             <div class="card">

@@ -6,10 +6,10 @@
         if($title != ""){
             echo $title;
         }else{
-            echo "Anjab";
+            echo "SIJABER";
         }
-        ?> | Analisa Jabatan, Analisa Beban Kerja dan Evaluasi Jabatan</title>
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+        ?> | Aplikasi Analisis Jabatan dan Analisis Beban Kerja (Informasi Jabatan)</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png?t=<?php echo time(); ?>" />
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/assets/css/bootstrap.css" rel="stylesheet" />
     <link href="/assets/css/toastr.css" rel="stylesheet" />

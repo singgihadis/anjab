@@ -18,6 +18,9 @@ $(document).ready(function(){
             window.open("/rekapitulasi/printdata_lampiran" + jenis_laporan + "/" + tahun + "/" + opd,"_blank");
         }
     });
+    $("#jenis_laporan").change(function(){
+        dropdown_opd();
+    });
 });
 function dropdown_opd(){
     $("#opd").html("<option value=''>Memuat Data ...</option>");
@@ -35,6 +38,9 @@ function dropdown_opd(){
                 }
             }else{
                 var html = "";
+                if($("#level").val() == "1" && $("#jenis_laporan").val() == "1"){
+                    html += "<option value='semua'>Semua OPD</option>";
+                }
                 $.each(res.data,function(k,v){
                     html += "<option value='"  + v['id'] + "'>" + v['nama'] + "</option>";
                 });

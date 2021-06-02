@@ -23,6 +23,7 @@ class Opd extends CI_Controller {
         $token = $this->session->userdata("token");
         $nama = $this->input->post("nama");
         $page = $this->input->post("page");
+        $is_tambah = $this->input->post("is_tambah");
         $param = array("token"=>$token,"nama"=>$nama,"page"=>$page);
         $data = $this->Api->Call("opd",$param);
 
@@ -35,7 +36,7 @@ class Opd extends CI_Controller {
             $json_data_new_data = array();
             if($json_data['is_error'] == false){
                 foreach($json_data['data'] as $item){
-                    if($master_opd_id == $item['id']){
+                    if($master_opd_id == $item['id'] || $item['is_opd_utama'] == "1" && $is_tambah == "1"){
                         array_push($json_data_new_data,$item);
                     }
                 }
@@ -54,7 +55,10 @@ class Opd extends CI_Controller {
     {
         $token = $this->session->userdata("token");
         $nama = $this->input->post("nama");
-        $param = array("token"=>$token,"nama"=>$nama);
+        $is_opd_utama = $this->input->post("is_opd_utama");
+        $jenis_jabatan = $this->input->post("jenis_jabatan");
+        $nama_jabatan = $this->input->post("nama_jabatan");
+        $param = array("token"=>$token,"nama"=>$nama,"is_opd_utama"=>$is_opd_utama,"jenis_jabatan"=>$jenis_jabatan,"nama_jabatan"=>$nama_jabatan);
         $data = $this->Api->Call("opd/tambah",$param);
         echo $data;
     }
@@ -63,7 +67,10 @@ class Opd extends CI_Controller {
         $token = $this->session->userdata("token");
         $id = $this->input->post("id");
         $nama = $this->input->post("nama");
-        $param = array("id"=>$id,"token"=>$token,"nama"=>$nama);
+        $is_opd_utama = $this->input->post("is_opd_utama");
+        $jenis_jabatan = $this->input->post("jenis_jabatan");
+        $nama_jabatan = $this->input->post("nama_jabatan");
+        $param = array("id"=>$id,"token"=>$token,"nama"=>$nama,"is_opd_utama"=>$is_opd_utama,"jenis_jabatan"=>$jenis_jabatan,"nama_jabatan"=>$nama_jabatan);
         $data = $this->Api->Call("opd/edit",$param);
         echo $data;
     }

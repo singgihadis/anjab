@@ -64,11 +64,18 @@ function abk(){
                                 html += "<select class='form-control form-control-sm satuan_waktu'>";
                                 html += "<option value='0' data-jml='0'>Pilih</option>";
                                 $.each(data_keterangan_waktu,function(k3,v3){
-                                    if(v2['master_keterangan_waktu_id'] == v3['id']){
-                                        html += "<option value='" + v3['id'] + "' data-jml='" + v3['jml'] + "' selected>" + v3['nama'] + "</option>";
-                                    }else{
-                                        html += "<option value='" + v3['id'] + "' data-jml='" + v3['jml'] + "'>" + v3['nama'] + "</option>";
+                                    if(v3['id'] == 1){
+                                        if(v2['master_keterangan_waktu_id'] == v3['id']){
+                                            html += "<option value='" + v3['id'] + "' data-jml='" + v3['jml'] + "' selected>" + v3['nama'] + "</option>";
+                                        }else{
+                                            html += "<option value='" + v3['id'] + "' data-jml='" + v3['jml'] + "'>" + v3['nama'] + "</option>";
+                                        }
                                     }
+                                    //if(v2['master_keterangan_waktu_id'] == v3['id']){
+                                    //    html += "<option value='" + v3['id'] + "' data-jml='" + v3['jml'] + "' selected>" + v3['nama'] + "</option>";
+                                    //}else{
+                                    //    html += "<option value='" + v3['id'] + "' data-jml='" + v3['jml'] + "'>" + v3['nama'] + "</option>";
+                                    //}
                                 });
                                 html += "</select>";
                                 html += "</td>";

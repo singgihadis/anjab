@@ -38,6 +38,21 @@
                             <label>Nama OPD</label>
                             <input id="nama" name="nama" type="text" class="form-control" placeholder="Input nama opd" required="">
                         </div>
+                        <div class="form-group">
+                            <label>Apakah OPD Utama</label>
+                            <select id="is_opd_utama" name="is_opd_utama" class="form-control" required="">
+                                <option value="0">Tidak</option>
+                                <option value="1">Ya</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="fg_jenis_jabatan" style="display:none;">
+                            <label>Jenis Jabatan (Untuk Informasi Pada Dokumen Anjab)</label>
+                            <input type="text" id="jenis_jabatan" name="jenis_jabatan" class="form-control">
+                        </div>
+                        <div class="form-group" id="fg_nama_jabatan" style="display:none;">
+                            <label>Nama Jabatan (Untuk Informasi Pada Dokumen Anjab)</label>
+                            <input type="text" id="nama_jabatan" name="nama_jabatan" class="form-control">
+                        </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Simpan</button>
                         </div>
@@ -51,6 +66,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/opd_tambah.js"></script>
+<script type="text/javascript" src="/assets/js/page/opd_tambah.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

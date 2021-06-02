@@ -6,6 +6,8 @@
     $menu = "6";
     $sub_menu = "1";
     include("sidebar.php");
+    $Permission = $this->PublicFunction->Get_Permission();
+    $level = $Permission[0];
     ?>
     <!-- Sidebar -->
 
@@ -21,6 +23,7 @@
                     <li>Tambah Jabatan</li>
                 </ul>
             </div>
+            <input type="hidden" id="level" name="level" value="<?php echo $level; ?>">
             <div class="card">
                 <div class="card-header bg-white">
                     <div class="row">

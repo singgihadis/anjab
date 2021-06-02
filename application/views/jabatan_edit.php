@@ -21,6 +21,7 @@
                     <li>Edit Jabatan</li>
                 </ul>
             </div>
+            <input type="hidden" id="level" name="level" value="<?php echo $level; ?>">
             <div class="card">
                 <div class="card-header bg-white">
                     <div class="row">
@@ -46,10 +47,16 @@
                                     <input id="opd_nama" name="opd_nama" type="text" class="form-control" value="" readonly>
                                     <input id="opd" name="opd" type="hidden" class="form-control">
                                 </div>
+<!--                                <div class="form-group">-->
+<!--                                    <label>Jabatan Atasan</label><br>-->
+<!--                                    <input id="jabatan_nama" name="jabatan_nama" type="text" class="form-control" value="" readonly>-->
+<!--                                    <input id="jabatan_id" name="jabatan_id" type="hidden" class="form-control" value="">-->
+<!--                                </div>-->
                                 <div class="form-group">
                                     <label>Jabatan Atasan</label><br>
-                                    <input id="jabatan_nama" name="jabatan_nama" type="text" class="form-control" value="" readonly>
-                                    <input id="jabatan_id" name="jabatan_id" type="hidden" class="form-control" value="">
+                                    <select id="jabatan_id" name="jabatan_id" class="form-control">
+                                        <option value="">Pilih Tahun dan OPD terlebih dahulu</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Kode Jabatan</label>

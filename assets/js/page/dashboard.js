@@ -12,6 +12,7 @@ $(document).ready(function(){
     $("#filter_tahun").html(html_tahun);
     $(".tahun").html(cur_year);
     $("#filter_tahun").change(function(){
+        $(".tahun").html($(this).val());
         total_jabatan();
     });
     $("#filter_opd").change(function(){

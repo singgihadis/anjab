@@ -70,9 +70,9 @@
                                 <th>Jenis Jabatan</th>
                                 <th>Anjab</th>
                                 <th>ABK</th>
-                                <th>EvJab</th>
-                                <th>Form EvJab</th>
-                                <th>SKJ</th>
+<!--                                <th>EvJab</th>-->
+<!--                                <th>Form EvJab</th>-->
+<!--                                <th>SKJ</th>-->
                             </tr>
                             </thead>
                             <tbody id="listdata">
@@ -102,6 +102,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/print_dokumen.js"></script>
+<script type="text/javascript" src="/assets/js/page/print_dokumen.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

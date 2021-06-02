@@ -115,6 +115,8 @@ function dropdown_jabatan(){
     var tahun = $("#tahun").val();
     var opd = $("#opd").val();
     if(tahun != "" && opd != ""){
+        var nama_jabatan_atas = $("#opd option[data-is-opd-utama='1']").attr("data-nama-jabatan");
+        var is_opd_utama = $("#opd option:selected").attr("data-is-opd-utama");
         $("#jabatan_id").html("<option value=''>Memuat Data ...</option>");
         $.ajax({
             type:'post',
@@ -127,64 +129,73 @@ function dropdown_jabatan(){
                     if(res.must_login){
                         window.location = "/logout";;
                     }else{
-                        $("#jabatan_id").html("<option value=''></option>");
+                        if(is_opd_utama != "1"){
+                            $("#jabatan_id").html("<option value=''>" + nama_jabatan_atas + "</option>");
+                        }else{
+                            $("#jabatan_id").html("<option value=''></option>");
+                        }
                     }
                 }else{
-                    var html = "<option value=''>&nbsp;</option>";
+                    var html = "";
+                    if(is_opd_utama != "1"){
+                        html = "<option value=''>" + nama_jabatan_atas + "</option>";
+                    }else{
+                        html = "<option value=''>&nbsp;</option>";
+                    }
                     $.each(res.data,function(k,v){
                         if(v['tingkat'] == 0){
                             if(jabatan_id == v['id']){
-                                html += "<option value='" + v['id'] + "' selected='selected'>" + v['nama'] + "</option>";
+                                html += "<option value='" + v['id'] + "' selected='selected'>-" + v['nama'] + "</option>";
                             }else{
-                                html += "<option value='" + v['id'] + "'>" + v['nama'] + "</option>";
+                                html += "<option value='" + v['id'] + "'>-" + v['nama'] + "</option>";
                             }
                             var jabatan_id_0 = v['id'];
                             $.each(res.data,function(k,v){
                                 if(v['tingkat'] == 1 && jabatan_id_0 == v['jabatan_id']){
                                     if(jabatan_id == v['id']){
-                                        html += "<option value='" + v['id'] + "' selected='selected'>-" + v['nama'] + "</option>";
+                                        html += "<option value='" + v['id'] + "' selected='selected'>--" + v['nama'] + "</option>";
                                     }else{
-                                        html += "<option value='" + v['id'] + "'>-" + v['nama'] + "</option>";
+                                        html += "<option value='" + v['id'] + "'>--" + v['nama'] + "</option>";
                                     }
                                     var jabatan_id_1 = v['id'];
                                     $.each(res.data,function(k,v){
                                         if(v['tingkat'] == 2 && jabatan_id_1 == v['jabatan_id']){
                                             if(jabatan_id == v['id']){
-                                                html += "<option value='" + v['id'] + "' selected='selected'>--" + v['nama'] + "</option>";
+                                                html += "<option value='" + v['id'] + "' selected='selected'>---" + v['nama'] + "</option>";
                                             }else{
-                                                html += "<option value='" + v['id'] + "'>--" + v['nama'] + "</option>";
+                                                html += "<option value='" + v['id'] + "'>---" + v['nama'] + "</option>";
                                             }
                                             var jabatan_id_2 = v['id'];
                                             $.each(res.data,function(k,v){
                                                 if(v['tingkat'] == 3 && jabatan_id_2 == v['jabatan_id']){
                                                     if(jabatan_id == v['id']){
-                                                        html += "<option value='" + v['id'] + "' selected='selected'>---" + v['nama'] + "</option>";
+                                                        html += "<option value='" + v['id'] + "' selected='selected'>----" + v['nama'] + "</option>";
                                                     }else{
-                                                        html += "<option value='" + v['id'] + "'>---" + v['nama'] + "</option>";
+                                                        html += "<option value='" + v['id'] + "'>----" + v['nama'] + "</option>";
                                                     }
                                                     var jabatan_id_3 = v['id'];
                                                     $.each(res.data,function(k,v){
                                                         if(v['tingkat'] == 4 && jabatan_id_3 == v['jabatan_id']){
                                                             if(jabatan_id == v['id']){
-                                                                html += "<option value='" + v['id'] + "' selected='selected'>----" + v['nama'] + "</option>";
+                                                                html += "<option value='" + v['id'] + "' selected='selected'>-----" + v['nama'] + "</option>";
                                                             }else{
-                                                                html += "<option value='" + v['id'] + "'>----" + v['nama'] + "</option>";
+                                                                html += "<option value='" + v['id'] + "'>-----" + v['nama'] + "</option>";
                                                             }
                                                             var jabatan_id_4 = v['id'];
                                                             $.each(res.data,function(k,v){
                                                                 if(v['tingkat'] == 5 && jabatan_id_4 == v['jabatan_id']){
                                                                     if(jabatan_id == v['id']){
-                                                                        html += "<option value='" + v['id'] + "' selected='selected'>-----" + v['nama'] + "</option>";
+                                                                        html += "<option value='" + v['id'] + "' selected='selected'>------" + v['nama'] + "</option>";
                                                                     }else{
-                                                                        html += "<option value='" + v['id'] + "'>-----" + v['nama'] + "</option>";
+                                                                        html += "<option value='" + v['id'] + "'>------" + v['nama'] + "</option>";
                                                                     }
                                                                     var jabatan_id_5 = v['id'];
                                                                     $.each(res.data,function(k,v){
                                                                         if(v['tingkat'] == 6 && jabatan_id_5 == v['jabatan_id']){
                                                                             if(jabatan_id == v['id']){
-                                                                                html += "<option value='" + v['id'] + "' selected='selected'>------" + v['nama'] + "</option>";
+                                                                                html += "<option value='" + v['id'] + "' selected='selected'>-------" + v['nama'] + "</option>";
                                                                             }else{
-                                                                                html += "<option value='" + v['id'] + "'>------" + v['nama'] + "</option>";
+                                                                                html += "<option value='" + v['id'] + "'>-------" + v['nama'] + "</option>";
                                                                             }
                                                                         }
                                                                     });
@@ -332,11 +343,12 @@ function dropdown_jenis_jabatan(){
     });
 }
 function dropdown_opd(){
+    var level = $("#level").val();
     $("#filter_opd").html("<option value=''>Memuat Data ...</option>");
     $.ajax({
         type:'post',
         url:'/ajax/opd',
-        data:{page:"x",nama:""},
+        data:{page:"x",nama:"",is_tambah:"1"},
         success:function(resp){
             $("#listdata").loading("stop");
             var res = JSON.parse(resp);
@@ -349,11 +361,21 @@ function dropdown_opd(){
             }else{
                 var html = "<option value=''>Pilih OPD</option>";
                 $.each(res.data,function(k,v){
-                    html += "<option value='"  + v['id'] + "'>" + v['nama'] + "</option>";
+                    if(level == "2" && v['is_opd_utama'] == "1"){
+                        html += "<option hidden data-is-opd-utama='" + v['is_opd_utama'] + "' data-nama-jabatan='" + v['nama'] + "' data-jenis-jabatan='" + v['jenis_jabatan'] + "' value='"  + v['id'] + "'>" + v['nama'] + "</option>";
+                    }else{
+                        html += "<option data-is-opd-utama='" + v['is_opd_utama'] + "' data-nama-jabatan='" + v['nama'] + "' data-jenis-jabatan='" + v['jenis_jabatan'] + "' value='"  + v['id'] + "'>" + v['nama'] + "</option>";
+                    }
                 });
                 $("#opd").html(html);
                 $("#opd").select2({
-                    theme: "bootstrap"
+                    theme: "bootstrap",
+                    templateResult: function(option) {
+                        if(option.element && (option.element).hasAttribute('hidden')){
+                            return null;
+                        }
+                        return option.text;
+                    }
                 });
             }
         },error:function(){

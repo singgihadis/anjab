@@ -19,7 +19,7 @@
                 <div class="col-md-8">
                     <div class="custom-breadcrumb mb-4">
                         <ul>
-                            <li><a href="/anjab">Analisa Jabatan Dan Beban kerja</a></li>
+                            <li><a href="/anjab">Analisis Jabatan Dan Beban kerja</a></li>
                             <li><a href="/anjab/edit/<?php echo $id; ?>">Input Analisis Jabatan</a></li>
                             <li><a href="/anjab/edit/<?php echo $id; ?>/kualifikasi">Kualifikasi Jabatan</a></li>
                             <li>Pendidikan Formal</li>

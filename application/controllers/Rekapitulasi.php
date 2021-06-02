@@ -34,6 +34,10 @@ class Rekapitulasi extends CI_Controller {
         $dompdf = new Dompdf($options);
         $token = $this->session->userdata("token");
         session_write_close();
+        $id_backup = $id;
+        if($id == "semua"){
+            $id = "";
+        }
         $param = array("id"=>$id,"token"=>$token);
 
         $nama_opd = "";
@@ -41,21 +45,37 @@ class Rekapitulasi extends CI_Controller {
 
         $get_opd = $this->Api->Call("opd/detail",$param);
         $json_opd = json_decode($get_opd,true);
-        if($json_opd['is_error']){
+        if($json_opd['is_error'] && $id_backup != "semua"){
 
         }else{
-            $nama_opd = $json_opd['data'][0]['nama'];
+            if(!$json_opd['is_error']){
+                $nama_opd = $json_opd['data'][0]['nama'];
+            }
 
-            $param_kelas_jabatan = array(
-                "token"=>$token,
-                "nama"=>"",
-                "tahun"=>$tahun,
-                "page"=>"x"
-            );
+
+//            $param_kelas_jabatan = array(
+//                "token"=>$token,
+//                "nama"=>"",
+//                "tahun"=>$tahun,
+//                "page"=>"x"
+//            );
+
+//            $arr_kelas_jabatan = [];
+//
+//            $get_kelas_jabatan = $this->Api->Call("kelas_jabatan",$param_kelas_jabatan);
+//            $json_kelas_jabatan = json_decode($get_kelas_jabatan,true);
+//            if($json_kelas_jabatan['is_error']){
+//
+//            }else{
+//                foreach($json_kelas_jabatan['data'] as $item){
+//                    array_push($arr_kelas_jabatan,"0");
+//                }
+//            }
 
             $arr_kelas_jabatan = [];
 
-            $get_kelas_jabatan = $this->Api->Call("kelas_jabatan",$param_kelas_jabatan);
+            $get_kelas_jabatan = $this->Api->Call("anjab/kelas_jabatan_by_opd",array("token"=>$token,"master_opd_id"=>$id,"tahun"=>$tahun));
+
             $json_kelas_jabatan = json_decode($get_kelas_jabatan,true);
             if($json_kelas_jabatan['is_error']){
 
@@ -75,55 +95,91 @@ class Rekapitulasi extends CI_Controller {
 
             }else{
 
-                foreach($json_jabatan['data'] as $item){
-                    $param_jabatan_jml_pegawai = array("token"=>$token,"jabatan_id"=>$item['id']);
-                    $get_jabatan_jml_pegawai = $this->Api->Call("jabatan/jml_pegawai",$param_jabatan_jml_pegawai);
-                    $json_jabatan_jml_pegawai = json_decode($get_jabatan_jml_pegawai,true);
-                    if($json_jabatan_jml_pegawai['is_error']){
+//                foreach($json_jabatan['data'] as $item){
+//                    $param_jabatan_jml_pegawai = array("token"=>$token,"jabatan_id"=>$item['id']);
+//                    $get_jabatan_jml_pegawai = $this->Api->Call("jabatan/jml_pegawai",$param_jabatan_jml_pegawai);
+//                    $json_jabatan_jml_pegawai = json_decode($get_jabatan_jml_pegawai,true);
+//                    if($json_jabatan_jml_pegawai['is_error']){
+//
+//                    }else{
+//                        foreach($json_jabatan_jml_pegawai['data'] as $item_jabatan_jml_pegawai){
+//                            $tanpa_kelas = $tanpa_kelas + intval($item_jabatan_jml_pegawai['jml']);
+//                        }
+//                    }
+//
+//                    $param_jenis_jabatan = array("token"=>$token,"id"=>$item['master_jenis_jabatan_id']);
+//                    $get_jenis_jabatan = $this->Api->Call("jenis_jabatan/detail",$param_jenis_jabatan);
+//                    $json_jenis_jabatan = json_decode($get_jenis_jabatan,true);
+//                    if($json_jenis_jabatan['is_error']){
+//
+//                    }else{
+//                        $tipe_jenis_jabatan = $json_jenis_jabatan['data'][0]['tipe'];
+//                        $param_evjab = array("jabatan_id"=>$item['id'],"token"=>$token,"tahun"=>$tahun,"tipe"=>$tipe_jenis_jabatan);
+//                        $get_evjab = $this->Api->Call("evjab/data",$param_evjab);
+//                        $json_evjab = json_decode($get_evjab,true);
+//                        if($json_evjab['is_error']){
+//
+//                        }else{
+//                            $total = 0;
+//                            foreach($json_evjab['data'] as $item_evjab){
+//                                $total = $total + intval($item_evjab['nilai']);
+//                            }
+//                            foreach($json_kelas_jabatan['data'] as $k=>$item_kelas_jabatan){
+//                                if(intval($item_kelas_jabatan['batas_awal']) <= $total && intval($item_kelas_jabatan['batas_akhir']) >= $total){
+//                                    $n_kelas_jabatan = intval($arr_kelas_jabatan[$k]);
+//                                    $arr_kelas_jabatan[$k] = $n_kelas_jabatan + 1;
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//
+//                }
 
-                    }else{
-                        foreach($json_jabatan_jml_pegawai['data'] as $item_jabatan_jml_pegawai){
-                            $tanpa_kelas = $tanpa_kelas + intval($item_jabatan_jml_pegawai['jml']);
-                        }
-                    }
+                if($json_kelas_jabatan['is_error']){
 
-                    $param_jenis_jabatan = array("token"=>$token,"id"=>$item['master_jenis_jabatan_id']);
-                    $get_jenis_jabatan = $this->Api->Call("jenis_jabatan/detail",$param_jenis_jabatan);
-                    $json_jenis_jabatan = json_decode($get_jenis_jabatan,true);
-                    if($json_jenis_jabatan['is_error']){
-
-                    }else{
-                        $tipe_jenis_jabatan = $json_jenis_jabatan['data'][0]['tipe'];
-                        $param_evjab = array("jabatan_id"=>$item['id'],"token"=>$token,"tahun"=>$tahun,"tipe"=>$tipe_jenis_jabatan);
-                        $get_evjab = $this->Api->Call("evjab/data",$param_evjab);
-                        $json_evjab = json_decode($get_evjab,true);
-                        if($json_evjab['is_error']){
-
-                        }else{
-                            $total = 0;
-                            foreach($json_evjab['data'] as $item_evjab){
-                                $total = $total + intval($item_evjab['nilai']);
+                }else{
+                    $dengan_kelas = 0;
+                    $k = 0;
+                    foreach($json_kelas_jabatan['data'] as $item){
+                        foreach($json_jabatan['data'] as $item2){
+                            if($item['jabatan_id'] == $item2['id']){
+                                $arr_kelas_jabatan[$k] = intval($arr_kelas_jabatan[$k]) + $item2['jml_pegawai'];
+                                $dengan_kelas = $dengan_kelas + $item2['jml_pegawai'];
                             }
-                            foreach($json_kelas_jabatan['data'] as $k=>$item_kelas_jabatan){
-                                if(intval($item_kelas_jabatan['batas_awal']) <= $total && intval($item_kelas_jabatan['batas_akhir']) >= $total){
-                                    $n_kelas_jabatan = intval($arr_kelas_jabatan[$k]);
-                                    $arr_kelas_jabatan[$k] = $n_kelas_jabatan + 1;
-                                }
-                            }
                         }
+                        $k++;
                     }
-
-
+                    $total_pegawai = 0;
+                    foreach($json_jabatan['data'] as $item){
+                        $total_pegawai = $total_pegawai + $item['jml_pegawai'];
+                    }
+                    $tanpa_kelas = $total_pegawai - $dengan_kelas;
                 }
             }
-            if($json_kelas_jabatan['is_error']){
 
+//            if($json_kelas_jabatan['is_error']){
+//
+//            }else{
+//                $jml_jabatan = 0;
+//                $no =0;
+//                foreach($json_kelas_jabatan['data'] as $k=>$item){
+//                    $no++;
+//                    $html_kelas_jabatan .= "<tr><td style='text-align: center;'>" . $no . "</td><td style='text-align: center;'>" . $item['kelas'] . "</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($arr_kelas_jabatan[$k],true) . "</td></tr>";
+//                    $jml_jabatan = $jml_jabatan + intval($arr_kelas_jabatan[$k]);
+//                }
+//                $no++;
+//                $jml_jabatan = $jml_jabatan + $tanpa_kelas;
+//                $html_kelas_jabatan .= "<tr><td style='text-align: center;'>" . $no . "</td><td style='text-align: center;'>Tanpa Kelas</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($tanpa_kelas,true) . "</td></tr>";
+//                $html_kelas_jabatan .= "<tr><td colspan='2' style='text-align: center;'>Total</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($jml_jabatan) . "</td></tr>";
+//            }
+            if($json_kelas_jabatan['is_error']){
             }else{
                 $jml_jabatan = 0;
                 $no =0;
                 foreach($json_kelas_jabatan['data'] as $k=>$item){
                     $no++;
-                    $html_kelas_jabatan .= "<tr><td style='text-align: center;'>" . $no . "</td><td style='text-align: center;'>" . $item['kelas'] . "</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($arr_kelas_jabatan[$k],true) . "</td></tr>";
+                    $html_kelas_jabatan .= "<tr><td style='text-align: center;'>" . $no . "</td><td style='text-align: center;'>" . $item['kelas_jabatan'] . "</td><td style='text-align: center;'>" . $this->PublicFunction->FormatAngka($arr_kelas_jabatan[$k],true) . "</td></tr>";
                     $jml_jabatan = $jml_jabatan + intval($arr_kelas_jabatan[$k]);
                 }
                 $no++;
@@ -249,6 +305,19 @@ class Rekapitulasi extends CI_Controller {
                                 }
                             }
                             $total_pegawai = $total_pegawai + $jml_pegawai;
+
+                            $kelas_jabatan = "";
+                            $param_jabatan_kelas_jabatan = array("token"=>$token,"jabatan_id"=>$item['id']);
+                            $get_jabatan_kelas_jabatan = $this->Api->Call("anjab/kelas_jabatan",$param_jabatan_kelas_jabatan);
+                            $json_jabatan_kelas_jabatan = json_decode($get_jabatan_kelas_jabatan,true);
+                            if($json_jabatan_kelas_jabatan['is_error']){
+
+                            }else{
+                                foreach($json_jabatan_kelas_jabatan['data'] as $item_jabatan_kelas_jabatan){
+                                    $kelas_jabatan = $item_jabatan_kelas_jabatan['kelas_jabatan'];
+                                }
+                            }
+
                             $html_data .= "<tr><td style='text-align: center;'>" . $no . "</td><td>" . $item['nama'] . "</td><td style='text-align:center;'>" . $kelas_jabatan . "</td><td style='text-align:center;'>" . $this->PublicFunction->FormatAngka($jml_pegawai) . "</td></tr>";
                         }
                     }
@@ -372,6 +441,19 @@ class Rekapitulasi extends CI_Controller {
                                 }
                             }
                             $total_pegawai = $total_pegawai + $jml_pegawai;
+
+                            $kelas_jabatan = "";
+                            $param_jabatan_kelas_jabatan = array("token"=>$token,"jabatan_id"=>$item['id']);
+                            $get_jabatan_kelas_jabatan = $this->Api->Call("anjab/kelas_jabatan",$param_jabatan_kelas_jabatan);
+                            $json_jabatan_kelas_jabatan = json_decode($get_jabatan_kelas_jabatan,true);
+                            if($json_jabatan_kelas_jabatan['is_error']){
+
+                            }else{
+                                foreach($json_jabatan_kelas_jabatan['data'] as $item_jabatan_kelas_jabatan){
+                                    $kelas_jabatan = $item_jabatan_kelas_jabatan['kelas_jabatan'];
+                                }
+                            }
+
                             $html_data .= "<tr><td style='text-align: center;'>" . $no . "</td><td>" . $item['nama'] . "</td><td style='text-align:center;'>" . $kelas_jabatan . "</td><td style='text-align:center;'>" . $this->PublicFunction->FormatAngka($jml_pegawai) . "</td></tr>";
                         }
                     }

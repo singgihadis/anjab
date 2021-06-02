@@ -1,3 +1,5 @@
+var nama_jabatan_atasan = "";
+var is_opd_utama = "";
 $(document).ready(function(){
     var cur_year = new Date().getFullYear();
     var html_tahun = "<option value=''>Pilih Tahun</option>";
@@ -10,6 +12,8 @@ $(document).ready(function(){
         submitHandler:function(){
             $("#form_update").loading();
             var id = $("#id").val();
+            var jabatan_id = $("#jabatan_id").val();
+            var jabatan_id_is_bawahannya = $("#jabatan_id option:selected").attr("data-is-bawahannya");
             var tahun = $("#tahun").val();
             var opd = $("#opd").val();
             var kode = $("#kode").val();
@@ -21,6 +25,8 @@ $(document).ready(function(){
             var urusan_pemerintahan = $("#urusan_pemerintahan").val();
             var data = new FormData();
             data.append("id", id);
+            data.append("jabatan_id", jabatan_id);
+            data.append("jabatan_id_is_bawahannya", jabatan_id_is_bawahannya);
             data.append("tahun", tahun);
             data.append("master_opd_id", opd);
             data.append("kode", kode);
@@ -123,6 +129,7 @@ function load_data(){
                 $("#kode").val(data['kode']);
                 $("#nama").val(data['nama']);
                 $("#unit").val(data['unit']);
+                $("#opd").val(data['master_opd_id']);
                 $("#jml_pegawai").val(data['jml_pegawai']);
                 jml_pegawai();
                 dropdown_opd(data['master_opd_id'],data['jabatan_id']);
@@ -282,12 +289,12 @@ function dropdown_jenis_jabatan(id){
     });
 }
 function dropdown_opd(id,jabatan_id){
-    $("#opd_nama").html("");
+    $("#opd_nama").val("Memuat Data ...");
     $("#opd_id").val(id);
     $.ajax({
         type:'post',
         url:'/ajax/opd',
-        data:{page:"x",nama:""},
+        data:{page:"x",nama:"",is_tambah:"1"},
         success:function(resp){
             $("#listdata").loading("stop");
             var res = JSON.parse(resp);
@@ -295,13 +302,20 @@ function dropdown_opd(id,jabatan_id){
                 if(res.must_login){
                     window.location = "/logout";;
                 }else{
-                    $("#filter_opd").html("<option value=''>" + res.msg + "</option>");
+                    $("#opd_nama").val("<option value=''>" + res.msg + "</option>");
                 }
             }else{
                 var nama_opd = "";
                 $.each(res.data,function(k,v){
+                    if(v['is_opd_utama'] == "1"){
+                        nama_jabatan_atasan = v['nama_jabatan'];
+                    }
                     if(id == v['id']){
                         nama_opd = v['nama'];
+                        is_opd_utama = v['is_opd_utama'];
+                        if(v['is_opd_utama'] == "1"){
+                            nama_jabatan_atasan = "";
+                        }
                     }
                 });
                 $("#opd_nama").val(nama_opd);
@@ -309,40 +323,224 @@ function dropdown_opd(id,jabatan_id){
                 dropdown_jabatan(jabatan_id);
             }
         },error:function(){
-            $("#opd_nama").html("");
+            $("#opd_nama").val("");
             $("#opd_id").val(id);
         }
     });
 }
 function dropdown_jabatan(jabatan_id){
+    var level = $("#level").val();
     var tahun = $("#tahun").val();
     var opd = $("#opd").val();
+    var id = $("#id").val();
+    $("#jabatan_nama").val("Memuat Data ...");
     //if(tahun != "" && opd != ""){
         $.ajax({
             type:'post',
             url:'/ajax/jabatan',
-            data:{page:"x",nama:"",master_opd_id:opd,tahun:tahun,master_jenis_jabatan:"",max_tingkat:6},
+            data:{page:"x",nama:"",master_opd_id:opd,tahun:tahun,master_jenis_jabatan:"2,3,4",max_tingkat:6},
             success:function(resp){
                 $("#listdata").loading("stop");
                 var res = JSON.parse(resp);
                 if(res.is_error){
                     if(res.must_login){
-                        window.location = "/logout";;
+                        window.location = "/logout";
                     }else{
-                        $("#jabatan_id").val(jabatan_id);
+                        if(is_opd_utama != "1"){
+                            $("#jabatan_id").html("<option value=''>" + nama_jabatan_atasan + "</option>");
+                        }else{
+                            $("#jabatan_id").html("<option value=''></option>");
+                        }
                     }
                 }else{
-                    var jabatan_nama = "";
+                    var html = "";
+                    if(is_opd_utama != "1"){
+                        html = "<option value=''>" + nama_jabatan_atasan + "</option>";
+                    }else{
+                        html = "<option value=''>&nbsp;</option>";
+                    }
+                    var bawahannya_match = [id];
                     $.each(res.data,function(k,v){
-                        if(jabatan_id == v['id']){
-                            jabatan_nama = v['nama'];
+                        if(v['tingkat'] == 0){
+                            var is_bawahannya = "0";
+                            if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                is_bawahannya = "1";
+                                bawahannya_match.push(v['id']);
+                            }
+                            if(id != v['id']){
+                                if(jabatan_id == v['id']){
+                                    if(is_bawahannya == "0"){
+                                        html += "<option value='" + v['id'] + "' selected='selected'>-" + v['nama'] + "</option>";
+                                    }
+                                }else{
+                                    if(is_bawahannya == "0"){
+                                        html += "<option value='" + v['id'] + "'>-" + v['nama'] + "</option>";
+                                    }
+                                }
+                            }else{
+                                html += "<option disabled='disabled' value='" + v['id'] + "'>-" + v['nama'] + "</option>";
+                            }
+                            var jabatan_id_0 = v['id'];
+                            $.each(res.data,function(k,v){
+                                if(v['tingkat'] == 1 && jabatan_id_0 == v['jabatan_id']){
+                                    var is_bawahannya = "0";
+                                    if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                        is_bawahannya = "1";
+                                        bawahannya_match.push(v['id']);
+                                    }
+                                    if(id != v['id']){
+                                        if(jabatan_id == v['id']){
+                                            if(is_bawahannya == "0"){
+                                                html += "<option value='" + v['id'] + "' selected='selected'>--" + v['nama'] + "</option>";
+                                            }
+
+                                        }else{
+                                            if(is_bawahannya == "0"){
+                                                html += "<option value='" + v['id'] + "'>--" + v['nama'] + "</option>";
+                                            }
+
+                                        }
+                                    }else{
+                                        html += "<option disabled='disabled' value='" + v['id'] + "'>--" + v['nama'] + "</option>";
+                                    }
+                                    var jabatan_id_1 = v['id'];
+                                    $.each(res.data,function(k,v){
+                                        if(v['tingkat'] == 2 && jabatan_id_1 == v['jabatan_id']){
+                                            var is_bawahannya = "0";
+                                            if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                                is_bawahannya = "1";
+                                                bawahannya_match.push(v['id']);
+                                            }
+                                            if(id != v['id']){
+                                                if(jabatan_id == v['id']){
+                                                    if(is_bawahannya == "0"){
+                                                        html += "<option value='" + v['id'] + "' selected='selected'>---" + v['nama'] + "</option>";
+                                                    }
+
+                                                }else{
+                                                    if(is_bawahannya == "0"){
+                                                        html += "<option value='" + v['id'] + "'>---" + v['nama'] + "</option>";
+                                                    }
+
+                                                }
+                                            }else{
+                                                html += "<option disabled='disabled' value='" + v['id'] + "'>---" + v['nama'] + "</option>";
+                                            }
+                                            var jabatan_id_2 = v['id'];
+                                            $.each(res.data,function(k,v){
+                                                if(v['tingkat'] == 3 && jabatan_id_2 == v['jabatan_id']){
+                                                    var is_bawahannya = "0";
+                                                    if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                                        is_bawahannya = "1";
+                                                        bawahannya_match.push(v['id']);
+                                                    }
+                                                    if(id != v['id']){
+                                                        if(jabatan_id == v['id']){
+                                                            if(is_bawahannya == "0"){
+                                                                html += "<option value='" + v['id'] + "' selected='selected'>----" + v['nama'] + "</option>";
+                                                            }
+
+                                                        }else{
+                                                            if(is_bawahannya == "0"){
+                                                                html += "<option value='" + v['id'] + "'>----" + v['nama'] + "</option>";
+                                                            }
+
+                                                        }
+                                                    }else{
+                                                        html += "<option disabled='disabled' value='" + v['id'] + "'>----" + v['nama'] + "</option>";
+                                                    }
+                                                    var jabatan_id_3 = v['id'];
+                                                    $.each(res.data,function(k,v){
+                                                        if(v['tingkat'] == 4 && jabatan_id_3 == v['jabatan_id']){
+                                                            var is_bawahannya = "0";
+                                                            if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                                                is_bawahannya = "1";
+                                                                bawahannya_match.push(v['id']);
+                                                            }
+                                                            if(id != v['id']){
+                                                                if(jabatan_id == v['id']){
+                                                                    if(is_bawahannya == "0"){
+                                                                        html += "<option value='" + v['id'] + "' selected='selected'>-----" + v['nama'] + "</option>";
+                                                                    }
+
+                                                                }else{
+                                                                    if(is_bawahannya == "0"){
+                                                                        html += "<option value='" + v['id'] + "'>-----" + v['nama'] + "</option>";
+                                                                    }
+
+                                                                }
+                                                            }else{
+                                                                html += "<option disabled='disabled' value='" + v['id'] + "'>-----" + v['nama'] + "</option>";
+                                                            }
+                                                            var jabatan_id_4 = v['id'];
+                                                            $.each(res.data,function(k,v){
+                                                                if(v['tingkat'] == 5 && jabatan_id_4 == v['jabatan_id']){
+                                                                    var is_bawahannya = "0";
+                                                                    if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                                                        is_bawahannya = "1";
+                                                                        bawahannya_match.push(v['id']);
+                                                                    }
+                                                                    if(id != v['id']){
+                                                                        if(jabatan_id == v['id']){
+                                                                            if(is_bawahannya == "0"){
+                                                                                html += "<option value='" + v['id'] + "' selected='selected'>------" + v['nama'] + "</option>";
+                                                                            }
+
+                                                                        }else{
+                                                                            if(is_bawahannya == "0"){
+                                                                                html += "<option value='" + v['id'] + "'>------" + v['nama'] + "</option>";
+                                                                            }
+
+                                                                        }
+                                                                    }else{
+                                                                        html += "<option disabled='disabled' value='" + v['id'] + "'>------" + v['nama'] + "</option>";
+                                                                    }
+                                                                    var jabatan_id_5 = v['id'];
+                                                                    $.each(res.data,function(k,v){
+                                                                        if(v['tingkat'] == 6 && jabatan_id_5 == v['jabatan_id']){
+                                                                            var is_bawahannya = "0";
+                                                                            if($.inArray(v['jabatan_id'],bawahannya_match) != -1){
+                                                                                is_bawahannya = "1";
+                                                                                bawahannya_match.push(v['id']);
+                                                                            }
+                                                                            if(id != v['id']){
+                                                                                if(jabatan_id == v['id']){
+                                                                                    if(is_bawahannya == "0"){
+                                                                                        html += "<option value='" + v['id'] + "' selected='selected'>-------" + v['nama'] + "</option>";
+                                                                                    }
+
+                                                                                }else{
+                                                                                    if(is_bawahannya == "0"){
+                                                                                        html += "<option value='" + v['id'] + "'>-------" + v['nama'] + "</option>";
+                                                                                    }
+
+                                                                                }
+                                                                            }else{
+                                                                                html += "<option disabled='disabled' value='" + v['id'] + "'>-------" + v['nama'] + "</option>";
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
+                    $("#jabatan_id").html(html);
+                    $("#jabatan_id").select2({
+                        theme: "bootstrap"
+                    });
                     $("#jabatan_id").val(jabatan_id);
-                    $("#jabatan_nama").val(jabatan_nama);
+
                 }
             },error:function(){
-                $("#jabatan_id").val(jabatan_id);
+                $("#jabatan_id").html("<option value=''>Gagal memuat data, coba lagi nanti</option>");
             }
         });
     //}

@@ -294,7 +294,29 @@ function prestasi_kerja_diharapkan_kelengkapan(){
                 }
             }else{
                 $("#listdata_anjab tr:nth-child(13) td:nth-child(3)").html(round_decimal_places(res.persentase,2,false) + "%");
+                kelas_jabatan_kelengkapan();
+            }
+        },error:function(){
+        }
+    });
+}
 
+function kelas_jabatan_kelengkapan(){
+    var jabatan_id = $("#jabatan_id").val();
+    $.ajax({
+        type:'post',
+        url:'/ajax/anjab/kelas_jabatan_kelengkapan',
+        data:{jabatan_id:jabatan_id},
+        success:function(resp){
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/logout";
+                }else{
+                    $("#listdata_anjab tr:nth-child(14) td:nth-child(3)").html("0%");
+                }
+            }else{
+                $("#listdata_anjab tr:nth-child(14) td:nth-child(3)").html(round_decimal_places(res.persentase,2,false) + "%");
             }
         },error:function(){
         }

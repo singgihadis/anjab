@@ -58,7 +58,7 @@ function load_data(){
     $.ajax({
         type:'post',
         url:'/ajax/jabatan',
-        data:{page:page,nama:nama,master_opd_id:opd,tahun:tahun,master_jenis_jabatan:jenis_jabatan},
+        data:{page:"x",nama:nama,master_opd_id:opd,tahun:tahun,master_jenis_jabatan:jenis_jabatan},
         success:function(resp){
             $("#listdata").loading("stop");
             var res = JSON.parse(resp);
@@ -128,6 +128,7 @@ function load_data(){
                 });
                 $("#listdata").html(html);
                 CreateHTMLPagination(page,res.data.length,res.total);
+                $("#info_page").html("Menampilkan 1 - " + $("#listdata").find("tr").length + " dari " + $("#listdata").find("tr").length + " data");
             }
         },error:function(){
             $("#listdata").loading("stop");

@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-body" id="card-body">
                             <form id="form_logo">
-                                <img src="/assets/img/logo.png" style="max-width: 140px;">
+                                <img src="/assets/img/logo.png?t=<?php echo time(); ?>" style="max-width: 140px;">
                                 <br>
                                 <br>
                                 <div class="input-group">
@@ -64,7 +64,7 @@
                         </div>
                         <div class="card-body" id="card-body">
                             <form id="form_logo_login">
-                                <img src="/assets/img/logo-login.png" style="max-width: 80px;">
+                                <img src="/assets/img/logo-login.png?t=<?php echo time(); ?>" style="max-width: 80px;">
                                 <br>
                                 <br>
                                 <div class="input-group">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="card-body" id="card-body">
                             <form id="form_favicon">
-                                <img src="/assets/img/favicon.png" style="max-width: 32px;">
+                                <img src="/assets/img/favicon.png?t=<?php echo time(); ?>" style="max-width: 32px;">
                                 <br>
                                 <br>
                                 <div class="input-group">
@@ -124,6 +124,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/pengaturan.js"></script>
+<script type="text/javascript" src="/assets/js/page/pengaturan.js?v=1"></script>
 </body>
 </html>

@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://anjab.id/';
+$config['base_url'] = 'https://sijaber.patikab.go.id/';
 
 /*
 |--------------------------------------------------------------------------
@@ -521,6 +521,6 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-$config['js_version'] = '1.1.3';
+$config['js_version'] = '1.3.1';
 
 

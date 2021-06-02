@@ -22,7 +22,7 @@ $(document).ready(function(){
            var password = $("#hidden_password").val();
            var level = $("#level").val();
            var nama = $("#nama").val();
-           var master_opd_id = $("#master_opd_id").val();
+           var master_opd_id = $("#opd").val();
            var jabatan = $("#nama_jabatan").val();
            var data = new FormData();
            data.append("username", username);

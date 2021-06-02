@@ -97,39 +97,37 @@ function simpan_tahapan(){
             param_arr.push(uraian);
         }
     });
-    if(param_arr.length > 0){
-        $("#form_tugas_pokok_tahapan").loading();
-        var data = new FormData();
-        var anjab_tugas_pokok_id = $("#anjab_tugas_pokok_id").val();
-        data.append("anjab_tugas_pokok_id", anjab_tugas_pokok_id);
-        data.append("uraian_json", JSON.stringify(param_arr));
-        $.ajax({
-            type:'post',
-            url:'/ajax/anjab/tugas_pokok_tahapan_update',
-            data:data,
-            enctype: 'multipart/form-data',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success:function(resp){
-                $("#form_tugas_pokok_tahapan").loading("stop");
-                var res = JSON.parse(resp);
-                if(res.is_error){
-                    if(res.must_login){
-                        window.location = "/logout";;
-                    }else{
-                        toastr["error"](res.msg);
-                    }
+    $("#form_tugas_pokok_tahapan").loading();
+    var data = new FormData();
+    var anjab_tugas_pokok_id = $("#anjab_tugas_pokok_id").val();
+    data.append("anjab_tugas_pokok_id", anjab_tugas_pokok_id);
+    data.append("uraian_json", JSON.stringify(param_arr));
+    $.ajax({
+        type:'post',
+        url:'/ajax/anjab/tugas_pokok_tahapan_update',
+        data:data,
+        enctype: 'multipart/form-data',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:function(resp){
+            $("#form_tugas_pokok_tahapan").loading("stop");
+            var res = JSON.parse(resp);
+            if(res.is_error){
+                if(res.must_login){
+                    window.location = "/logout";;
                 }else{
-                    $("#modal_tahapan").modal("hide");
-                    toastr["success"](res.msg);
+                    toastr["error"](res.msg);
                 }
-            },error:function(){
-                $("#form_tugas_pokok_tahapan").loading("stop");
-                toastr["error"]("Gagal tambah data, coba lagi nanti");
+            }else{
+                $("#modal_tahapan").modal("hide");
+                toastr["success"](res.msg);
             }
-        });
-    }
+        },error:function(){
+            $("#form_tugas_pokok_tahapan").loading("stop");
+            toastr["error"]("Gagal tambah data, coba lagi nanti");
+        }
+    });
 }
 function tambah_input_tahapan(){
     var html = "";

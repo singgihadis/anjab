@@ -16,8 +16,9 @@ $profil = json_decode($this->session->userdata("profil"),true);
                         Panduan
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuPanduan">
-                        <a href="/assets/doc/manual_book.pdf" target="_blank" class="dropdown-item">PDF</a>
-                        <a href="/assets/doc/manual_book/MembukaAplikasi.html" target="_blank" class="dropdown-item">HTML</a>
+                        <a href="/assets/doc/manual_book.pdf?v=<?php echo $this->config->item("js_version"); ?>" target="_blank" class="dropdown-item">PDF</a>
+                        <a href="/assets/doc/manual_book/MembukaAplikasi.html?v=<?php echo $this->config->item("js_version"); ?>" target="_blank" class="dropdown-item">HTML</a>
+                        <a href="/assets/doc/tutorial_opd.mp4?v=<?php echo $this->config->item("js_version"); ?>" target="_blank" class="dropdown-item">Video (OPD)</a>
                     </div>
                 </div>
             </li>

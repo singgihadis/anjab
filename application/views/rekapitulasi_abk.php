@@ -14,6 +14,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <?php include("navbar.php"); ?>
+        <input type="hidden" id="level" name="level" value="<?php echo json_decode($_SESSION['profil'])->level; ?>">
         <div class="container-fluid">
             <div class="custom-breadcrumb mb-4">
                 <ul>
@@ -70,6 +71,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/rekapitulasi_abk.js"></script>
+<script type="text/javascript" src="/assets/js/page/rekapitulasi_abk.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

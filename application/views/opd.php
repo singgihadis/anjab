@@ -51,6 +51,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama OPD</th>
+                                <th>OPD Utama</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>

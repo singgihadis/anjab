@@ -14,6 +14,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <?php include("navbar.php"); ?>
+        <input type="hidden" id="level" name="level" value="<?php echo json_decode($_SESSION['profil'])->level; ?>">
         <div class="container-fluid">
             <div class="custom-breadcrumb mb-4">
                 <ul>
@@ -49,8 +50,8 @@
                                         <option value="1">Lampiran I : Rekapitulasi Kelas Jabatan dan Persediaan Pegawai</option>
                                         <option value="2">Lampiran II : Daftar Nama Jabatan Struktural, Kelas Jabatan dan Persediaan Pegawai</option>
                                         <option value="3">Lampiran III : Daftar Nama Jabatan Fungsional, Kelas Jabatan dan Persediaan Pegawai</option>
-                                        <option value="4">Lampiran IV : Tabel Hasil Evaluasi Jabatan Struktural</option>
-                                        <option value="5">Lampiran V : Tabel Hasil Evaluasi Jabatan Fungsional</option>
+<!--                                        <option value="4">Lampiran IV : Tabel Hasil Evaluasi Jabatan Struktural</option>-->
+<!--                                        <option value="5">Lampiran V : Tabel Hasil Evaluasi Jabatan Fungsional</option>-->
                                     </select>
                                 </div>
                             </div>
@@ -82,6 +83,6 @@
 </div>
 <!-- /#wrapper -->
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/rekapitulasi.js"></script>
+<script type="text/javascript" src="/assets/js/page/rekapitulasi.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

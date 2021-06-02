@@ -71,7 +71,7 @@ class Jabatan extends CI_Controller {
         $id = $this->input->post("id");
 //        $tahun = $this->input->post("tahun");
 //        $master_opd_id = $this->input->post("master_opd_id");
-//        $jabatan_id = $this->input->post("jabatan_id");
+        $jabatan_id = $this->input->post("jabatan_id");
         $kode = $this->input->post("kode");
         $nama = $this->input->post("nama");
         $unit = $this->input->post("unit");
@@ -84,7 +84,7 @@ class Jabatan extends CI_Controller {
             "id"=>$id,
 //            "tahun"=>$tahun,
 //            "master_opd_id"=>$master_opd_id,
-//            "jabatan_id"=>$jabatan_id,
+            "jabatan_id"=>$jabatan_id,
             "kode"=>$kode,
             "nama"=>$nama,
             "unit"=>$unit,

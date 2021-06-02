@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <div class="custom-breadcrumb mb-4">
                         <ul>
-                            <li><a href="/anjab">Analisa Jabatan Dan Beban kerja</a></li>
+                            <li><a href="/anjab">Analisis Jabatan Dan Beban kerja</a></li>
                             <li>Input Analisis Jabatan</li>
                         </ul>
                     </div>
@@ -171,6 +171,14 @@
                                     <a href="<?php echo $id; ?>/prestasi_kerja_diharapkan" class="btn btn-sm btn-primary"><span class="fa fa-edit"></span> Input</a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>Kelas Jabatan</td>
+                                <td></td>
+                                <td>
+                                    <a href="<?php echo $id; ?>/kelas_jabatan" class="btn btn-sm btn-primary"><span class="fa fa-edit"></span> Input</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -234,6 +242,6 @@
 </div>
 
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/anjab_edit.js"></script>
+<script type="text/javascript" src="/assets/js/page/anjab_edit.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>

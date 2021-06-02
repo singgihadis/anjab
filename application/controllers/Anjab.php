@@ -83,6 +83,8 @@ class Anjab extends CI_Controller {
                 }
             }else if($halaman == "prestasi_kerja_diharapkan"){
                 $this->load->view("anjab_edit_prestasi_kerja_diharapkan",array("id"=>$id));
+            }else if($halaman == "kelas_jabatan") {
+                $this->load->view("anjab_edit_kelas_jabatan", array("id" => $id));
             }
         }else{
             redirect("login");
@@ -137,6 +139,7 @@ class Anjab extends CI_Controller {
             $jabatan_kode = $json_opd['data'][0]['kode_jabatan'];
             $jabatan_tahun = $json_opd['data'][0]['tahun'];
             $tingkat_jabatan = $json_opd['data'][0]['tingkat'];
+            $is_opd_utama = $json_opd['data'][0]['is_opd_utama'];
             $master_jenis_jabatan_id = $json_opd['data'][0]['master_jenis_jabatan_id'];
             $tahun = $json_opd['data'][0]['tahun'];
 
@@ -148,16 +151,45 @@ class Anjab extends CI_Controller {
                 $ikhtisiar_jabatan = $json_ikhtisiar_jabatan['data'][0]['ikhtisiar'];
             }
 
-            $param_unit_kerja = array("id"=>$jabatan_id,"token"=>$token,"tingkat"=>$tingkat_jabatan,"tahun"=>$jabatan_tahun);
+            $param_unit_kerja = array("id"=>$jabatan_id,"token"=>$token,"tingkat"=>$tingkat_jabatan,"tahun"=>$jabatan_tahun,"master_opd_id"=>$json_opd['data'][0]['master_opd_id']);
             $get_unit_kerja = $this->Api->Call("anjab/unit_kerja",$param_unit_kerja);
             $json_unit_kerja = json_decode($get_unit_kerja,true);
             if($json_unit_kerja['is_error']){
 
             }else{
                 $alphas = range('a', 'z');
-                foreach($json_unit_kerja['data'] as $k=>$item){
-                    $html_unit_kerja .= "<tr><td>&nbsp;</td><td style='vertical-align: top;'>" . $alphas[$k] . ".</td><td style='vertical-align: top;'>" . $item['jenis_jabatan'] . "</td><td style='vertical-align: top;'>:</td><td style='vertical-align: top;'>" . $item['nama_jabatan'] . "</td></tr>";
+                $k_tambahan = 0;
+                if($is_opd_utama == "1"){
+
+                }else{
+//                    $param_opd_data = array("is_opd_utama"=>"1","page"=>"1","nama"=>"","token"=>$token);
+//                    $get_opd_data = $this->Api->Call("opd",$param_opd_data);
+//                    $json_opd_data = json_decode($get_opd_data,true);
+//                    if($json_opd_data['is_error']){
+//
+//                    }else{
+//                        $html_unit_kerja .= "<tr><td>&nbsp;</td><td style='vertical-align: top;'>" . $alphas[$k_tambahan] . ".</td><td style='vertical-align: top;'>" . $json_opd_data['data'][0]['jenis_jabatan'] . "</td><td style='vertical-align: top;'>:</td><td style='vertical-align: top;'>" . $json_opd_data['data'][0]['nama_jabatan'] . "</td></tr>";
+//                        $k_tambahan++;
+//                    }
                 }
+
+                $arr_jabatan_html_unit_kerja = array();
+                $id_jabatan_temp = $jabatan_id;
+                for($i=0;$i<25;$i++){
+                    foreach($json_unit_kerja['data'] as $k=>$item){
+                        if($id_jabatan_temp == $item['id']){
+                            $html_unit_kerja_item = "<td style='vertical-align: top;'>" . $item['jenis_jabatan'] . "</td><td style='vertical-align: top;'>:</td><td style='vertical-align: top;'>" . $item['nama_jabatan'] . "</td>";
+                            array_push($arr_jabatan_html_unit_kerja,$html_unit_kerja_item);
+                            $id_jabatan_temp = $item['jabatan_id'];
+                            break;
+                        }
+                    }
+                }
+                foreach(array_reverse($arr_jabatan_html_unit_kerja) as $item){
+                    $html_unit_kerja .=  "<tr><td>&nbsp;</td><td style='vertical-align: top;'>" . $alphas[$k_tambahan] . ".</td>" . $item . "</tr>";
+                    $k_tambahan++;
+                }
+
             }
 
             $get_kualifikasi_jabatan_pendidikan = $this->Api->Call("anjab/kualifikasi_jabatan_pendidikan",$param);
@@ -230,11 +262,11 @@ class Anjab extends CI_Controller {
                         $no++;
                         $last_id = $item['id'];
                         $anjab_tugas_pokok_id_parent = $item['id'];
-                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td>&nbsp;</td><td style='text-align: center;border-left: 1px solid black;vertical-align: top;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='font-size:16px;border-left: 1px solid black;padding-left:4px;padding-right:4px;vertical-align: top;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
+                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='border-left:0px;'>&nbsp;</td><td style='text-align: center;border-left: 1px solid black;vertical-align: top;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='font-size:16px;border-left: 1px solid black;padding-left:4px;padding-right:4px;vertical-align: top;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
                         foreach($json_abk['data'] as $k2=>$item2){
                             if($anjab_tugas_pokok_id_parent == $item2['anjab_tugas_pokok_id']){
                                 $html_tugas_pokok_dan_beban_kerja .= "<tr>";
-                                $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;'>&nbsp;</td>";
+                                $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 0px solid black;'>&nbsp;</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='border-left: 1px solid black;'>&nbsp;</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='vertical-align: top;border-left: 1px solid black;text-align: center;width:2%;'>-</td>";
                                 $html_tugas_pokok_dan_beban_kerja .= "<td style='width:33%;font-size:16px;'>" . $item2['uraian_sub'] . "</td>";
@@ -468,17 +500,26 @@ class Anjab extends CI_Controller {
                 }
             }
 
-            $param_kelas_jabatan = array("token"=>$token,"nama"=>"","page"=>"x","tahun"=>$tahun);
-            $get_kelas_jabatan = $this->Api->Call("kelas_jabatan",$param_kelas_jabatan);
+//            $param_kelas_jabatan = array("token"=>$token,"nama"=>"","page"=>"x","tahun"=>$tahun);
+//            $get_kelas_jabatan = $this->Api->Call("kelas_jabatan",$param_kelas_jabatan);
+//            $json_kelas_jabatan = json_decode($get_kelas_jabatan,true);
+//            if($json_kelas_jabatan['is_error']){
+//
+//            }else{
+//                foreach($json_kelas_jabatan['data'] as $k=>$item_kelas_jabatan){
+//                    if($item_kelas_jabatan['batas_awal'] <= $total_nilai && $item_kelas_jabatan['batas_akhir'] >= $total_nilai){
+//                        $kelas_jabatan = $json_kelas_jabatan['data'][$k]['kelas'];
+//                    }
+//                }
+//            }
+
+            $param_kelas_jabatan = array("token"=>$token,"jabatan_id"=>$id);
+            $get_kelas_jabatan = $this->Api->Call("anjab/kelas_jabatan",$param_kelas_jabatan);
             $json_kelas_jabatan = json_decode($get_kelas_jabatan,true);
             if($json_kelas_jabatan['is_error']){
 
             }else{
-                foreach($json_kelas_jabatan['data'] as $k=>$item_kelas_jabatan){
-                    if($item_kelas_jabatan['batas_awal'] <= $total_nilai && $item_kelas_jabatan['batas_akhir'] >= $total_nilai){
-                        $kelas_jabatan = $json_kelas_jabatan['data'][$k]['kelas'];
-                    }
-                }
+                $kelas_jabatan = $json_kelas_jabatan['data'][0]['kelas_jabatan'];
             }
         }
 
@@ -576,7 +617,7 @@ class Anjab extends CI_Controller {
         $html .= "<tr><td style='width:6%;'>16.</td><td style='width:35%;'>PRESTASI KERJA YANG DIHARAPKAN</td><td style='width:3%;'>:</td><td style='width:68%;'>" . $html_prestasi_kerja_yang_diharapkan . "</td></tr>";
         $html .= "</table>";
         $html .= "<table style='width:100%;table-layout: fixed;'>";
-        $html .= "<tr><td style='width:6%;'>17.</td><td style='width:23%;'>KELAS JABATAN</td><td style='width:3%;'>:</td><td style='width:68%;'>" . $kelas_jabatan . "</td></tr>";
+        $html .= "<tr><td style='width:6%;'>17.</td><td style='width:35%;'>KELAS JABATAN</td><td style='width:3%;'>:</td><td style='width:68%;'>" . $kelas_jabatan . "</td></tr>";
         $html .= "</table>";
         $html .= "</body>";
         $html .= "</html>";

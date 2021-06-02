@@ -12,8 +12,9 @@ include("head.php"); ?>
                 <span class="fa fa-question-circle"></span> Panduan
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/assets/doc/manual_book.pdf" target="_blank">PDF</a>
-                <a class="dropdown-item" href="/assets/doc/manual_book/MembukaAplikasi.html" target="_blank">HTML</a>
+                <a class="dropdown-item" href="/assets/doc/manual_book.pdf?v=<?php echo $this->config->item("js_version"); ?>" target="_blank">PDF</a>
+                <a class="dropdown-item" href="/assets/doc/manual_book/MembukaAplikasi.html?v=<?php echo $this->config->item("js_version"); ?>" target="_blank">HTML</a>
+                <a href="/assets/doc/tutorial_opd.mp4?v=<?php echo $this->config->item("js_version"); ?>" target="_blank" class="dropdown-item">Video (OPD)</a>
             </div>
         </div>
     </div>
@@ -29,8 +30,8 @@ include("head.php"); ?>
                     <div class="background-wrapper">
                         <div class="information">
                             <div class="information-wrapper">
-                                <h4><b>ANJAB</b></h4>
-                                <div class="desc">Analisa Jabatan, Analisa Beban Kerja dan Evaluasi Jabatan</div>
+                                <h4><b>SIJABER</b></h4>
+                                <div class="desc">Aplikasi Analisis Jabatan dan Analisis Beban Kerja (Informasi Jabatan)</div>
                             </div>
                         </div>
                     </div>
@@ -39,7 +40,7 @@ include("head.php"); ?>
                     <div class="card rounded-0">
                         <div class="card-body login-form-card px-5">
                             <div class="text-center">
-                                <img src="/assets/img/logo-login.png" class="logo-login" />
+                                <img src="/assets/img/logo-login.png?t=<?php echo time(); ?>" class="logo-login" />
                             </div>
                             <div class="text-center">
                                 <h6><b>Login ke Dashboard</b></h6>
@@ -59,7 +60,7 @@ include("head.php"); ?>
                             </form>
                             <br>
                             <div class="text-center">
-                                @2020
+                                @<?php  echo date("Y"); ?>
                                 <br>
                             </div>
                         </div>

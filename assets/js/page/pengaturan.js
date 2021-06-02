@@ -45,7 +45,7 @@ $(document).ready(function(){
                             var d = new Date();
                             $(this).attr("src",src + "?v=" + d.getTime());
                         });
-                        $("#logo_alert").html("<div class='alert alert-warning alert-dismissible fade show' role='alert' id='logo_alert'> Bila tidak ada perubahan, silahkan hapus cache pada browser anda atau tunggu hingga berganti hari. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button> </div>");
+                        //$("#logo_alert").html("<div class='alert alert-warning alert-dismissible fade show' role='alert' id='logo_alert'> Bila tidak ada perubahan, silahkan hapus cache pada browser anda atau tunggu hingga berganti hari. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button> </div>");
                     }
                 },error:function(){
                     $("#form_logo").loading("stop");
@@ -87,7 +87,7 @@ $(document).ready(function(){
                             var d = new Date();
                             $(this).attr("src",src + "?v=" + d.getTime());
                         });
-                        $("#logo_login_alert").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'> Bila tidak ada perubahan, silahkan hapus cache pada browser anda atau tunggu hingga berganti hari. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button> </div>");
+                        //$("#logo_login_alert").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'> Bila tidak ada perubahan, silahkan hapus cache pada browser anda atau tunggu hingga berganti hari. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button> </div>");
                     }
                 },error:function(){
                     $("#form_logo_login").loading("stop");
@@ -129,7 +129,7 @@ $(document).ready(function(){
                             var d = new Date();
                             $(this).attr("src",src + "?v=" + d.getTime());
                         });
-                        $("#favicon_alert").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'> Bila tidak ada perubahan, silahkan hapus cache pada browser anda atau tunggu hingga berganti hari. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button> </div>");
+                        //$("#favicon_alert").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'> Bila tidak ada perubahan, silahkan hapus cache pada browser anda atau tunggu hingga berganti hari. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button> </div>");
                     }
                 },error:function(){
                     $("#form_favicon").loading("stop");

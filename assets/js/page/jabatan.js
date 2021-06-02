@@ -130,6 +130,7 @@ function load_data(){
 
                 $("#listdata").html(html);
                 CreateHTMLPagination(page,res.data.length,res.total);
+                $("#info_page").html("Menampilkan 1 - " + $("#listdata").find("tr").length + " dari " + $("#listdata").find("tr").length + " data");
             }
         },error:function(){
             $("#listdata").loading("stop");
@@ -237,7 +238,7 @@ function hapus(itu){
     var id = $(itu).attr("data-id");
     $.confirm({
         title: 'Konfirmasi',
-        content: 'Jabatan di dalam jabatan ini otomatis akan terhapus juga.<br>Apa anda yakin menghapus data ini? ',
+        content: 'Peringatan!<br>Jabatan di bawah jabatan ini otomatis akan terhapus juga.<br>Apa anda yakin menghapus data ini? ',
         buttons: {
             cancel: {
                 text: 'Batal',
