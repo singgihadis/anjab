@@ -105,6 +105,13 @@ function StrToNumber(str){
     str = str.replace("Rp. ","").replace(/\./g,"");
     return parseInt(str);
 }
+function StrToFloat(str){
+    if(str == ""){
+        return 0;
+    }else{
+        return parseFloat(str);
+    }
+}
 function URLSeo(Text){
     return Text
         .toLowerCase()

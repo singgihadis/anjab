@@ -51,15 +51,15 @@ function abk(){
                     if(last_id != v['id']){
                         last_id = v['id'];
                         html += "<tr>";
-                        html += "<td colspan='7'><b>" + v['uraian'] + "</b></td>";
+                        html += "<td><b>" + v['uraian'] + "</b></td><td><b>" + v['hasil_kerja_induk'] + "</b></td><td colspan='5'></td>";
                         html += "</tr>";
                         $.each(res.data,function(k2,v2){
                             if(v['id'] == v2['anjab_tugas_pokok_id']){
                                 html += "<tr class='tr_tahapan' data-tugas-pokok-tahapan-id='" + v2['id2'] + "'>";
                                 html += "<td>" + v2['uraian_sub'] + "</td>";
                                 html += "<td><input type='text' value='" + v2['hasil_kerja'] + "' class='form-control form-control-sm hasil_kerja' /></td>";
-                                html += "<td><input type='text' value='" + FormatAngka(v2['jumlah_hasil'], true) + "' class='form-control form-control-sm jumlah_hasil' /></td>";
-                                html += "<td><input type='text' value='" + FormatAngka(v2['waktu_penyelesaian'],true) + "' class='form-control form-control-sm waktu_penyelesaian' /></td>";
+                                html += "<td><input type='text' value='" + StrToFloat(v2['jumlah_hasil']) + "' class='form-control form-control-sm jumlah_hasil' /></td>";
+                                html += "<td><input type='text' value='" + StrToFloat(v2['waktu_penyelesaian']) + "' class='form-control form-control-sm waktu_penyelesaian' /></td>";
                                 html += "<td>";
                                 html += "<select class='form-control form-control-sm satuan_waktu'>";
                                 html += "<option value='0' data-jml='0'>Pilih</option>";
@@ -79,7 +79,7 @@ function abk(){
                                 });
                                 html += "</select>";
                                 html += "</td>";
-                                html += "<td><input type='text' value='" + FormatAngka(v2['waktu_efektif'],true) + "' class='form-control form-control-sm waktu_efektif' readonly /></td>";
+                                html += "<td><input type='text' value='" + v2['waktu_efektif'] + "' class='form-control form-control-sm waktu_efektif' readonly /></td>";
                                 html += "<td><input type='text' value='" + round_decimal_places(v2['kebutuhan_pegawai'],4,true) + "' class='form-control form-control-sm kebutuhan_pegawai' readonly /></td>";
                                 html += "</tr>";
                             }
@@ -94,9 +94,9 @@ function abk(){
                 });
                 $(".satuan_waktu").change(function(){
                     var jml = $(this).find("option:selected").attr("data-jml");
-                    $(this).parent().parent().find(".waktu_efektif").val(FormatAngka(jml));
-                    var jumlah_hasil = StrToNumber($(this).parent().parent().find(".jumlah_hasil").val());
-                    var waktu_penyelesaian = StrToNumber($(this).parent().parent().find(".waktu_penyelesaian").val());
+                    $(this).parent().parent().find(".waktu_efektif").val(jml);
+                    var jumlah_hasil = StrToFloat($(this).parent().parent().find(".jumlah_hasil").val());
+                    var waktu_penyelesaian = StrToFloat($(this).parent().parent().find(".waktu_penyelesaian").val());
                     var waktu_efektif = StrToNumber($(this).parent().parent().find(".waktu_efektif").val());
                     var kebutuhan_pegawai = 0.0;
                     if(waktu_efektif != 0){
@@ -106,8 +106,8 @@ function abk(){
                     total_kebutuhan_pegawai();
                 });
                 $(".jumlah_hasil").keyup(function(){
-                    var jumlah_hasil = StrToNumber($(this).parent().parent().find(".jumlah_hasil").val());
-                    var waktu_penyelesaian = StrToNumber($(this).parent().parent().find(".waktu_penyelesaian").val());
+                    var jumlah_hasil = StrToFloat($(this).parent().parent().find(".jumlah_hasil").val());
+                    var waktu_penyelesaian = StrToFloat($(this).parent().parent().find(".waktu_penyelesaian").val());
                     var waktu_efektif = StrToNumber($(this).parent().parent().find(".waktu_efektif").val());
                     var kebutuhan_pegawai = 0.0;
                     if(waktu_efektif != 0){
@@ -117,8 +117,8 @@ function abk(){
                     total_kebutuhan_pegawai();
                 });
                 $(".waktu_penyelesaian").keyup(function(){
-                    var jumlah_hasil = StrToNumber($(this).parent().parent().find(".jumlah_hasil").val());
-                    var waktu_penyelesaian = StrToNumber($(this).parent().parent().find(".waktu_penyelesaian").val());
+                    var jumlah_hasil = StrToFloat($(this).parent().parent().find(".jumlah_hasil").val());
+                    var waktu_penyelesaian = StrToFloat($(this).parent().parent().find(".waktu_penyelesaian").val());
                     var waktu_efektif = StrToNumber($(this).parent().parent().find(".waktu_efektif").val());
                     var kebutuhan_pegawai = 0.0;
                     if(waktu_efektif != 0){
@@ -153,8 +153,8 @@ function update(){
     $(".tr_tahapan").each(function(k,v){
         var tugas_pokok_tahapan_id = $(this).attr("data-tugas-pokok-tahapan-id");
         var hasil_kerja = $(this).find(".hasil_kerja").val();
-        var jumlah_hasil = StrToNumber($(this).find(".jumlah_hasil").val());
-        var waktu_penyelesaian = StrToNumber($(this).find(".waktu_penyelesaian").val());
+        var jumlah_hasil = $(this).find(".jumlah_hasil").val();
+        var waktu_penyelesaian = $(this).find(".waktu_penyelesaian").val();
         var satuan_waktu = StrToNumber($(this).find(".satuan_waktu").val());
         var waktu_efektif = StrToNumber($(this).find(".waktu_efektif").val());
         var kebutuhan_pegawai = $(this).find(".kebutuhan_pegawai").val();

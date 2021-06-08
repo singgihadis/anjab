@@ -262,7 +262,7 @@ class Anjab extends CI_Controller {
                         $no++;
                         $last_id = $item['id'];
                         $anjab_tugas_pokok_id_parent = $item['id'];
-                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='border-left:0px;'>&nbsp;</td><td style='text-align: center;border-left: 1px solid black;vertical-align: top;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='font-size:16px;border-left: 1px solid black;padding-left:4px;padding-right:4px;vertical-align: top;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
+                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='border-left:0px;'>&nbsp;</td><td style='text-align: center;border-left: 1px solid black;vertical-align: top;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='font-size:16px;border-left: 1px solid black;padding-left:4px;padding-right:4px;vertical-align: top;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>" . $item['hasil_kerja_induk'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
                         foreach($json_abk['data'] as $k2=>$item2){
                             if($anjab_tugas_pokok_id_parent == $item2['anjab_tugas_pokok_id']){
                                 $html_tugas_pokok_dan_beban_kerja .= "<tr>";
@@ -686,7 +686,7 @@ class Anjab extends CI_Controller {
                         $no++;
                         $last_id = $item['id'];
                         $anjab_tugas_pokok_id_parent = $item['id'];
-                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='vertical-align: top;text-align: center;border-left: 1px solid black;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='border-left: 1px solid black;padding-left:5px;padding-right:5px;vertical-align:top;font-size:16px;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
+                        $html_tugas_pokok_dan_beban_kerja .= "<tr><td style='vertical-align: top;text-align: center;border-left: 1px solid black;font-size:16px;'><b>" . $no . "</b></td><td colspan='2' style='border-left: 1px solid black;padding-left:5px;padding-right:5px;vertical-align:top;font-size:16px;'>" . $item['uraian'] . "</td><td style='border-left: 1px solid black;'>" . $item['hasil_kerja_induk'] . "</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;'>&nbsp;</td><td style='border-left: 1px solid black;border-right: 1px solid black;'>&nbsp;</td></tr>";
                         foreach($json_abk['data'] as $k2=>$item2){
                             if($anjab_tugas_pokok_id_parent == $item2['anjab_tugas_pokok_id']){
                                 $html_tugas_pokok_dan_beban_kerja .= "<tr>";
