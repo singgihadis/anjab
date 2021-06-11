@@ -77,7 +77,7 @@
     <!-- /#page-content-wrapper -->
 </div>
 <?php include("foot.php"); ?>
-<script type="text/javascript" src="/assets/js/page/anjab_edit_hasil_kerja.js"></script>
+<script type="text/javascript" src="/assets/js/page/anjab_edit_hasil_kerja.js?v=<?php echo $this->config->item("js_version"); ?>"></script>
 </body>
 </html>
 

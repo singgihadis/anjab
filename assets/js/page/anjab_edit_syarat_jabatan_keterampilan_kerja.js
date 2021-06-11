@@ -41,7 +41,7 @@ function syarat_jabatan_keterampilan_kerja(){
                     html += "<td>" + v['uraian'] + "</td>";
                     html += "<td>";
                     html += "<a href='javascript:void(0);' onclick='modal_keterampilan_kerja(false,this)' data-id='" + v['id'] + "' data-pos='" + k + "' class='btn btn-sm btn-light'><span class='fa fa-edit'></span></a> ";
-                    html += "<a onclick='hapus(this)' data-id='" + v['id'] + "' href='javascript:void(0);' class='btn btn-sm btn-danger'><span class='fa fa-trash'></span></a>";
+                    html += "<a onclick='hapus(this)' data-id='" + v['id'] + "' data-jabatan-id='" + v['jabatan_id'] + "' href='javascript:void(0);' class='btn btn-sm btn-danger'><span class='fa fa-trash'></span></a>";
                     html += "</td>";
                     html += "</tr>";
                 });
@@ -165,6 +165,58 @@ function get_opd_name(){
                 $("#nama_jabatan").html(toTitleCase(res.data[0]['nama_jabatan']));
             }
         },error:function(){
+        }
+    });
+}
+function hapus(itu){
+    $.confirm({
+        title: 'Konfirmasi',
+        content: 'Apa anda yakin menghapus data ini?',
+        buttons: {
+            cancel: {
+                text: 'Batal',
+                action: function(){
+
+                }
+            },
+            confirm: {
+                text: 'Konfirmasi',
+                btnClass: 'btn-blue',
+                action: function(){
+                    var id = $(itu).attr("data-id");
+                    var jabatan_id = $(itu).attr("data-jabatan-id");
+                    var data = new FormData();
+                    data.append("jabatan_id", jabatan_id);
+                    data.append("id", id);
+                    $(itu).parent().parent().loading();
+                    $.ajax({
+                        type:'post',
+                        url:'/ajax/anjab/syarat_jabatan_keterampilan_kerja_hapus',
+                        data:data,
+                        enctype: 'multipart/form-data',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success:function(resp){
+                            $(itu).parent().parent().loading("stop");
+                            var res = JSON.parse(resp);
+                            if(res.is_error){
+                                if(res.must_login){
+                                    window.location = "/logout";;
+                                }else{
+                                    toastr["error"](res.msg);
+                                }
+                            }else{
+                                toastr["success"](res.msg);
+                                syarat_jabatan_keterampilan_kerja();
+                            }
+                        },error:function(){
+                            $(itu).parent().parent().loading("stop");
+                            toastr["error"]("Gagal hapus, coba lagi nanti");
+                        }
+                    });
+                }
+            }
         }
     });
 }

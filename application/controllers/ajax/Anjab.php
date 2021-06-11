@@ -882,6 +882,19 @@ class Anjab extends CI_Controller {
         }
         echo $data;
     }
+    public function syarat_jabatan_keterampilan_kerja_hapus(){
+        $token = $this->session->userdata("token");
+        $id = $this->input->post("id");
+        $jabatan_id = $this->input->post("jabatan_id");
+        $param = array("id"=>$id,"jabatan_id"=>$jabatan_id,"token"=>$token);
+        $data = $this->Api->Call("anjab/syarat_jabatan_keterampilan_kerja_hapus",$param);
+
+        //Simpan log
+        if(json_decode($data,true)['is_error'] == false){
+            $this->PublicFunction->SimpanLog("Hapus Keterampilan Kerja Syarat Jabatan Anjab",json_encode($param));
+        }
+        echo $data;
+    }
     public function syarat_jabatan_bakat_kerja(){
         $token = $this->session->userdata("token");
         $jabatan_id = $this->input->post("jabatan_id");

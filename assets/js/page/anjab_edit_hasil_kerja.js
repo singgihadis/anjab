@@ -54,7 +54,7 @@ function hasil_kerja(){
                     html_satuan += "<select class='form-control form-control-sm'>";
                     html_satuan += "    <option value=''>Pilih Satuan</option>";
                     $.each(data_dropdown_satuan_kerja,function(k1,v1){
-                        html_satuan += "    <option value='1' " + (v['master_satuan_kerja_id'] == v1['id']?"selected":"") + ">" + v1['nama']  +"</option>";
+                        html_satuan += "    <option value='" + v1['id'] +  "' " + (v['master_satuan_kerja_id'] == v1['id']?"selected":"") + ">" + v1['nama']  +"</option>";
                     });
                     html_satuan += "</select>";
 
