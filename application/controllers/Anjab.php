@@ -446,11 +446,14 @@ class Anjab extends CI_Controller {
             if($json_syarat_jabatan_kondisi_fisik['is_error']){
 
             }else{
-                $html_syarat_jabatan_kondisi_fisik .= "<table style='border-collapse: collapse;width:100%;'>";
+//                $html_syarat_jabatan_kondisi_fisik .= "<table style='border-collapse: collapse;width:100%;'>";
+//                foreach($json_syarat_jabatan_kondisi_fisik['data'] as $k=>$item){
+//                    $html_syarat_jabatan_kondisi_fisik .= "<tr><td style='width:10%;vertical-align: top;'>" . ($k + 1) . ")</td><td style='vertical-align: top;'>" . $item['nama'] . "</td><td style='width:5%;vertical-align: top;'> : </td><td style='width:50%;vertical-align: top;'>" . $item['keterangan'] . "</td></tr>";
+//                }
+//                $html_syarat_jabatan_kondisi_fisik .= "</table>";
                 foreach($json_syarat_jabatan_kondisi_fisik['data'] as $k=>$item){
-                    $html_syarat_jabatan_kondisi_fisik .= "<tr><td style='width:10%;vertical-align: top;'>" . ($k + 1) . ")</td><td style='vertical-align: top;'>" . $item['nama'] . "</td><td style='width:5%;vertical-align: top;'> : </td><td style='width:50%;vertical-align: top;'>" . $item['keterangan'] . "</td></tr>";
+                    $html_syarat_jabatan_kondisi_fisik .= "<div style='margin-bottom:5px;'><span style='width:5%;display:inline-block;vertical-align: top;'>" . ($k + 1) . ")</span><span style='width:25%;display:inline-block;vertical-align: top;'>" . $item['nama'] . "</span><span style='width:2%;display:inline-block;vertical-align: top;'> : </span><span style='width:58%;display:inline-block;vertical-align: top;'>" . $item['keterangan'] . "</span></div>";
                 }
-                $html_syarat_jabatan_kondisi_fisik .= "</table>";
             }
 
             $get_syarat_jabatan_fungsi_pekerjaan = $this->Api->Call("anjab/syarat_jabatan_fungsi_pekerjaan",$param);
@@ -612,7 +615,7 @@ class Anjab extends CI_Controller {
         $html .= "</tr>";
         $html .= "<tr><td>&nbsp;</td><td>g. </td><td>Fungsi Pekerjaan</td><td>:</td><td>" . $html_syarat_jabatan_fungsi_pekerjaan . "</td></tr>";
         $html .= "<tr><td colspan='5'>&nbsp;</td></tr>";
-       $html .= "</table>";
+        $html .= "</table>";
         $html .= "<table style='width:100%;table-layout: fixed;'>";
         $html .= "<tr><td style='width:6%;'>16.</td><td style='width:35%;'>PRESTASI KERJA YANG DIHARAPKAN</td><td style='width:3%;'>:</td><td style='width:68%;'>" . $html_prestasi_kerja_yang_diharapkan . "</td></tr>";
         $html .= "</table>";
