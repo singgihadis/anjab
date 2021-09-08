@@ -187,14 +187,14 @@
                         <span class="fa fa-circle-o"></span> Analisis Jabatan dan Beban Kerja
                     </a>
                 </li>
-                <li class="list-group-item list-group-item-action bg-white" style="display: none;">
+                <li class="list-group-item list-group-item-action bg-white">
                     <a href="/evjab" class="<?php echo ($menu == "6" && $sub_menu == "3"?"active":""); ?>">
                         <span class="fa fa-circle-o"></span> Evaluasi Jabatan
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="list-group-item list-group-item-action bg-white" style="display: none;">
+        <li class="list-group-item list-group-item-action bg-white">
             <a href="/skj" class="<?php echo ($menu == "7"?"active":""); ?>">
                 <span class="fa fa-suitcase mr-2"></span> SKJ
             </a>

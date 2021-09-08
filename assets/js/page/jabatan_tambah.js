@@ -361,7 +361,7 @@ function dropdown_opd(){
             }else{
                 var html = "<option value=''>Pilih OPD</option>";
                 $.each(res.data,function(k,v){
-                    if(level == "2" && v['is_opd_utama'] == "1"){
+                    if(level == "2" && v['is_opd_utama'] == "1" && $("#master_opd_id_cur").val() != v['id']){
                         html += "<option hidden data-is-opd-utama='" + v['is_opd_utama'] + "' data-nama-jabatan='" + v['nama'] + "' data-jenis-jabatan='" + v['jenis_jabatan'] + "' value='"  + v['id'] + "'>" + v['nama'] + "</option>";
                     }else{
                         html += "<option data-is-opd-utama='" + v['is_opd_utama'] + "' data-nama-jabatan='" + v['nama'] + "' data-jenis-jabatan='" + v['jenis_jabatan'] + "' value='"  + v['id'] + "'>" + v['nama'] + "</option>";

@@ -259,7 +259,7 @@ class Skj extends CI_Controller {
         $html .= "<table style='width:100%;table-layout: fixed;'>";
         $html .= "<tr><th style='width:25%;'></th><th style='width:5%;'></th><th style='width:70%;'></th></tr>";
         $html .= "<tr><td style='vertical-align: top;'>NAMA JABATAN</td><td style='vertical-align: top;'> : </td><td style='vertical-align: top;'>" . $jabatan_nama . "</td></tr>";
-        $html .= "<tr><td style='vertical-align: top;'>KELOMPOK JABATAN</td><td style='vertical-align: top;'> : </td><td style='vertical-align: top;'>" . $kelompok_jabatan . "</td></tr>";
+        $html .= "<tr><td style='vertical-align: top;'>KELOMPOK JABATAN</td><td style='vertical-align: top;'> : </td><td style='vertical-align: top;'>" . strtoupper($kelompok_jabatan) . "</td></tr>";
         $html .= "<tr><td style='vertical-align: top;'>URUSAN PEMERINTAH</td><td style='vertical-align: top;'> : </td><td style='vertical-align: top;'>" . $urusan_pemerintahan . "</td></tr>";
         $html .= "<tr><td style='vertical-align: top;'>KODE JABATAN</td><td style='vertical-align: top;'> : </td><td style='vertical-align: top;'>" . $jabatan_kode . "</td></tr>";
         $html .= "</table>";

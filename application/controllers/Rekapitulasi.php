@@ -143,7 +143,8 @@ class Rekapitulasi extends CI_Controller {
                     $k = 0;
                     foreach($json_kelas_jabatan['data'] as $item){
                         foreach($json_jabatan['data'] as $item2){
-                            if($item['jabatan_id'] == $item2['id']){
+                            $jabatan_ids = explode(',',$item['jabatan_id']);
+                            if(in_array($item2['id'],$jabatan_ids)){
                                 $arr_kelas_jabatan[$k] = intval($arr_kelas_jabatan[$k]) + $item2['jml_pegawai'];
                                 $dengan_kelas = $dengan_kelas + $item2['jml_pegawai'];
                             }

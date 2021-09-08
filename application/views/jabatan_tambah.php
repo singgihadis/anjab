@@ -8,6 +8,7 @@
     include("sidebar.php");
     $Permission = $this->PublicFunction->Get_Permission();
     $level = $Permission[0];
+    $master_opd_id = $Permission[1];
     ?>
     <!-- Sidebar -->
 
@@ -24,6 +25,7 @@
                 </ul>
             </div>
             <input type="hidden" id="level" name="level" value="<?php echo $level; ?>">
+            <input type="hidden" id="master_opd_id_cur" name="master_opd_id_cur" value="<?php echo $master_opd_id; ?>">
             <div class="card">
                 <div class="card-header bg-white">
                     <div class="row">

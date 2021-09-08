@@ -12,8 +12,8 @@ include("head.php"); ?>
                 <span class="fa fa-question-circle"></span> Panduan
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/assets/doc/manual_book.pdf?v=<?php echo $this->config->item("js_version"); ?>" target="_blank">PDF</a>
-                <a class="dropdown-item" href="/assets/doc/manual_book/MembukaAplikasi.html?v=<?php echo $this->config->item("js_version"); ?>" target="_blank">HTML</a>
+<!--                <a class="dropdown-item" href="/assets/doc/manual_book.pdf?v=--><?php //echo $this->config->item("js_version"); ?><!--" target="_blank">PDF</a>-->
+<!--                <a class="dropdown-item" href="/assets/doc/manual_book_html/MembukaAplikasi.html?v=--><?php //echo $this->config->item("js_version"); ?><!--" target="_blank">HTML</a>-->
                 <a href="/assets/doc/tutorial_opd.mp4?v=<?php echo $this->config->item("js_version"); ?>" target="_blank" class="dropdown-item">Video (OPD)</a>
             </div>
         </div>

@@ -146,9 +146,9 @@ function html_data_builder(v,no){
     html += "<td>" + v['nama_jenis_jabatan'] + "</td>";
     html += "<td class='text-center'><a target='_blank' href='/anjab/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
     html += "<td class='text-center'><a target='_blank' href='/anjab/printabk/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
-    //html += "<td class='text-center'><a target='_blank' href='/evjab/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
-    //html += "<td class='text-center'><a target='_blank' href='/evjab/printformulir/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
-    //html += "<td class='text-center'><a target='_blank' href='/skj/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
+    html += "<td class='text-center'><a target='_blank' href='/evjab/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
+    html += "<td class='text-center'><a target='_blank' href='/evjab/printformulir/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
+    html += "<td class='text-center'><a target='_blank' href='/skj/printdata/" + v['id'] + "' class='btn btn-sm btn-light'><span class='fa fa-print'></span></a></td>";
     html += "</tr>";
     return html;
 }

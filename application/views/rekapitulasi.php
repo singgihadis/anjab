@@ -50,8 +50,8 @@
                                         <option value="1">Lampiran I : Rekapitulasi Kelas Jabatan dan Persediaan Pegawai</option>
                                         <option value="2">Lampiran II : Daftar Nama Jabatan Struktural, Kelas Jabatan dan Persediaan Pegawai</option>
                                         <option value="3">Lampiran III : Daftar Nama Jabatan Fungsional, Kelas Jabatan dan Persediaan Pegawai</option>
-<!--                                        <option value="4">Lampiran IV : Tabel Hasil Evaluasi Jabatan Struktural</option>-->
-<!--                                        <option value="5">Lampiran V : Tabel Hasil Evaluasi Jabatan Fungsional</option>-->
+                                        <option value="4">Lampiran IV : Tabel Hasil Evaluasi Jabatan Struktural</option>
+                                        <option value="5">Lampiran V : Tabel Hasil Evaluasi Jabatan Fungsional</option>
                                     </select>
                                 </div>
                             </div>

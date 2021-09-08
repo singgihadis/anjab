@@ -61,7 +61,7 @@ function modal_prestasi_kerja_diharapkan(is_tambah,itu){
         $("#nama_prestasi").val("");
     }else{
         var nama = data_prestasi_kerja_diharapkan[pos]['nama'];
-        $("#anjab_prestasi_kerja_diharapakan_id").val(id);
+        $("#anjab_prestasi_kerja_diharapkan_id").val(id);
         $("#nama_prestasi").val(nama);
     }
 }
